@@ -32,6 +32,9 @@ input[type=number] {
 .flex-gap-30{gap: 30px}
 .flex-gap-40{gap: 40px}
 
+.texto-primario{
+  color: var(--azul);
+}
 .texto-naranja{
     color: var(--naranja-flamingo);
 }
@@ -80,6 +83,26 @@ input[type=number] {
 }
 
 /* botones */
+
+.boton{
+  height: 40px;
+  padding: 5px 17px;
+  border-radius: 20px;
+  outline: none;
+  border: none;
+  font-size: 12px;
+  font-weight: bold;
+  box-shadow: 0px 0px 4px #9b9b9b;
+}
+.boton.primario.relleno{
+  background-color: var(--azul);
+  color: white;
+}
+.boton.primario.relleno:hover{
+  background-color: var(--azul-oscuro);
+  color: white;
+}
+
 .boton-flamingo{
     height: 40px;
     padding: 5px 17px;
@@ -258,4 +281,8 @@ input[type=number] {
   width: 100%;
   color: var(--rojo-flamingo);
   font-size: 12px;
+}
+
+.borde-rojo{
+  border: 1px solid red;
 }
