@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import {  CanActivate, Router } from '@angular/router';
+import { map } from 'rxjs';
+import { ServicioUsuarios} from '../administrador/servicios/usuarios.service';
 
 @Injectable({
   providedIn: 'root'
@@ -8,18 +10,19 @@ export class AutenticacionGuard implements CanActivate {
   public readonly llaveToken = 'jwt'
   public readonly llaveExpiracion = 'expira'
 
-  public constructor(private enrutador:Router){}
+  public constructor(private enrutador:Router, private servicioUsuario: ServicioUsuarios ){}
 
-  canActivate():boolean{
+  async canActivate(): Promise<boolean>{
     const fechaUnixActual = new Date().getTime()
     let token = localStorage.getItem(this.llaveToken)
     let expiracion = localStorage.getItem(this.llaveExpiracion)
+
     if(!token){
       this.enrutador.navigateByUrl('/inicio-sesion')
       return false
-    } 
+    }
     if(!expiracion){
-      this.enrutador.navigateByUrl('/inicio-sesion') 
+      this.enrutador.navigateByUrl('/inicio-sesion')
       return false
     }
     if(fechaUnixActual >= parseInt(expiracion)){
@@ -28,7 +31,8 @@ export class AutenticacionGuard implements CanActivate {
       this.enrutador.navigateByUrl('/inicio-sesion')
       return false;
     }
+
     return true;
   }
-  
+
 }

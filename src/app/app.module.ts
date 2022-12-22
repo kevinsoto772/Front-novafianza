@@ -17,7 +17,6 @@ import { InterceptorAutorizacion } from './administrador/interceptores/Intercept
     BrowserModule,
     AppRoutingModule,
     NgbModule,
-
     AdministradorModule,
     AutenticacionModule
   ],

@@ -32,7 +32,7 @@
 .form-control:focus {
     color: #212529;
     background-color: #fff;
-    border-color: var(--naranja-flamingo);
+    border-color: var(--azul);
     outline: 0;
     box-shadow: none !important;
 }

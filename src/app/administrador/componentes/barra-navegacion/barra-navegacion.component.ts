@@ -1,5 +1,6 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, DoCheck, EventEmitter, OnInit, Output } from '@angular/core';
 import { TitleStrategy } from '@angular/router';
+import { ServicioCabeceraService } from '../../servicios/servicio-cabecera.service';
 
 @Component({
   selector: 'app-barra-navegacion',
@@ -9,15 +10,24 @@ import { TitleStrategy } from '@angular/router';
 export class BarraNavegacionComponent implements OnInit {
   @Output() usuarioQuiereCerrarSesion:EventEmitter<void>
   @Output() menuLateralDesplegado:EventEmitter<void>
-
+  public roles: any;
+  public nombre: string = '';
+  public cabeceraModulo: string[] = [];
   public menuOpcionesDeUsuarioColapsado = true;
+  public readonly llaveRolesLocalStorage = 'rol'
+  public readonly llaveNombreUsuarioLocalStorage = 'nombreUsuario'
 
-  constructor() {
+  constructor(private servicioCabecera: ServicioCabeceraService) {
     this.usuarioQuiereCerrarSesion = new EventEmitter<void>()
     this.menuLateralDesplegado = new EventEmitter<void>()
+    this.servicioCabecera.suscribirseACambioDeTitulo().subscribe(cabeceraModulo =>{
+      this.cabeceraModulo = cabeceraModulo;
+    })
   }
 
   ngOnInit(): void {
+    this.roles = JSON.parse(localStorage.getItem(this.llaveRolesLocalStorage)!)
+    this.nombre = localStorage.getItem(this.llaveNombreUsuarioLocalStorage)!
   }
 
   public abrirMenuLateral(){
