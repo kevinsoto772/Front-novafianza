@@ -6,20 +6,23 @@ import { Paginacion } from '../modelos/compartido/Paginador';
 import { Empresa } from '../modelos/empresas/Empresa';
 import { PeticionActualizarEmpresa } from '../modelos/empresas/PeticionActualizarEmpresa';
 import { PeticionRegistrarEmpresa } from '../modelos/empresas/PeticionRegistrarEmpresa';
+import { Autenticable } from './compartido/Autenticable';
 
 const apiUrl = 'http://127.0.0.1:3333/api/v1'
 @Injectable({
   providedIn: 'root'
 })
-export class ServicioEmpresa {
+export class ServicioEmpresa extends Autenticable{
   private urlBackend:string
   headers: HttpHeaders;
 
 
   constructor(private http: HttpClient) {
+    super()
     this.urlBackend = environment.urlBackend
     this.headers = new HttpHeaders({
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
+      "Authorization" : `Bearer ${this.obtenerTokenAutorizacion()}`
     })
   }
 

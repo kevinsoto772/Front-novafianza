@@ -6,6 +6,7 @@ import { PopupComponent } from '../../popup/popup.component';
 import { ModalRegistrarEmpresaComponent } from './modal-registrar-empresa/modal-registrar-empresa.component';
 import { ModalVerEmpresaComponent } from './modal-ver-empresa/modal-ver-empresa.component';
 import { ModalActualizarEmpresaComponent } from './modal-actualizar-empresa/modal-actualizar-empresa.component';
+import { ServicioCabeceraService } from 'src/app/administrador/servicios/servicio-cabecera.service';
 
 @Component({
   selector: 'app-gestion-de-empresas',
@@ -13,16 +14,19 @@ import { ModalActualizarEmpresaComponent } from './modal-actualizar-empresa/moda
   styleUrls: ['./gestion-de-empresas.component.css']
 })
 export class GestionDeEmpresasComponent implements OnInit {
-  @ViewChild('popup') popup!:PopupComponent
+  @ViewChild('popup') popup!: PopupComponent
   @ViewChild('modalRegistrarEmpresa') ModalRegistrarEmpresa!: ModalRegistrarEmpresaComponent
   @ViewChild('modalverEmpresa') ModalverEmpresaComponent!: ModalVerEmpresaComponent
   @ViewChild('modalActualizarEmpresa') ModalActualizarEmpresaComponent!: ModalActualizarEmpresaComponent
+  public ReportesCabecera = ['Crear usuarios','/assets/img/agregar-usuario.svg']
   public pagina = 1;
   public total = 0;
   public limite = 5;
 
   public empresas: Empresa[] = [];
-  constructor(private servicioEmpresa: ServicioEmpresa) { }
+  constructor(private servicioEmpresa: ServicioEmpresa, private servicioCabercera: ServicioCabeceraService) {
+    this.servicioCabercera.actualizarTitulo(this.ReportesCabecera)
+  }
 
   ngOnInit(): void {
     this.servicioEmpresa.obtenerEmpresas(this.pagina, this.limite).subscribe((empresas) => {
