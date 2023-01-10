@@ -19,6 +19,7 @@ export class ModalActualizarEmpresaComponent implements OnInit {
   public empresa?: Empresa;
   public formulario: FormGroup;
 
+
   constructor(private servicioModal: NgbModal, private servicioEmpresa: ServicioEmpresa) {
     this.seHaActualizadoUnaEmpresa = new EventEmitter<void>()
     this.formulario = new FormGroup({

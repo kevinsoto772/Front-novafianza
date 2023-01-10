@@ -5,7 +5,21 @@
     padding-left: var(--ancho-menu-lateral);
     z-index: var(--z-index-barra-navegacion);
     box-shadow: 0px 3px 6px #00000029;
-    background: linear-gradient();
+    background: linear-gradient(241deg, var(--azul) 30%, var(--azul-oscuro) 100%);
+
+}
+
+.items:hover{
+cursor: pointer;
+}
+
+.selector{
+  color:var(--azul);
+}
+
+.selector:hover{
+  background-color:transparent;
+  color:#01b3ff;
 }
 
 .icono-usuario{

@@ -8,6 +8,7 @@ import { AdministradorModule } from './administrador/administrador.module';
 import { AutenticacionModule } from './autenticacion/autenticacion.module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { InterceptorAutorizacion } from './administrador/interceptores/InterceptorAutorizacion';
+import { PagoModule } from './pago/pago.module';
 
 @NgModule({
   declarations: [
@@ -17,9 +18,9 @@ import { InterceptorAutorizacion } from './administrador/interceptores/Intercept
     BrowserModule,
     AppRoutingModule,
     NgbModule,
-
     AdministradorModule,
-    AutenticacionModule
+    AutenticacionModule,
+    PagoModule
   ],
   providers: [
     {
