@@ -103,6 +103,17 @@ input[type=number] {
   color: white;
 }
 
+.boton.primario.delineado{
+  background-color: #fff;
+  border: 1px solid var(--azul);
+  color: var(--azul);
+}
+
+.boton.primario.delineado:hover{
+  background-color: var(--azul-oscuro);
+  color: white;
+}
+
 .boton-flamingo{
     height: 40px;
     padding: 5px 17px;

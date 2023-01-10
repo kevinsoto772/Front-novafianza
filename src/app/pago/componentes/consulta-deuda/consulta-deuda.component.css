@@ -1,0 +1,25 @@
+.fondo{
+  background-color: #ffff;
+}
+
+label{
+  font-family: 'Poppins';
+}
+
+.input{
+  width: 310px;
+}
+.alert{
+  width:641.78px;
+  border: 1px solid var(--azul-oscuro);
+}
+.warning{
+  margin-right: 5px;
+}
+
+.titulo{
+  display:flex;
+  justify-content: center;
+  color: #202256;
+}
+

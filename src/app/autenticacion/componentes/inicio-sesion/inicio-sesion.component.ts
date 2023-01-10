@@ -42,7 +42,8 @@ export class InicioSesionComponent implements OnInit {
           respuesta.expira,
           respuesta.nombre,
           respuesta.id,
-          respuesta.rol
+          respuesta.rol,
+          respuesta.usuario
         )
 
         if (respuesta.claveTemporal === true) {
@@ -50,8 +51,13 @@ export class InicioSesionComponent implements OnInit {
         } else {
           this.enrutador.navigateByUrl(`/administrar${respuesta.rol._modulos[0]._ruta}`)
         }
-      }, (error:HttpErrorResponse) =>{
-        Swal.fire('credenciales incorrectas')
+      }, (error: HttpErrorResponse) => {
+        if (error.status == 423) {
+          this.abrirModalRecuperacion()
+        }
+        if (error.status == 400) {
+          Swal.fire('credenciales incorrectas')
+        }
       })
     }
   }

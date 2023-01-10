@@ -78,7 +78,7 @@
     height: 30px;
 }
 .form-select:focus {
-    border-color: var(--naranja-flamingo);
+    border-color: var(--azul);
     outline: 0;
     box-shadow: none !important;
 }
