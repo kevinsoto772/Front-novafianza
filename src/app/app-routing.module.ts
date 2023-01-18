@@ -41,7 +41,7 @@ const routes: Routes = [
         component: ConfiguracionDeCuentaComponent
       },
     ],
-    canActivate: [AutenticacionGuard, AutorizacionGuard]
+    // canActivate: [AutenticacionGuard, AutorizacionGuard]
 
   },
   {

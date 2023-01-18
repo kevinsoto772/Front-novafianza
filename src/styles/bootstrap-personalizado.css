@@ -141,3 +141,21 @@ ngb-pagination li:last-child a::before{
 .modal-header{
     padding: 0.75rem 0.75rem;
 }
+
+/* personalizar acordeones  */
+.accordion-body{
+padding:0px;
+}
+
+.accordion-button:not(.collapsed) {
+  color: #0D0D0D;
+  background-color: #ffffff;
+}
+
+.accordion-button::after {
+  background-image: url('../assets/img/mas.png');
+}
+
+.accordion-button:not(.collapsed)::after{
+  background-image: url('../assets/img/menos.png');
+}

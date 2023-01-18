@@ -14,7 +14,8 @@ export class FormularioProcesoPagoComponent implements OnInit {
   public llaveCaptcha = '6LemnwgjAAAAAD4NV9ROf1inZOsO5tmM71nNfaQn'
   public formulario: FormGroup
   public deuda: boolean = true;
-  public informacion_deudor:any[] = []
+  public numero_documento: string = ''
+  public tipo_documento:string = ''
   public errorValorPago?: number;
 
   constructor(private servicioWompi: WompiService, private enrutador: Router, private ruta: ActivatedRoute) {
@@ -31,10 +32,11 @@ export class FormularioProcesoPagoComponent implements OnInit {
 
   ngOnInit(): void {
     this.ruta.queryParams.subscribe((params: any) => {
-      this.informacion_deudor = params.formulario;
-      if (this.informacion_deudor.length > 0) {
-        this.formulario.controls['tipo_documento'].setValue(this.informacion_deudor[1])
-        this.formulario.controls['numero_documento'].setValue(this.informacion_deudor[0])
+      this.numero_documento = params.numero_documento;
+      this.tipo_documento = params.tipo_documento;
+      if (this.tipo_documento != '' &&  this.tipo_documento!= '') {
+        this.formulario.controls['tipo_documento'].setValue(this.tipo_documento )
+        this.formulario.controls['numero_documento'].setValue(this.numero_documento)
       }
     })
   }
@@ -74,8 +76,7 @@ export class FormularioProcesoPagoComponent implements OnInit {
         parametros.push(respuesta.datosUsuarios.tipoDocumento);
         parametros.push(respuesta.datosUsuarios.telefono);
         parametros.push(respuesta.datosUsuarios.valor);
-        this.enrutador.navigate(['/pagar-obligacion'], { queryParams: { formulario: parametros } })
-
+        this.enrutador.navigate(['/pagar-obligacion'], { queryParams: { formulario: parametros }})
       }, (errorTransaccion: HttpErrorResponse) => {
         if (errorTransaccion.status == 400) {
           this.errorValorPago = errorTransaccion.status

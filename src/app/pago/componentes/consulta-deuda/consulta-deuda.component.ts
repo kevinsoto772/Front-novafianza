@@ -50,7 +50,8 @@ public procesoDePago(): void{
   let parametros: any[] = [];
   parametros.push((this.formulario.controls['numero_documento'].value));
   parametros.push(this.formulario.controls['tipo_documento'].value);
-  this.enrutador.navigate(['//proceso-pago'], { queryParams: { formulario: parametros } })
+  //this.enrutador.navigate(['/proceso-pago'], { queryParams: { formulario: parametros } })
+  window.open('/wordpress/zona-pagos?numero_documento=1067855122&tipo_documento=CC', '_parent');
   this.limpiarFormulario();
 }
 

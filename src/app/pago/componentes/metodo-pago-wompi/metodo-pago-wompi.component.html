@@ -29,7 +29,7 @@
           </div>
           <div class="list-group">
 
-            <form action="https://checkout.wompi.co/p/" method="GET" ngNoForm>
+            <form action="https://checkout.wompi.co/p/" method="GET" ngNoForm target="_parent">
               <!-- OBLIGATORIOS -->
               <input type="hidden" name="public-key" id="public-key" value="{{this.llavePublica}}" />
               <input type="hidden" name="currency" value="{{this.moneda}}" />
@@ -44,7 +44,7 @@
               <button type="button" type="submit"  class="list-group-item list-group-item-action fs-16px">
                 <div class="row fila-boton-wompi">
                   <div class="d-flex col-3"><img src="assets/img/tarjeta-credito.svg" class="img-fluid"> <img src="assets/img/pse-logo.svg" class="img-fluid"> <img src="assets/img/bancolombia-logo.svg" class="img-fluid"></div>
-                  <div class="col" id="boton-wompi">Pagar con Wompi
+                  <div class="col" id="boton-wompi">Pagar aquí
                   </div>
                 </div>
               </button>
