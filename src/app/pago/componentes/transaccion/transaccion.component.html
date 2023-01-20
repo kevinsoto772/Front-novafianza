@@ -1,0 +1,55 @@
+<div class="container-fluid fondo d-flex justify-content-center">
+  <div>
+    <div class="row mt-4">
+      <div class="col mb-3 d-flex justify-content-center">
+        <div class="card estado">
+          <div class="card-header">
+            <label class="fs-16px fw-semibold">Detalles del pago</label>
+          </div>
+          <div class="card-body">
+            <div *ngIf="this.actualizar == false">
+              <label class="fs-16px mb-2">Estado: <b id="sin-confirmar">Sin confirmar</b></label>
+              <img src="assets/img/warning-amarillo.svg" class="img-fluid" style="margin-right:10px;">
+            </div>
+
+            <div *ngIf="this.actualizar == true && this.transaccion[0].status == 'APPROVED'">
+              <label class="fs-16px mb-3">Estado: <b id="aprobado">Aprobado</b></label>
+              <img src="assets/img/aprobado.svg" class="img-fluid" style="margin-right:10px;">
+            </div>
+
+            <div *ngIf="this.actualizar == true && this.transaccion[0].status == 'DECLINED'">
+              <label class="fs-16px mb-3">Estado: <b id="rechazado">Rechazado</b></label>
+              <img src="assets/img/rechazo.svg" class="img-fluid" style="margin-right:10px;">
+            </div>
+
+            <div>
+              <label class="contenido" *ngIf="this.actualizar == false">Aun no hemos confirmado tu pago, espera unos
+                minutos y usa el botón actualizar para ver el estado de tu pago.</label>
+              <div class="row" *ngIf="this.actualizar == true">
+                <div class="col-12 mb-3">
+                  <label class="contenido"><b>Número de cédula/ referencia:</b>
+                    <br />{{this.transaccion[0].reference}}</label>
+                </div>
+                <div class="col-12 mb-3">
+                  <label class="contenido"><b>Monto pagado:</b> <br />${{this.valorPagado}}</label>
+                </div>
+                <div class="col-12 mb-3">
+                  <label class="contenido"><b>Forma de pago:</b>
+                    <br />{{this.transaccion[0].payment_method_type}}</label>
+                </div>
+                <div class="col-12 mb-3">
+                  <label class="contenido"><b>Fecha y hora de pago:</b> <br />{{this.fechaPago}}</label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-flex justify-content-end">
+      <button type="button" class="boton primario relleno fw-semibold" id="actualizar" style="width:158px;"
+        (click)="actualizarEstado()" *ngIf="this.actualizar == false">Actualizar</button>
+      <button type="button" class="boton primario delineado fw-semibold" style="width:158px;">Finalizar</button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,100 @@
+<div class="container-fluid fondo d-flex justify-content-center">
+  <div>
+    <div class="mt-4 d-flex justify-content-center">
+      <img src="assets/img/warning.svg" class="img-fluid" style="margin-right:10px;">
+      <label class="fs-16px fw-semibold text-center titulo">Completa el formulario para iniciar el proceso de pago</label>
+    </div>
+    <form [formGroup]="this.formulario" method="GET" action="/pagar-obligacion" >
+      <div class="row align-items-start mt-5">
+        <div class="col-6">
+          <fieldset class="mb-4">
+            <label class="fs-14px fw-semibold mb-2 es-requerido" for="tipo_documento">Tipo de documento</label>
+            <select class="form-select form-control input" id="tipo_documento" name="tipo_documento"
+              formControlName="tipo_documento" required>
+              <option value="" disabled selected>Seleccionar...</option>
+              <option value="CC">CC - Cédula de ciudadanía</option>
+              <option value="CE">CE - Cédula de extranjería</option>
+              <option value="Pasaporte">Pasaporte</option>
+            </select>
+          </fieldset>
+        </div>
+
+        <div class="col-6">
+          <fieldset class="mb-4">
+            <label class="fs-14px fw-semibold mb-2 es-requerido" for="numero_documento">Número de documento</label>
+            <input class="form-control input" type="number" name="numero_documento" formControlName="numero_documento"
+              placeholder="Ingrese su No. de documento" required>
+          </fieldset>
+        </div>
+
+        <div class="col">
+          <fieldset class="mb-4">
+            <label class="fs-14px fw-semibold mb-2 es-requerido" for="valor_pagar">Valor a pagar</label>
+            <input class="form-control input" type="number" name="valor_pagar" formControlName="valor_pagar" required>
+          </fieldset>
+        </div>
+
+        <div class="col">
+          <fieldset class="mb-4">
+            <label class="fs-14px fw-semibold mb-2 es-requerido" for="telefono">Teléfono de contacto</label>
+            <input class="form-control input" type="text" name="telefono" formControlName="telefono" required>
+          </fieldset>
+        </div>
+      </div>
+
+      <fieldset class="mb-4">
+        <label class="fs-14px fw-semibold mb-2 es-requerido " for="Correo">Correo electrónico</label>
+        <input class="form-control input" type="email" name="Correo" formControlName="Correo" required>
+      </fieldset>
+
+      <fieldset class="mb-4">
+        <input class="form-check-input" type="checkbox" name="checkbox" formControlName="checkbox" required>
+        <label class="fs-14px fw-semibold mb-2" style="margin-left:10px;">Acepto las <b>políticas de tratamiento de datos.</b></label>
+      </fieldset>
+
+      <fieldset class="d-flex align-items-start">
+        <ngx-recaptcha2 #captchaElem [siteKey]="llaveCaptcha" [useGlobalDomain]="false" [theme]="'light'"
+          formControlName='captcha' required>
+        </ngx-recaptcha2>
+      </fieldset>
+
+      <div class="alert alert-danger d-flex justify-content-center mb-3 mt-3 border border-danger" role="alert" *ngIf="errorValorPago == 400">
+        <div class="row align-items-start">
+          <div class="col-12 danger d-flex justify-content-center">
+            <img src="assets/img/warning-rojo.svg" class="img-fluid" style="margin-right:10px;">
+            <label class="fs-16px fw-semibold">Actualiza el valor a pagar dado que el valor ingresado supera el valor total de la deuda,</label>
+          </div>
+          <div class="col-12 danger d-flex justify-content-center mb-3">
+            <label class="fs-16px fw-semibold">para mayor información comuníquese con el:</label>
+          </div>
+          <div class="col-12 d-flex justify-content-center">
+            <button type="button" class="btn btn-light rounded-pill"><img src="assets/img/simbolo-llamada.svg"> (604) 2 04 28 14</button>
+            <span class="nexo">o</span>
+            <button type="button" class="btn btn-light rounded-pill"><img src="assets/img/logo-whatsapp.svg"> 310 523 5025</button>
+          </div>
+        </div>
+        <div>
+        </div>
+      </div>
+
+      <div class="alert alert-warning d-flex mb-3 mt-3 border border-warning" role="alert" *ngIf="deuda == false">
+        <div class="row align-items-start ">
+          <div class="col-12 warning d-flex justify-content-center mb-2">
+            <img src="assets/img/warning-amarillo.svg" class="img-fluid" style="margin-right:10px;">
+            <label class="fs-16px">Actualmente no tiene deuda con Novafianza, para más información comuníquese con el:</label>
+          </div><br/>
+          <div class="col-12 d-flex justify-content-center">
+            <button type="button" class="btn btn-light rounded-pill"><img src="assets/img/simbolo-llamada.svg"> (604) 2 04 28 14</button>
+            <span class="nexo">o</span>
+            <button type="button" class="btn btn-light rounded-pill"><img src="assets/img/logo-whatsapp.svg"> 310 523 5025</button>
+          </div>
+        </div>
+      </div>
+
+      <fieldset class="d-flex mb-3">
+        <button type="button" class="boton primario relleno ms-auto fw-semibold" style="width:158px;" (click)="iniciarPago()"
+          >Iniciar pago</button>
+      </fieldset>
+    </form>
+  </div>
+</div>
