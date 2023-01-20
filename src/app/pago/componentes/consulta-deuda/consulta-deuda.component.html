@@ -46,17 +46,22 @@
     </form>
 
     <div *ngIf="this.deuda == true">
-
-      <div class="alert alert-primary d-flex justify-content-center mb-3" role="alert" >
-        <div class="warning">
-          <img src="assets/img/warning.svg" class="img-fluid">
+      <div class="alert alert-primary mb-3 mt-3" role="alert">
+        <div class="row d-flex mb-2">
+          <div class="col d-flex px-4">
+            <img src="assets/img/warning.svg" class="img-fluid" style="margin-right:10px;">
+            <label class="fs-14px" style="text-align: center;">Actualmente usted tiene deudas con Novafianza, si conoce el valor a cancelar por favor de clic en el botón “Iniciar proceso de pago”, de lo contrario, comuníquese a la línea:</label>
+          </div><br/>
         </div>
-        <div>
-          <label class="fs-16px fw-semibold">Actualmente tiene deudas con Novafianza.</label><br/>
-          <label class="fs-16px fw-semibold">Para más información comuníquese al:</label>
-        </div>
-        <div>
-        </div>
+          <div class="row align-items-start">
+            <div class="col-12 d-flex justify-content-center mb-2">
+              <button type="button" class="btn btn-light rounded-pill" style="margin-right:20px;"><img src="assets/img/simbolo-llamada.svg" >(604) 2 04 28 14</button>
+              <button type="button" class="btn btn-light rounded-pill"><img src="assets/img/logo-whatsapp.svg"> 310 523 5025</button>
+            </div>
+            <div class="col-ms-12 d-flex justify-content-center">
+              <label class="fs-14px fw-semibold">para obtener más información.</label>
+            </div>
+          </div>
       </div>
 
       <div class="d-flex justify-content-center mb-5">
@@ -66,10 +71,7 @@
 
       <div class="row align-items-start  mb-4">
         <div class="col d-flex justify-content-center mb-4">
-          <label>Medios <br/>de pago:</label>
-        </div>
-
-        <div class="col d-flex justify-content-center mb-4">
+          <label id="medio_pago">Medios <br/>de pago:</label>
           <img src="assets/img/medio-de-pago.svg  " class="img-fluid">
         </div>
 
