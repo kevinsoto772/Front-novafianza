@@ -1,0 +1,27 @@
+.fondo{
+  background-color: #ffff;
+}
+
+label{
+  font-family: 'Poppins';
+}
+
+.input{
+  width: 310px;
+}
+.alert{
+  width:641.78px;
+  border: 2px solid var(--azul-oscuro);
+  background-color: #EBF4FD;
+}
+
+#medio_pago{
+  margin-right:20px;
+}
+
+.titulo{
+  display:flex;
+  justify-content: center;
+  color: #202256;
+}
+

@@ -10,6 +10,10 @@ import { HistorialNovedadesComponent } from './administrador/componentes/paginas
 import { ReportesComponent } from './administrador/componentes/paginas/reportes/reportes.component';
 import { ConfiguracionDeCuentaComponent } from './administrador/componentes/paginas/configuracion-de-cuenta/configuracion-de-cuenta.component';
 import { AutorizacionGuard } from './guards/autorizacion.guard';
+import { ConsultaDeudaComponent } from './pago/componentes/consulta-deuda/consulta-deuda.component';
+import { MetodoPagoWompiComponent} from './pago/componentes/metodo-pago-wompi/metodo-pago-wompi.component';
+import { TransaccionComponent} from './pago/componentes/transaccion/transaccion.component';
+import { FormularioProcesoPagoComponent } from './pago/componentes/formulario-proceso-pago/formulario-proceso-pago.component';
 
 
 const routes: Routes = [
@@ -37,8 +41,24 @@ const routes: Routes = [
         component: ConfiguracionDeCuentaComponent
       },
     ],
-    canActivate: [AutenticacionGuard, AutorizacionGuard]
+    // canActivate: [AutenticacionGuard, AutorizacionGuard]
 
+  },
+  {
+    path: 'consulta-obligacion',
+    component: ConsultaDeudaComponent
+  },
+  {
+    path: 'proceso-pago',
+    component: FormularioProcesoPagoComponent
+  },
+  {
+    path: 'pagar-obligacion',
+    component: MetodoPagoWompiComponent
+  },
+  {
+    path: 'pago',
+    component: TransaccionComponent
   },
   {
     path: 'inicio-sesion',

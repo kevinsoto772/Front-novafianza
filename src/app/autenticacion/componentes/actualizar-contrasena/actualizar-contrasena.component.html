@@ -40,6 +40,14 @@
         </div>
       </div>
       <form class="w-100" [formGroup]="this.formulario">
+        <fieldset class="mb-4 mt-2">
+          <label class="fs-12px fw-bold mb-2" for="antigua_contrasena">Antigua contraseña</label>
+          <input class="form-control" type="password" name="antigua_contrasena" formControlName="antigua_contrasena" required>
+          <span class="validacion" *ngIf="this.formulario.controls['antigua_contrasena'].errors &&
+          this.formulario.controls['antigua_contrasena'].dirty && this.formulario.controls['antigua_contrasena'].errors['required']">
+            Ingrese su antigua contraseña
+        </span>
+        </fieldset>
         <fieldset class="mb-4">
           <label class="fs-12px fw-bold mb-2" for="nueva_contrasena">Nueva contraseña</label>
           <input class="form-control" type="password" name="nueva_contrasena" formControlName="nueva_contrasena" required>

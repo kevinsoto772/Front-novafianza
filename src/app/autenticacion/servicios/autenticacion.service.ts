@@ -45,7 +45,7 @@ export class AutenticacionService {
     localStorage.removeItem(this.llaveRolesLocalStorage)
   }
 
-  public guardarInformacionInicioSesion(jwt:string, expira:number, nombreUsuario:string, idUsuario: string, rol:object):void{
+  public guardarInformacionInicioSesion(jwt:string, expira:number, nombreUsuario:string, idUsuario: string, rol:object, Usuario: string):void{
     console.log('Guardando Información de inicio de sesión')
     console.log('Nuevo token', jwt)
     const diferenciaDeMilisegundos = expira * 60 * 1000;
@@ -57,6 +57,7 @@ export class AutenticacionService {
     localStorage.setItem(this.llaveTokenLocalStorage, jwt),
     localStorage.setItem(this.llaveIdUsuarioLocalStorage, idUsuario)
     localStorage.setItem(this.llaveRolesLocalStorage, JSON.stringify(rol))
+    localStorage.setItem(this.llaveUsuarioLocalStorage, Usuario)
 
   }
 }

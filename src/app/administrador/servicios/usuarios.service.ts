@@ -58,9 +58,9 @@ export class ServicioUsuarios extends Autenticable {
     return this.httpClient.patch<string>(`${this.urlBackend}${endpoint}`, usuarioEmpresa, {headers: this.headers})
   }
 
-  public ActualizarContraseñaUsuarioEmpresa(usuariosEmpresa_id:string, usuarioEmpresa:PeticionActualizarContrasena): Observable<string>{
-    const endpoint = `/api/v1/usuario_empresa/${usuariosEmpresa_id}`;
-    return this.httpClient.patch<string>(`${this.urlBackend}${endpoint}`, usuarioEmpresa, {headers: this.headers})
+  public ActualizarContraseñaUsuario(usuarioEmpresa:PeticionActualizarContrasena): Observable<string>{
+    const endpoint = `/api/v1/autenticacion/cambiar-clave`;
+    return this.httpClient.post<string>(`${this.urlBackend}${endpoint}`, usuarioEmpresa, {headers: this.headers})
   }
 
   public cambiarEstadoUsuarioEmpresa(usuariosEmpresa_id:string):Observable<any>{

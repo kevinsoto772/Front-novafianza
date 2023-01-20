@@ -1,0 +1,40 @@
+.requisitos{
+  margin-left: 5px;
+  color: #4B4B4B;
+}
+
+
+#selector{
+  width: 20%;
+}
+
+#telefono{
+  margin-left: 5px;
+  width: 100%;
+}
+
+#extension{
+  margin-left: 5px;
+}
+
+.col-sm-12 .img-fluid:first-child{
+  margin-left: 2px;
+}
+
+.col-sm-12 .parametros{
+  margin-left: 50px;
+}
+
+@media screen and (max-width:1355px){
+  #selector{
+    width: 150px;
+  }
+}
+
+/* @media only screen and (min-width: 577px) and (max-width: 1355px) {
+  #selector{
+    width: 150px;
+  }
+} */
+
+

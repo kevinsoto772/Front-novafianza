@@ -15,12 +15,13 @@ import { AutenticacionService } from '../../servicios/autenticacion.service';
 export class ActualizarContrasenaComponent implements OnInit {
   @ViewChild('popup') popup!: PopupComponent
   public formulario: FormGroup
-  public readonly llaveIdUsuarioLocalStorage = 'idUsuario'
+  public readonly llaveUsuarioLocalStorage = 'Usuario'
 
 
 
   constructor(private enrutador: Router, private servicioUsuarios: ServicioUsuarios, private servicioAutenticacion:AutenticacionService) {
     this.formulario = new FormGroup({
+      antigua_contrasena: new FormControl('', [Validators.required]),
       nueva_contrasena: new FormControl('', [Validators.required, Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&#_<>^~`()])([A-Za-z\d$@$!%*?&]|[^ ]){8,100}$/)]),
       confirmmar_contrasena: new FormControl('', [Validators.required]),
     })
@@ -31,9 +32,11 @@ export class ActualizarContrasenaComponent implements OnInit {
 
   actualizarContrasena() {
     if (this.formulario.controls['nueva_contrasena'].value === this.formulario.controls['confirmmar_contrasena'].value) {
-      let UsuarioId = localStorage.getItem(this.llaveIdUsuarioLocalStorage)
-      this.servicioUsuarios.ActualizarContraseñaUsuarioEmpresa(UsuarioId!, new PeticionActualizarContrasena(
-        this.formulario.controls['nueva_contrasena'].value, false
+      let Usuario = localStorage.getItem(this.llaveUsuarioLocalStorage)
+      this.servicioUsuarios.ActualizarContraseñaUsuario(new PeticionActualizarContrasena(
+        Usuario!,
+        this.formulario.controls['antigua_contrasena'].value,
+        this.formulario.controls['nueva_contrasena'].value
       )).subscribe((respuesta) => {
         this.popup.abrirPopupExitoso('Contraseña actualizada con éxito')
         this.limpiarFormulario()

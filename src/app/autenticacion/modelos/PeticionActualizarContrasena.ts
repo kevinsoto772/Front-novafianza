@@ -1,9 +1,11 @@
 export class PeticionActualizarContrasena {
+  identificacion: string;
   clave: string;
-  claveTemporal: boolean
+  nuevaClave: string;
 
-  public constructor(clave: string, claveTemporal: boolean) {
+  public constructor(identificacion: string, clave: string, nuevaClave: string) {
+    this.identificacion = identificacion
     this.clave = clave
-    this.claveTemporal = claveTemporal
+    this.nuevaClave = nuevaClave
 }
 }
