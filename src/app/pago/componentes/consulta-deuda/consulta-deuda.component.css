@@ -11,10 +11,12 @@ label{
 }
 .alert{
   width:641.78px;
-  border: 1px solid var(--azul-oscuro);
+  border: 2px solid var(--azul-oscuro);
+  background-color: #EBF4FD;
 }
-.warning{
-  margin-right: 5px;
+
+#medio_pago{
+  margin-right:20px;
 }
 
 .titulo{
