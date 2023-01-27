@@ -10,7 +10,7 @@ label{
   width: 310px;
 }
 .alert{
-  width:641.78px;
+  max-width: 641px;
   border: 2px solid var(--azul-oscuro);
   background-color: #EBF4FD;
 }
@@ -23,5 +23,26 @@ label{
   display:flex;
   justify-content: center;
   color: #202256;
+}
+
+.contacto{
+  color: #38c0ff;
+}
+
+
+@media screen and (max-width: 668px){
+  .img-fluid{
+    max-width:80%;
+  }
+
+  .input{
+    width: 300px;
+  }
+}
+@media screen and (min-width: 410px){
+  .fondo{
+    display: flex;
+    justify-content: center;
+  }
 }
 

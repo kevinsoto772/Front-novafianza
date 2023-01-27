@@ -8,20 +8,20 @@ import { ServicioEmpresa } from 'src/app/administrador/servicios/empresas.servic
 import { PopupComponent } from '../../../popup/popup.component';
 
 @Component({
-  selector: 'app-modal-actualizar-empresa',
-  templateUrl: './modal-actualizar-empresa.component.html',
-  styleUrls: ['./modal-actualizar-empresa.component.css']
+  selector: 'app-modal-actualizar-usuario',
+  templateUrl: './modal-actualizar-usuario.component.html',
+  styleUrls: ['./modal-actualizar-usuario.component.css']
 })
-export class ModalActualizarEmpresaComponent implements OnInit {
+export class ModalActualizarUsuarioComponent implements OnInit {
   @ViewChild('popup') popup!:PopupComponent
-  @ViewChild('modalActualizarEmpresa') modalActualizarEmpresa!:ElementRef
-  @Output('seHaActualizadoUnaEmpresa') seHaActualizadoUnaEmpresa: EventEmitter<void>
+  @ViewChild('modalActualizarUsuario') modalActualizarUsuario!:ElementRef
+  @Output('seHaActualizadoUnUsuario') seHaActualizadoUnUsuario: EventEmitter<void>
   public empresa?: Empresa;
   public formulario: FormGroup;
 
 
   constructor(private servicioModal: NgbModal, private servicioEmpresa: ServicioEmpresa) {
-    this.seHaActualizadoUnaEmpresa = new EventEmitter<void>()
+    this.seHaActualizadoUnUsuario = new EventEmitter<void>()
     this.formulario = new FormGroup({
       nombre: new FormControl('', [Validators.required]),
       nit: new FormControl('', [Validators.required]),
@@ -34,7 +34,7 @@ export class ModalActualizarEmpresaComponent implements OnInit {
   public abrir(empresa: Empresa): void{
     this.empresa = empresa
     this.limpiarFormulario()
-    this.servicioModal.open(this.modalActualizarEmpresa, {
+    this.servicioModal.open(this.modalActualizarUsuario, {
       size: 'xl'
     })
     this.rellenarFormulario(empresa);
@@ -53,7 +53,7 @@ export class ModalActualizarEmpresaComponent implements OnInit {
       this.formulario.controls['nombre'].value,
       this.formulario.controls['nit'].value,
     )).subscribe((respuesta) => {
-      this.seHaActualizadoUnaEmpresa.emit()
+      this.seHaActualizadoUnUsuario.emit()
       this.limpiarFormulario()
       this.cerrar()
       this.popup.abrirPopupExitoso('Actualizado con éxito')
