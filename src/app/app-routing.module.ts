@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { PlantillaComponent } from './administrador/componentes/plantilla/plantilla.component';
 import { InicioSesionComponent } from './autenticacion/componentes/inicio-sesion/inicio-sesion.component';
 import { AutenticacionGuard } from './guards/autenticacion.guard';
-import { GestionDeEmpresasComponent } from './administrador/componentes/paginas/gestion-de-empresas/gestion-de-usuarios.component';
+import { GestionDeUsuariosComponent } from './administrador/componentes/paginas/gestion-de-usuarios-empresas/gestion-de-usuarios.component';
 import { ActualizarContrasenaComponent } from './autenticacion/componentes/actualizar-contrasena/actualizar-contrasena.component';
 import { CargaArchivosComponent } from './administrador/componentes/paginas/carga-archivos/carga-archivos.component';
 import { HistorialNovedadesComponent } from './administrador/componentes/paginas/historial-novedades/historial-novedades.component';
@@ -23,7 +23,7 @@ const routes: Routes = [
     children: [
       {
         path: 'crear_usuarios',
-        component: GestionDeEmpresasComponent
+        component: GestionDeUsuariosComponent
       },
       {
         path: 'cargar_archivos',

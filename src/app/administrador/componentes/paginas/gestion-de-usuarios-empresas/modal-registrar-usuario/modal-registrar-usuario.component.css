@@ -1,0 +1,24 @@
+.validacion-span{
+  color: #AC0404;
+  font-size: 10px;
+  font-weight: normal;
+}
+
+#selector{
+  width: 150px;
+}
+
+.ext{
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-end;
+}
+
+#telefono{
+  margin-left: 5px;
+  width: 100%;
+}
+
+#extension{
+  margin-left: 5px;
+}

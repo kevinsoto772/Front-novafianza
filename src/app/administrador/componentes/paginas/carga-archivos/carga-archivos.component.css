@@ -1,0 +1,46 @@
+.card-header{
+  background-color: #FFFFFF;
+}
+.titulo-input{
+  font-size: 12px;
+  font-family: 'Montserrat';
+  margin-bottom: 10px;
+}
+
+.boton-adjuntar{
+  height: 40px;
+  padding: 5px 17px;
+  border-radius: 5px !important;
+  outline: none;
+  border: none;
+  font-size: 12px;
+  font-weight: bold;
+  box-shadow: none !important;
+  background-color: #fff;
+  border: 2px solid var(--azul);
+  color: var(--azul);
+}
+
+.boton-adjuntar:hover{
+  background-color: var(--azul) !important;
+  color: white;
+  cursor: pointer;
+}
+
+.descarga{
+  color: var(--azul);
+  display: flex;
+  justify-content: flex-end;
+}
+
+.descarga:hover{
+  color: #0ab6ff;
+  cursor: pointer;
+}
+
+@media screen and (max-width:576px) {
+  .titulo-input{
+    margin-top: 10px;
+    margin-bottom: 7px;
+  }
+}

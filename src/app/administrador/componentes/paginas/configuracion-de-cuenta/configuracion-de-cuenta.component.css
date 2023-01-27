@@ -3,9 +3,8 @@
   color: #4B4B4B;
 }
 
-
 #selector{
-  width: 20%;
+  width: 150px;
 }
 
 #telefono{
@@ -17,6 +16,12 @@
   margin-left: 5px;
 }
 
+.ext{
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+
 .col-sm-12 .img-fluid:first-child{
   margin-left: 2px;
 }
@@ -25,16 +30,17 @@
   margin-left: 50px;
 }
 
-@media screen and (max-width:1355px){
-  #selector{
-    width: 150px;
+.card-footer button{
+  margin-top:5px;
+  margin-bottom:5px;
+
+}
+
+@media screen and (max-width:576px){
+  .columna-correo{
+    margin-bottom:10px;
   }
 }
 
-/* @media only screen and (min-width: 577px) and (max-width: 1355px) {
-  #selector{
-    width: 150px;
-  }
-} */
 
 

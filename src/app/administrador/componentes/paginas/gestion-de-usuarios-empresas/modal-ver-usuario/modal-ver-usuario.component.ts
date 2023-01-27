@@ -2,15 +2,15 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Empresa } from 'src/app/administrador/modelos/empresas/Empresa';
-import { ServicioEmpresa } from 'src/app/administrador/servicios/empresas.service';
+
 
 @Component({
-  selector: 'app-modal-ver-empresa',
-  templateUrl: './modal-ver-empresa.component.html',
-  styleUrls: ['./modal-ver-empresa.component.css']
+  selector: 'app-modal-ver-usuario',
+  templateUrl: './modal-ver-usuario.component.html',
+  styleUrls: ['./modal-ver-usuario.component.css']
 })
-export class ModalVerEmpresaComponent implements OnInit {
-  @ViewChild('modalverEmpresa') modalverEmpresa!: ElementRef
+export class ModalVerUsuarioComponent implements OnInit {
+  @ViewChild('modalverUsuario') modalverUsuario!: ElementRef
   public empresa?: Empresa;
   public formulario: FormGroup;
 
@@ -28,7 +28,7 @@ export class ModalVerEmpresaComponent implements OnInit {
   public abrir(empresa: Empresa): void{
     this.empresa = empresa
     this.limpiarFormulario()
-    this.servicioModal.open(this.modalverEmpresa, {
+    this.servicioModal.open(this.modalverUsuario, {
       size: 'lg'
     })
     this.rellenarFormulario(empresa);

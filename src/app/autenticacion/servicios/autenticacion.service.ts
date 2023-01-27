@@ -12,10 +12,7 @@ export class AutenticacionService {
   private urlBackend: string
   headers: HttpHeaders;
   public readonly llaveTokenLocalStorage = 'jwt'
-  public readonly llaveExpiraLocalStorage = 'expira'
-  public readonly llaveNombreUsuarioLocalStorage = 'nombreUsuario'
   public readonly llaveUsuarioLocalStorage = 'Usuario'
-  public readonly llaveIdUsuarioLocalStorage = 'idUsuario'
   public readonly llaveRolesLocalStorage = 'rol'
 
 
@@ -38,26 +35,16 @@ export class AutenticacionService {
 
   public cerrarSesion(){
     localStorage.removeItem(this.llaveUsuarioLocalStorage)
-    localStorage.removeItem(this.llaveExpiraLocalStorage)
-    localStorage.removeItem(this.llaveNombreUsuarioLocalStorage)
     localStorage.removeItem(this.llaveTokenLocalStorage)
-    localStorage.removeItem(this.llaveIdUsuarioLocalStorage)
     localStorage.removeItem(this.llaveRolesLocalStorage)
   }
 
-  public guardarInformacionInicioSesion(jwt:string, expira:number, nombreUsuario:string, idUsuario: string, rol:object, Usuario: string):void{
+  public guardarInformacionInicioSesion(jwt:string, rol:object, Usuario: object):void{
     console.log('Guardando Información de inicio de sesión')
     console.log('Nuevo token', jwt)
-    const diferenciaDeMilisegundos = expira * 60 * 1000;
-    const fechaActual = new Date().getTime()
-    const fechaExpiracion = new Date(fechaActual + diferenciaDeMilisegundos)
-
-    localStorage.setItem(this.llaveNombreUsuarioLocalStorage, nombreUsuario)
-    localStorage.setItem(this.llaveExpiraLocalStorage, fechaExpiracion.getTime().toString())
     localStorage.setItem(this.llaveTokenLocalStorage, jwt),
-    localStorage.setItem(this.llaveIdUsuarioLocalStorage, idUsuario)
     localStorage.setItem(this.llaveRolesLocalStorage, JSON.stringify(rol))
-    localStorage.setItem(this.llaveUsuarioLocalStorage, Usuario)
+    localStorage.setItem(this.llaveUsuarioLocalStorage, JSON.stringify(Usuario))
 
   }
 }

@@ -15,7 +15,7 @@ export class BarraNavegacionComponent implements OnInit {
   public cabeceraModulo: string[] = [];
   public menuOpcionesDeUsuarioColapsado = true;
   public readonly llaveRolesLocalStorage = 'rol'
-  public readonly llaveNombreUsuarioLocalStorage = 'nombreUsuario'
+  public readonly llaveUsuarioLocalStorage = 'Usuario'
 
   constructor(private servicioCabecera: ServicioCabeceraService) {
     this.usuarioQuiereCerrarSesion = new EventEmitter<void>()
@@ -27,7 +27,8 @@ export class BarraNavegacionComponent implements OnInit {
 
   ngOnInit(): void {
     this.roles = JSON.parse(localStorage.getItem(this.llaveRolesLocalStorage)!)
-    this.nombre = localStorage.getItem(this.llaveNombreUsuarioLocalStorage)!
+    const Usuario = JSON.parse(localStorage.getItem(this.llaveUsuarioLocalStorage)!)
+    this.nombre = `${Usuario.nombre} ${Usuario.apellido}`
   }
 
   public abrirMenuLateral(){
