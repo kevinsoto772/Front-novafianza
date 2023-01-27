@@ -39,9 +39,6 @@ export class InicioSesionComponent implements OnInit {
       this.servicioAutenticacion.iniciarSesion( this.formulario.controls['usuario'].value.toString(), this.formulario.controls['clave'].value,).subscribe((respuesta: IniciarSesionRespuesta)=>{
         this.servicioAutenticacion.guardarInformacionInicioSesion(
           respuesta.token,
-          respuesta.expira,
-          respuesta.nombre,
-          respuesta.id,
           respuesta.rol,
           respuesta.usuario
         )

@@ -1,1 +1,57 @@
-<p>carga-archivos works!</p>
+<div class="d-flex flex-column flex-gap-30">
+  <div class="row">
+    <div class="col-12">
+      <div class="card w-100">
+        <div class="card-header fw-semibold fs-14px mt-2">
+          Cargar archivo
+        </div>
+        <div class="card-body">
+          <form [formGroup]="this.formulario">
+            <div class="row">
+              <div class="col-sm-3">
+                <fieldset class="mb-2">
+                  <label class="titulo-input">Tipo de archivo</label>
+                  <select class="form-select form-control input" id="tipoArchivo" name="tipoArchivo"
+                  formControlName="tipoArchivo" required>
+                  <option value="" disabled selected>Seleccionar formato...</option>
+                  <option value="Nuevas fianzas">Nuevas fianzas</option>
+                  <option value="Anulaciones">Anulaciones</option>
+                  <option value="Pronto pago">Pronto pago</option>
+                  <option value="Saldos">Saldos</option>
+                  <option value="Reclamaciones">Reclamaciones</option>
+                </select>
+                </fieldset>
+                <label class="fs-12px descarga" *ngIf="this.formulario.controls['tipoArchivo'].value !== ''"><img src="./assets/img/flecha-abajo.png" class="img-fluid" style="width:12%;"> Descargar Manual de Uso</label>
+              </div>
+              <div class="col-sm-3">
+                <fieldset>
+                  <label class="titulo-input">Fecha inicial de corte</label>
+                  <input type="date" class="form-control" formControlName="fechaInicial">
+                </fieldset>
+              </div>
+              <div class="col-sm-3">
+                <fieldset>
+                  <label class="titulo-input">Fecha final de corte</label>
+                  <input type="date" class="form-control" formControlName="fechaFinal">
+                </fieldset>
+              </div>
+              <div class="col-sm-3">
+                <label class="titulo-input">Cargar archivo</label>
+                <div class="input-group mb-1">
+                  <input type="file" class="form-control" id="inputGroupFile02" formControlName="cargaArchivo" (change)="obtenerArchivo($event)">
+                  <label class="input-group-text boton-adjuntar" for="inputGroupFile02" id="">Adjuntar</label>
+                </div>
+                <label class="fs-10px"  *ngIf="this.formulario.controls['cargaArchivo'].value === null">Formatos permitidos: CVS, TXT. Max. 5MB</label>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="card-footer d-flex justify-content-end">
+          <button type="button" class="boton primario relleno mb-2 mt-2" (click)="this.enviarArchivo()">
+            Enviar archivo
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

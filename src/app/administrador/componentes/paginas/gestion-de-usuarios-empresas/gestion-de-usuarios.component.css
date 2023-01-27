@@ -35,18 +35,9 @@ color: #9B9B9B;
   margin-right:12%;
 }
 
-.detalles{
-  color: var(--azul);
-  cursor: pointer;
-}
-
-.detalles:hover{
-  color: #0cb6ff;
-}
-
 .contenedor{
-  display: flex;
-  }
+display: flex;
+}
 
 @media screen and (max-width:545px) {
   .contenedor{

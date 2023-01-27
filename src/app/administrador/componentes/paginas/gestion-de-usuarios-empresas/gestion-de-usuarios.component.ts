@@ -3,29 +3,35 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Empresa } from 'src/app/administrador/modelos/empresas/Empresa';
 import { ServicioEmpresa } from 'src/app/administrador/servicios/empresas.service';
 import { PopupComponent } from '../../popup/popup.component';
-import { ModalRegistrarEmpresaComponent } from './modal-registrar-empresa/modal-registrar-empresa.component';
-import { ModalVerEmpresaComponent } from './modal-ver-empresa/modal-ver-empresa.component';
-import { ModalActualizarEmpresaComponent } from './modal-actualizar-empresa/modal-actualizar-empresa.component';
+import {ModalRegistrarUsuarioComponent } from './modal-registrar-usuario/modal-registrar-usuario.component';
+import { ModalVerUsuarioComponent } from './modal-ver-usuario/modal-ver-usuario.component';
+import { ModalActualizarUsuarioComponent } from './modal-actualizar-usuario/modal-actualizar-empresa.component';
 import { ServicioCabeceraService } from 'src/app/administrador/servicios/servicio-cabecera.service';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'app-gestion-de-empresas',
-  templateUrl: './gestion-de-empresas.component.html',
-  styleUrls: ['./gestion-de-empresas.component.css']
+  selector: 'app-gestion-de-usuarios',
+  templateUrl: './gestion-de-usuarios.component.html',
+  styleUrls: ['./gestion-de-usuarios.component.css']
 })
-export class GestionDeEmpresasComponent implements OnInit {
+export class GestionDeUsuariosComponent implements OnInit {
   @ViewChild('popup') popup!: PopupComponent
-  @ViewChild('modalRegistrarEmpresa') ModalRegistrarEmpresa!: ModalRegistrarEmpresaComponent
-  @ViewChild('modalverEmpresa') ModalverEmpresaComponent!: ModalVerEmpresaComponent
-  @ViewChild('modalActualizarEmpresa') ModalActualizarEmpresaComponent!: ModalActualizarEmpresaComponent
+  @ViewChild('modalRegistrarUsuario') modalRegistrarUsuario!: ModalRegistrarUsuarioComponent
+  @ViewChild('modalverUsuario') ModalVerUsuarioComponent!: ModalVerUsuarioComponent
+  @ViewChild('modalActualizarUsuario') ModalActualizarEmpresaComponent!: ModalActualizarUsuarioComponent
+  public formulario: FormGroup
   public ReportesCabecera = ['Crear usuarios','/assets/img/agregar-usuario.svg']
   public pagina = 1;
   public total = 0;
   public limite = 5;
 
   public empresas: Empresa[] = [];
+
   constructor(private servicioEmpresa: ServicioEmpresa, private servicioCabercera: ServicioCabeceraService) {
     this.servicioCabercera.actualizarTitulo(this.ReportesCabecera)
+    this.formulario = new FormGroup({
+      busqueda: new FormControl('', [Validators.required])
+    })
   }
 
   ngOnInit(): void {
@@ -60,11 +66,11 @@ export class GestionDeEmpresasComponent implements OnInit {
   }
 
   public abrirModalRegistrarEmpresa(): void {
-    this.ModalRegistrarEmpresa.abrir();
+    this.modalRegistrarUsuario.abrir();
     }
 
     public abrirModalVer(empresa: Empresa): void{
-      this.ModalverEmpresaComponent.abrir(empresa);
+      this.ModalVerUsuarioComponent.abrir(empresa);
     }
 
     public abrirModalActualizar(empresa: Empresa): void{

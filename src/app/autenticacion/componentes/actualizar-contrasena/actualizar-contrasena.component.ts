@@ -32,9 +32,10 @@ export class ActualizarContrasenaComponent implements OnInit {
 
   actualizarContrasena() {
     if (this.formulario.controls['nueva_contrasena'].value === this.formulario.controls['confirmmar_contrasena'].value) {
-      let Usuario = localStorage.getItem(this.llaveUsuarioLocalStorage)
+      let usuario = localStorage.getItem(this.llaveUsuarioLocalStorage)
+      const Usuario = JSON.parse(usuario!)
       this.servicioUsuarios.ActualizarContraseñaUsuario(new PeticionActualizarContrasena(
-        Usuario!,
+        Usuario.usuario!,
         this.formulario.controls['antigua_contrasena'].value,
         this.formulario.controls['nueva_contrasena'].value
       )).subscribe((respuesta) => {

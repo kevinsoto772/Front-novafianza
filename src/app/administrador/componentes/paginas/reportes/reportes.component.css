@@ -1,0 +1,16 @@
+.card-header{
+  background-color: #FFFFFF;
+}
+.titulo-input{
+  font-size: 12px;
+  font-family: 'Montserrat';
+  margin-bottom: 10px;
+}
+
+
+@media screen and (max-width:576px) {
+  .titulo-input{
+    margin-top: 10px;
+    margin-bottom: 7px;
+  }
+}

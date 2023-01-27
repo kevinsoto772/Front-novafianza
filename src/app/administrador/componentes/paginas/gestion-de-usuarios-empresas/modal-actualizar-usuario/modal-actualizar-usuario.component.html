@@ -1,31 +1,25 @@
-<ng-template #modalRegistroEmpresa let-modal>
+<ng-template #modalActualizarUsuario let-modal>
   <div class="modal-header">
-    <h4 class="modal-title fs-14px  fw-bolder texto-naranja">Crear Empresa</h4>
+    <h4 class="modal-title fs-14px  fw-bolder texto-naranja">Actualizar Empresa</h4>
     <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
   </div>
-  <div class="modal-body">
+  <div class="modal-body" *ngIf="empresa">
+    <div class="d-flex flex-gap-5 align-items-center">
+      <span class="fs-14px">Empresa: </span>
+      <span class="fs-14px fw-bold">{{empresa.nombre}}</span>
+  </div><br/>
       <form [formGroup]="this.formulario" class="d-flex flex-column flex-gap-10">
           <div class="row">
               <div class="col-5">
                   <fieldset>
                       <label for="">Nombre de la empresa</label>
                       <input type="text" class="form-control" formControlName="nombre">
-                      <span class="validacion"
-                          *ngIf="this.formulario.controls['nombre'].invalid &&
-                          this.formulario.controls['nombre'].dirty">
-                          Nombre requerido.
-                      </span>
                   </fieldset>
               </div>
               <div class="col-5">
                   <fieldset>
                       <label for="">Nit de la empresa</label>
                       <input type="number" class="form-control" formControlName="nit">
-                      <span class="validacion"
-                          *ngIf="this.formulario.controls['nit'].invalid &&
-                          this.formulario.controls['nit'].dirty">
-                          Nit requerido.
-                      </span>
                   </fieldset>
               </div>
           </div>
@@ -33,9 +27,8 @@
   </div>
   <div class="modal-footer">
       <button type="button" class="boton-flamingo rojo delineado" (click)="modal.close('Close click')">Cerrar</button>
-      <button type="button" class="boton-flamingo rojo relleno" (click)="this.registrarEmpresa()">
-          <img src="assets/img/+.svg" alt="">
-          Crear Empresa
+      <button type="button" class="boton-flamingo rojo relleno" (click)="this.ActualizarEmpresa()">
+          Guardar Cambios
       </button>
   </div>
 </ng-template>
