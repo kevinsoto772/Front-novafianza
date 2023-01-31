@@ -34,18 +34,18 @@
         </ngx-recaptcha2>
       </fieldset>
 
-      <fieldset class="d-flex consultar mb-3" *ngIf="this.deuda == false">
+      <fieldset class="d-flex consultar mb-3" *ngIf="this.consultado == false">
         <button type="button" class="boton primario relleno ms-auto fw-semibold" style="width:158px;"
           (click)="consultarDueda()">Consultar</button>
       </fieldset>
 
-      <fieldset class="d-flex mb-3" *ngIf="this.deuda == true">
+      <fieldset class="d-flex mb-3" *ngIf="this.consultado == true">
         <button type="button" class="boton primario delineado ms-auto fw-semibold" style="width:176px;"
           (click)="consultarOtraDueda()">Realizar otra consulta</button>
       </fieldset>
     </form>
 
-    <div *ngIf="this.deuda == true">
+    <div *ngIf="deuda && consultado">
       <div class="alert alert-primary mb-3 mt-3" role="alert">
         <div class="row d-flex mb-2">
           <div class="col d-flex align-self-center px-4">
@@ -65,5 +65,20 @@
         <img src="assets/img/medio-de-pago.svg  " class="img-fluid">
       </div>
     </div>
+
+    <div class="alert alert-warning d-flex mb-3 mt-3 border border-warning" role="alert" *ngIf="!deuda && consultado">
+      <div class="row align-items-start ">
+        <div class="col-12 warning d-flex justify-content-center mb-2">
+          <img src="assets/img/warning-amarillo.svg" class="img-fluid" style="margin-right:10px;">
+          <label class="fs-16px">Actualmente no tiene deuda con Novafianza, para más información comuníquese con el:</label>
+        </div><br/>
+        <div class="col-12 d-flex justify-content-center">
+          <button type="button" class="btn btn-light rounded-pill"><img src="assets/img/simbolo-llamada.svg"> (604) 2 04 28 14</button>
+          <span class="nexo">o</span>
+          <button type="button" class="btn btn-light rounded-pill"><img src="assets/img/logo-whatsapp.svg"> 310 523 5025</button>
+        </div>
+      </div>
+    </div>
+
   </div>
 </div>

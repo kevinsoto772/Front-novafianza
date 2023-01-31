@@ -77,7 +77,7 @@
         </div>
       </div>
 
-      <div class="alert alert-warning d-flex mb-3 mt-3 border border-warning" role="alert" *ngIf="deuda == false">
+      <div class="alert alert-warning d-flex mb-3 mt-3 border border-warning" role="alert" *ngIf="!deuda && consultado">
         <div class="row align-items-start ">
           <div class="col-12 warning d-flex justify-content-center mb-2">
             <img src="assets/img/warning-amarillo.svg" class="img-fluid" style="margin-right:10px;">
@@ -92,7 +92,7 @@
       </div>
 
       <fieldset class="d-flex mb-3">
-        <button type="button" class="boton primario relleno ms-auto fw-semibold" style="width:158px;" (click)="iniciarPago()"
+        <button type="button" class="boton primario relleno ms-auto fw-semibold" style="width:158px;" (click)="consultarDeuda()"
           >Iniciar pago</button>
       </fieldset>
     </form>

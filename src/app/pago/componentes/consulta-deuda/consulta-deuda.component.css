@@ -12,7 +12,6 @@ label{
 .alert{
   max-width: 641px;
   border: 2px solid var(--azul-oscuro);
-  background-color: #EBF4FD;
 }
 
 #medio_pago{
@@ -27,6 +26,14 @@ label{
 
 .contacto{
   color: #38c0ff;
+}
+
+.warning{
+  color: #EA990A;
+}
+
+.danger{
+  color: #BC0000;
 }
 
 
