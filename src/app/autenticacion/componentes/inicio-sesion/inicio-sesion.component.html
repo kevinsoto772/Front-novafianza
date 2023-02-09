@@ -10,7 +10,7 @@
       <form class="w-100" [formGroup]="this.formulario">
         <fieldset class="mb-4">
           <label class="fs-12px fw-bold mb-2" for="usuario">Usuario</label>
-          <input class="form-control" type="number" name="usuario" formControlName="usuario" required [ngClass]="{'input-error':this.formulario.controls['usuario'].errors &&
+          <input class="form-control" type="text" name="usuario" formControlName="usuario" required [ngClass]="{'input-error':this.formulario.controls['usuario'].errors &&
                     this.formulario.controls['usuario'].dirty && this.formulario.controls['usuario'].errors['required']}">
           <span class="validacion"
             *ngIf="this.formulario.controls['usuario'].errors &&

@@ -21,7 +21,9 @@
                   <option value="Reclamaciones">Reclamaciones</option>
                 </select>
                 </fieldset>
-                <label class="fs-12px descarga" *ngIf="this.formulario.controls['tipoArchivo'].value !== ''"><img src="./assets/img/flecha-abajo.png" class="img-fluid" style="width:12%;"> Descargar Manual de Uso</label>
+                <label class="fs-12px descarga" *ngIf="this.formulario.controls['tipoArchivo'].value !== ''">
+                  <img src="./assets/img/flecha-abajo.png" class="img-fluid" style="width:12%;"> Descargar Manual de Uso
+                </label>
               </div>
               <div class="col-sm-3">
                 <fieldset>
@@ -38,16 +40,22 @@
               <div class="col-sm-3">
                 <label class="titulo-input">Cargar archivo</label>
                 <div class="input-group mb-1">
-                  <input type="file" class="form-control" id="inputGroupFile02" formControlName="cargaArchivo" (change)="obtenerArchivo($event)">
+                  <input 
+                  type="file" 
+                  class="form-control" 
+                  id="inputGroupFile02" 
+                  formControlName="archivo"
+                  accept=".cvs,.txt"
+                  (change)="obtenerArchivo($event)">
                   <label class="input-group-text boton-adjuntar" for="inputGroupFile02" id="">Adjuntar</label>
                 </div>
-                <label class="fs-10px"  *ngIf="this.formulario.controls['cargaArchivo'].value === null">Formatos permitidos: CVS, TXT. Max. 5MB</label>
+                <label class="fs-10px"  *ngIf="this.formulario.controls['archivo'].value === null">Formatos permitidos: CVS, TXT. Max. 5MB</label>
               </div>
             </div>
           </form>
         </div>
         <div class="card-footer d-flex justify-content-end">
-          <button type="button" class="boton primario relleno mb-2 mt-2" (click)="this.enviarArchivo()">
+          <button type="button" class="boton primario relleno mb-2 mt-2">
             Enviar archivo
           </button>
         </div>

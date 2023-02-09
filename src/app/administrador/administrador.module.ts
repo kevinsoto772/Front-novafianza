@@ -12,10 +12,11 @@ import { ModalVerUsuarioComponent } from './componentes/paginas/gestion-de-usuar
 import { ModalRegistrarUsuarioComponent } from './componentes/paginas/gestion-de-usuarios-empresas/modal-registrar-usuario/modal-registrar-usuario.component';
 import { ModalActualizarUsuarioComponent } from './componentes/paginas/gestion-de-usuarios-empresas/modal-actualizar-usuario/modal-actualizar-empresa.component';
 import { HistorialNovedadesComponent } from './componentes/paginas/historial-novedades/historial-novedades.component';
-import { CargaArchivosComponent } from './componentes/paginas/carga-archivos/carga-archivos.component';
 import { ReportesComponent } from './componentes/paginas/reportes/reportes.component';
 import { ConfiguracionDeCuentaComponent } from './componentes/paginas/configuracion-de-cuenta/configuracion-de-cuenta.component';
 import { GestionDeUsuariosComponent } from './componentes/paginas/gestion-de-usuarios-empresas/gestion-de-usuarios.component';
+import { HistorialNovedadesModule } from '../historial-novedades/historial-novedades.module';
+import { ArchivosModule } from '../archivos/archivos.module';
 
 
 
@@ -30,12 +31,13 @@ import { GestionDeUsuariosComponent } from './componentes/paginas/gestion-de-usu
     ModalVerUsuarioComponent,
     ModalActualizarUsuarioComponent,
     HistorialNovedadesComponent,
-    CargaArchivosComponent,
     ReportesComponent,
     ConfiguracionDeCuentaComponent,
   ],
   imports: [
     CommonModule,
+    HistorialNovedadesModule,
+    ArchivosModule,
     AdministradorRoutingModule,
     ReactiveFormsModule,
     FormsModule,

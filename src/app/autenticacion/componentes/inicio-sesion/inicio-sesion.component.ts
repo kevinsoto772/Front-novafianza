@@ -46,6 +46,7 @@ export class InicioSesionComponent implements OnInit {
         if (respuesta.claveTemporal === true) {
           this.enrutador.navigateByUrl('/actualizar-contrasena')
         } else {
+          console.log('navegando a ', `/administrar${respuesta.rol._modulos[0]._ruta}`)
           this.enrutador.navigateByUrl(`/administrar${respuesta.rol._modulos[0]._ruta}`)
         }
       }, (error: HttpErrorResponse) => {

@@ -15,6 +15,7 @@ export class FormularioProcesoPagoComponent implements OnInit {
   public formulario: FormGroup
   public deuda: boolean = false;
   public consultado: boolean = false;
+  public mostrarAlerta:boolean = false
   public numero_documento: string = ''
   public tipo_documento: string = ''
   public errorValorPago?: number;
@@ -53,7 +54,7 @@ export class FormularioProcesoPagoComponent implements OnInit {
       this.formulario.controls['tipo_documento'].value
     ).subscribe((respuesta) => {
       this.deuda = respuesta.deuda
-      console.log(respuesta)
+      this.mostrarAlerta = true
       this.consultado = true
       if (this.deuda) {
         this.iniciarPago()
@@ -64,11 +65,12 @@ export class FormularioProcesoPagoComponent implements OnInit {
   }
 
   private iniciarPago() {
+    const valor = this.formulario.controls['valor_pagar'].value.replace(/,/g, '')
     this.servicioWompi.transaccion(new PeticionRealizarTransaccion(
       (this.formulario.controls['numero_documento'].value).toString(),
       this.formulario.controls['tipo_documento'].value,
       this.formulario.controls['telefono'].value,
-      this.formulario.controls['valor_pagar'].value,
+      valor,
       this.formulario.controls['Correo'].value
     )
     ).subscribe((respuesta) => {
@@ -102,4 +104,8 @@ export class FormularioProcesoPagoComponent implements OnInit {
     });
   }
 
+
+  public cerrarAlerta(){
+    this.mostrarAlerta = false
+  }
 }

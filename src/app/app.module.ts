@@ -9,6 +9,7 @@ import { AutenticacionModule } from './autenticacion/autenticacion.module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { InterceptorAutorizacion } from './administrador/interceptores/InterceptorAutorizacion';
 import { PagoModule } from './pago/pago.module';
+import { InputMonedaDirective } from './directivas/input-moneda.directive';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,8 @@ import { PagoModule } from './pago/pago.module';
     AdministradorModule,
     AutenticacionModule,
     PagoModule
+  ],
+  exports:[
   ],
   providers: [
     {

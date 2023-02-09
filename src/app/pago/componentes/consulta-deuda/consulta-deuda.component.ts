@@ -17,6 +17,7 @@ export class ConsultaDeudaComponent implements OnInit {
   public formulario: FormGroup
   public deuda: boolean = false;
   public consultado: boolean = false;
+  public mostrarAlerta: boolean = false;
   constructor(private servicioWompi: WompiService, private enrutador: Router) {
     this.formulario = new FormGroup({
       tipo_documento: new FormControl('', [Validators.required]),
@@ -41,6 +42,7 @@ export class ConsultaDeudaComponent implements OnInit {
     ).subscribe((respuesta) => {
       this.consultado = true
       this.deuda = respuesta.deuda
+      this.mostrarAlerta = true
     }), (error: HttpErrorResponse) => {
       console.log(error)
     }
@@ -49,7 +51,13 @@ export class ConsultaDeudaComponent implements OnInit {
 
   public consultarOtraDueda(): void {
     this.consultado = false
+    this.mostrarAlerta = false
     this.limpiarFormulario();
+  }
+
+  public cerrarAlerta(): void {
+    console.log('cerrando alerta')
+    this.mostrarAlerta = false
   }
 
   public procesoDePago(): void {
