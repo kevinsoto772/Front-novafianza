@@ -1,0 +1,16 @@
+<ng-template #modal let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title fs-14px  fw-bolder texto-primario">Ver Empresa</h4>
+      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+      <div class="d-flex flex-gap-5 align-items-center">
+        <span class="fs-14px">Empresa: </span>
+      </div><br />
+    
+    </div>
+    <div class="modal-footer d-flex justify-content-center">
+      <button type="button" class="boton-flamingo naranja relleno" (click)="modal.close('Close click')">Confirmar</button>
+    </div>
+  </ng-template>
+  

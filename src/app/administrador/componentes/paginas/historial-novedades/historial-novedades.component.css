@@ -1,0 +1,59 @@
+.card-header{
+  background-color: #ffffff;
+}
+
+.totales{
+  background-color: #B7B7B7;
+  color: white;
+  box-shadow: none;
+  padding: 2px 15px;
+  border-radius: 20px;
+  outline: none;
+  border: none;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+#registrosTotales{
+  color: black;
+}
+
+.barraBusqueda{
+  margin-right: 2%;
+}
+
+.form-control{
+  max-height: 33px;
+}
+
+.acciones{
+font-size: 8px;
+color: #9B9B9B;
+}
+
+#accionEditar{
+  margin-right:12%;
+}
+
+.detalles{
+  color: var(--azul);
+  cursor: pointer;
+}
+
+.detalles:hover{
+  color: #0cb6ff;
+}
+
+.contenedor{
+  display: flex;
+  }
+
+@media screen and (max-width:545px) {
+  .contenedor{
+    display: block;
+    }
+
+    .barraBusqueda{
+      margin-bottom: 10px;
+    }
+}

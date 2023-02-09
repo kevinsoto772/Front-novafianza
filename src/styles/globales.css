@@ -190,11 +190,11 @@ input[type=number] {
   }
 
   input:checked + .slider {
-    background-color: var(--rojo-flamingo);
+    background-color: var(--azul);
   }
 
   input:focus + .slider {
-    box-shadow: 0 0 1px var(--rojo-flamingo);
+    box-shadow: 0 0 1px var(--azul);
   }
 
   input:checked + .slider:before {
@@ -228,7 +228,7 @@ input[type=number] {
     width: 12px;
     height: 12px;
     border-radius: 2px;
-    border: 1px solid var(--rojo-flamingo);
+    border: 1px solid var(--azul);
     cursor: pointer;
   }
   .copiar-portapapeles::before{
@@ -297,4 +297,13 @@ input[type=number] {
 
 .borde-rojo{
   border: 1px solid red;
+}
+
+.boton-cerrar-alerta{
+  position: absolute;
+  top: 0px;
+  right: 10px;
+}
+.boton-cerrar-alerta img{
+  width: 13px;
 }

@@ -1,5 +1,47 @@
 <div class="container-fluid fondo d-flex justify-content-center">
   <div>
+    <!-- Alertas -->
+    <div class="alert alert-danger d-flex justify-content-center mb-3 mt-3 border border-danger" role="alert" *ngIf="errorValorPago == 400 && mostrarAlerta">
+      <span class="boton-cerrar-alerta cursor-pointer" (click)="cerrarAlerta()">
+        <img src="assets/img/cerrar-gris.svg" />
+      </span>
+      
+      <div class="row align-items-start">
+        <div class="col-12 danger d-flex justify-content-center">
+          <img src="assets/img/warning-rojo.svg" class="img-fluid" style="margin-right:10px;">
+          <label class="fs-16px fw-semibold">Actualiza el valor a pagar dado que el valor ingresado supera el valor total de la deuda,</label>
+        </div>
+        <div class="col-12 danger d-flex justify-content-center mb-3">
+          <label class="fs-16px fw-semibold">para mayor información comuníquese con el:</label>
+        </div>
+        <div class="col-12 d-flex justify-content-center">
+          <button type="button" class="btn btn-light rounded-pill"><img src="assets/img/simbolo-llamada.svg"> (604) 2 04 28 14</button>
+          <span class="nexo">o</span>
+          <button type="button" class="btn btn-light rounded-pill"><img src="assets/img/logo-whatsapp.svg"> 310 523 5025</button>
+        </div>
+      </div>
+      <div>
+      </div>
+    </div>
+
+    <div class="alert alert-warning d-flex mb-3 mt-3 border border-warning" role="alert" *ngIf="!deuda && consultado && mostrarAlerta">
+      <span class="boton-cerrar-alerta cursor-pointer" (click)="cerrarAlerta()">
+        <img src="assets/img/cerrar-gris.svg" />
+      </span>  
+      <div class="row align-items-start ">
+        <div class="col-12 warning d-flex justify-content-center mb-2">
+          <img src="assets/img/warning-amarillo.svg" class="img-fluid" style="margin-right:10px;">
+          <label class="fs-16px">Actualmente no tiene deuda con Novafianza, para más información comuníquese con el:</label>
+        </div><br/>
+        <div class="col-12 d-flex justify-content-center">
+          <button type="button" class="btn btn-light rounded-pill"><img src="assets/img/simbolo-llamada.svg"> (604) 2 04 28 14</button>
+          <span class="nexo">o</span>
+          <button type="button" class="btn btn-light rounded-pill"><img src="assets/img/logo-whatsapp.svg"> 310 523 5025</button>
+        </div>
+      </div>
+    </div>
+    <!-- Fin Alertas -->
+    
     <div class="mt-4 d-flex justify-content-center">
       <img src="assets/img/warning.svg" class="img-fluid" style="margin-right:10px;">
       <label class="fs-16px fw-semibold text-center titulo">Completa el formulario para iniciar el proceso de pago</label>
@@ -30,10 +72,9 @@
         <div class="col">
           <fieldset class="mb-4">
             <label class="fs-14px fw-semibold mb-2 es-requerido" for="valor_pagar">Valor a pagar</label>
-            <input class="form-control input" type="number" name="valor_pagar" formControlName="valor_pagar" required>
+            <input inputMoneda class="form-control input" type="text" name="valor_pagar" formControlName="valor_pagar" required>
           </fieldset>
         </div>
-
         <div class="col">
           <fieldset class="mb-4">
             <label class="fs-14px fw-semibold mb-2 es-requerido" for="telefono">Teléfono de contacto</label>
@@ -57,42 +98,9 @@
           formControlName='captcha' required>
         </ngx-recaptcha2>
       </fieldset>
-
-      <div class="alert alert-danger d-flex justify-content-center mb-3 mt-3 border border-danger" role="alert" *ngIf="errorValorPago == 400">
-        <div class="row align-items-start">
-          <div class="col-12 danger d-flex justify-content-center">
-            <img src="assets/img/warning-rojo.svg" class="img-fluid" style="margin-right:10px;">
-            <label class="fs-16px fw-semibold">Actualiza el valor a pagar dado que el valor ingresado supera el valor total de la deuda,</label>
-          </div>
-          <div class="col-12 danger d-flex justify-content-center mb-3">
-            <label class="fs-16px fw-semibold">para mayor información comuníquese con el:</label>
-          </div>
-          <div class="col-12 d-flex justify-content-center">
-            <button type="button" class="btn btn-light rounded-pill"><img src="assets/img/simbolo-llamada.svg"> (604) 2 04 28 14</button>
-            <span class="nexo">o</span>
-            <button type="button" class="btn btn-light rounded-pill"><img src="assets/img/logo-whatsapp.svg"> 310 523 5025</button>
-          </div>
-        </div>
-        <div>
-        </div>
-      </div>
-
-      <div class="alert alert-warning d-flex mb-3 mt-3 border border-warning" role="alert" *ngIf="deuda == false">
-        <div class="row align-items-start ">
-          <div class="col-12 warning d-flex justify-content-center mb-2">
-            <img src="assets/img/warning-amarillo.svg" class="img-fluid" style="margin-right:10px;">
-            <label class="fs-16px">Actualmente no tiene deuda con Novafianza, para más información comuníquese con el:</label>
-          </div><br/>
-          <div class="col-12 d-flex justify-content-center">
-            <button type="button" class="btn btn-light rounded-pill"><img src="assets/img/simbolo-llamada.svg"> (604) 2 04 28 14</button>
-            <span class="nexo">o</span>
-            <button type="button" class="btn btn-light rounded-pill"><img src="assets/img/logo-whatsapp.svg"> 310 523 5025</button>
-          </div>
-        </div>
-      </div>
-
+      
       <fieldset class="d-flex mb-3">
-        <button type="button" class="boton primario relleno ms-auto fw-semibold" style="width:158px;" (click)="iniciarPago()"
+        <button type="button" class="boton primario relleno ms-auto fw-semibold" style="width:158px;" (click)="consultarDeuda()"
           >Iniciar pago</button>
       </fieldset>
     </form>

@@ -1,0 +1,76 @@
+<div class="d-flex flex-column flex-gap-30">
+    <div class="row">
+        <div class="col-12">
+            <div class="card w-100">
+                <div class="card-header fw-bold fs-14px mt-2">
+                    Historial de novedades
+                </div>
+                <div class="card-body">
+                    <div class="contenedor">
+                        <div class="barraBusqueda">
+                            <input type="text" class="form-control" placeholder="Buscar...">
+                        </div>
+                        <div>
+                            <button class="totales" disabled>
+                                <span class="fw-semibold fs-14px">Total:</span>
+                                <span class="fs-12px fw-semibold" style="margin-left: 5px">11</span>
+                            </button>
+                        </div>
+                        <div class="d-flex justify-self-end flex-gap-5 ms-auto mb-3">
+                            <span class="fs-12px d-flex align-items-center" id="registrosTotales">Registros por
+                                página</span>
+                            <span class="texto-gris fs-12px fw-bold align-items-center">
+                                <select #porPagina class="form-select sm" name="" id="">
+                                    <option value="5">5</option>
+                                    <option value="10">10</option>
+                                    <option value="15">15</option>
+                                    <option value="20">20</option>
+                                </select>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="container-table d-flex table-responsive">
+                        <table class="table table-striped fs-12px">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Fecha y hora</th>
+                                    <th scope="col">Nombre del archivo</th>
+                                    <th scope="col">Tipo de archivo</th>
+                                    <th scope="col">Validación de estructura</th>
+                                    <th scope="col">Validación de datos</th>
+                                    <th scope="col">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>05/11/2022 - 3:30 PM</td>
+                                    <td>Nombre del archivo</td>
+                                    <td>Nuevas fianzas</td>
+                                    <td>Exitoso</td>
+                                    <td>Exitoso</td>
+                                    <td>
+                                        <label class="detalles fs-12px fw-semibold" (click)="abrirModalVerDetallesArchivo()">Ver detalles</label>
+                                    </td>
+                                </tr>
+                                <!-- <tr *ngIf="empresas.length == 0">
+                    <td colspan="6">
+                      <label class="d-flex justify-content-center fs-14px">
+                        Aun no hay empresas registradas
+                      </label>
+                    </td>
+                  </tr> -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="card-footer d-flex justify-content-end ">
+                    <!-- [collectionSize]="this.total" [(page)]="pagina" [pageSize]="limite" (pageChange)="this.cambioDePagina($event)" -->
+                    <ngb-pagination class="mt-3">
+                    </ngb-pagination>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<app-modal-detalles-archivo #modalVerDetalles></app-modal-detalles-archivo>

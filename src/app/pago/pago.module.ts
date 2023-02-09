@@ -8,7 +8,7 @@ import { MetodoPagoWompiComponent} from './componentes/metodo-pago-wompi/metodo-
 import { TransaccionComponent } from './componentes/transaccion/transaccion.component';
 import { FormularioProcesoPagoComponent } from './componentes/formulario-proceso-pago/formulario-proceso-pago.component';
 import { RouterModule} from '@angular/router';
-
+import { InputMonedaDirective } from '../directivas/input-moneda.directive';
 
 
 @NgModule({
@@ -16,15 +16,15 @@ import { RouterModule} from '@angular/router';
     ConsultaDeudaComponent,
     MetodoPagoWompiComponent,
     TransaccionComponent,
-    FormularioProcesoPagoComponent
+    FormularioProcesoPagoComponent,
+    InputMonedaDirective,
   ],
   imports: [
     CommonModule,
     NgxCaptchaModule,
     FormsModule, ReactiveFormsModule,
     NgbModule,
-    RouterModule,
-
+    RouterModule
   ]
 })
 export class PagoModule { }

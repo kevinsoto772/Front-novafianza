@@ -2,18 +2,16 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { PlantillaComponent } from './administrador/componentes/plantilla/plantilla.component';
 import { InicioSesionComponent } from './autenticacion/componentes/inicio-sesion/inicio-sesion.component';
-import { AutenticacionGuard } from './guards/autenticacion.guard';
-import { GestionDeEmpresasComponent } from './administrador/componentes/paginas/gestion-de-empresas/gestion-de-usuarios.component';
+import { GestionDeUsuariosComponent } from './administrador/componentes/paginas/gestion-de-usuarios-empresas/gestion-de-usuarios.component';
 import { ActualizarContrasenaComponent } from './autenticacion/componentes/actualizar-contrasena/actualizar-contrasena.component';
-import { CargaArchivosComponent } from './administrador/componentes/paginas/carga-archivos/carga-archivos.component';
-import { HistorialNovedadesComponent } from './administrador/componentes/paginas/historial-novedades/historial-novedades.component';
 import { ReportesComponent } from './administrador/componentes/paginas/reportes/reportes.component';
+import { PaginaCargaArchivosComponent } from './archivos/componentes/carga-archivos/pagina-carga-archivos.component';
 import { ConfiguracionDeCuentaComponent } from './administrador/componentes/paginas/configuracion-de-cuenta/configuracion-de-cuenta.component';
-import { AutorizacionGuard } from './guards/autorizacion.guard';
 import { ConsultaDeudaComponent } from './pago/componentes/consulta-deuda/consulta-deuda.component';
 import { MetodoPagoWompiComponent} from './pago/componentes/metodo-pago-wompi/metodo-pago-wompi.component';
 import { TransaccionComponent} from './pago/componentes/transaccion/transaccion.component';
 import { FormularioProcesoPagoComponent } from './pago/componentes/formulario-proceso-pago/formulario-proceso-pago.component';
+import { PaginaHistorialNovedadesComponent } from './historial-novedades/componentes/pagina-historial-novedades/pagina-historial-novedades.component';
 
 
 const routes: Routes = [
@@ -23,15 +21,15 @@ const routes: Routes = [
     children: [
       {
         path: 'crear_usuarios',
-        component: GestionDeEmpresasComponent
+        component: GestionDeUsuariosComponent
       },
       {
         path: 'cargar_archivos',
-        component: CargaArchivosComponent
+        component: PaginaCargaArchivosComponent
       },
       {
         path: 'historial_novedades',
-        component: HistorialNovedadesComponent
+        component: PaginaHistorialNovedadesComponent
       },{
         path: 'reportes',
         component: ReportesComponent

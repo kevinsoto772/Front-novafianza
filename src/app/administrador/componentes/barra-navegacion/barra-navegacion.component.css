@@ -22,6 +22,10 @@ cursor: pointer;
   color:#01b3ff;
 }
 
+.material-symbols-outlined{
+  color: white;
+}
+
 .icono-usuario{
     width: 35px;
     height: 35px;
