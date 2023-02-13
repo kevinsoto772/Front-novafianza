@@ -17,6 +17,7 @@ import { ConfiguracionDeCuentaComponent } from './componentes/paginas/configurac
 import { GestionDeUsuariosComponent } from './componentes/paginas/gestion-de-usuarios-empresas/gestion-de-usuarios.component';
 import { HistorialNovedadesModule } from '../historial-novedades/historial-novedades.module';
 import { ArchivosModule } from '../archivos/archivos.module';
+import { EmpresasModule } from '../empresas/empresas.module';
 
 
 
@@ -38,11 +39,13 @@ import { ArchivosModule } from '../archivos/archivos.module';
     CommonModule,
     HistorialNovedadesModule,
     ArchivosModule,
+    EmpresasModule,
     AdministradorRoutingModule,
     ReactiveFormsModule,
     FormsModule,
     NgbModule,
-    SweetAlert2Module.forRoot()
-  ]
+    SweetAlert2Module.forRoot(),
+    
+  ],
 })
 export class AdministradorModule { }

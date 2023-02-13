@@ -24,7 +24,6 @@
     border-radius: 10px;
     transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
     overflow: visible;
-    z-index: 9999;
 }
 .form-control.sm{
     height: 30px !important;
