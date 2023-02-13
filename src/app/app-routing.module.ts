@@ -12,6 +12,7 @@ import { MetodoPagoWompiComponent} from './pago/componentes/metodo-pago-wompi/me
 import { TransaccionComponent} from './pago/componentes/transaccion/transaccion.component';
 import { FormularioProcesoPagoComponent } from './pago/componentes/formulario-proceso-pago/formulario-proceso-pago.component';
 import { PaginaHistorialNovedadesComponent } from './historial-novedades/componentes/pagina-historial-novedades/pagina-historial-novedades.component';
+import { PaginaAdministrarEmpresasComponent } from './empresas/componentes/pagina-administrar-empresas/pagina-administrar-empresas.component';
 
 
 const routes: Routes = [
@@ -24,13 +25,18 @@ const routes: Routes = [
         component: GestionDeUsuariosComponent
       },
       {
+        path: 'entidades',
+        component: PaginaAdministrarEmpresasComponent
+      },
+      {
         path: 'cargar_archivos',
         component: PaginaCargaArchivosComponent
       },
       {
         path: 'historial_novedades',
         component: PaginaHistorialNovedadesComponent
-      },{
+      },
+      {
         path: 'reportes',
         component: ReportesComponent
       },
