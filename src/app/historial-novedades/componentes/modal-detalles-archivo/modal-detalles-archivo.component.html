@@ -1,0 +1,22 @@
+<ng-template #modal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title fs-16px">
+      <span class="fw-bold">Detalles: </span> Nombre de archivo
+    </h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body p-0">
+    <app-informacion-archivo></app-informacion-archivo>
+    <ul ngbNav #tabs="ngbNav" class="fondo-azul-degradado">
+
+      <li ngbNavItem *ngFor="let tab of ['Validacion de estructura', 'Validacion de datos']">
+        <a ngbNavLink class="text-light fs-14px">{{ tab }}</a>
+        <ng-template ngbNavContent>
+          <app-tab-validacion-estructura></app-tab-validacion-estructura>
+        </ng-template>
+      </li>
+
+    </ul>
+    <div [ngbNavOutlet]="tabs"></div>
+  </div>
+</ng-template>

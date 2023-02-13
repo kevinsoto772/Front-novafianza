@@ -6,7 +6,8 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "postinstall": "ngcc"
   },
   "private": true,
   "dependencies": {
@@ -22,7 +23,9 @@
     "@ng-bootstrap/ng-bootstrap": "^13.0.0",
     "@popperjs/core": "^2.10.2",
     "@sweetalert2/ngx-sweetalert2": "^12.0.2",
+    "@types/luxon": "^3.2.0",
     "bootstrap": "^5.2.0",
+    "luxon": "^3.2.1",
     "ngx-captcha": "^12.0.2",
     "rxjs": "~7.5.0",
     "sweetalert2": "^11.6.0",

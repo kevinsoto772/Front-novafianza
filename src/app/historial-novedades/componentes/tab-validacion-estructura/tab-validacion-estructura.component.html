@@ -1,0 +1,31 @@
+<div class="px-4 py-3">
+    <div class="border rounded-top">
+        <ul ngbNav #tabs="ngbNav">
+
+            <li ngbNavItem *ngFor="let tab of ['Errores', 'Alertas']">
+                <a ngbNavLink class="fs-14px text-dark">{{tab}}</a>
+                <ng-template ngbNavContent>
+
+                    <ngb-accordion #acordeon="ngbAccordion" class="card mb-2" *ngFor="let foo of [1,2,3,4]">
+                        <ngb-panel>
+                            <ng-template ngbPanelTitle>
+                                <span class="fs-14px fw-bold me-2">Categoría</span>
+                                <span class="fs-14px text-warning fw-normal">Total: 28</span>
+                            </ng-template>
+                            <ng-template ngbPanelContent>
+                                <div class="px-4 py-2">
+                                    <app-tabla-novedades></app-tabla-novedades>
+                                </div>
+                            </ng-template>
+                        </ngb-panel>
+                    </ngb-accordion>
+
+                </ng-template>
+            </li>
+
+        </ul>
+    </div>
+    <div class="border border-top-0 p-3">
+        <div [ngbNavOutlet]="tabs"></div>
+    </div>
+</div>

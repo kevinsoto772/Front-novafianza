@@ -1,0 +1,22 @@
+<div class="p-2">
+    <div class="border round">
+        <ul ngbNav #tabs="ngbNav">
+            <li ngbNavItem>
+                <a ngbNavLink class="fs-14px text-dark">Errores</a>
+                <ng-template ngbNavContent>
+                    tabla errores
+                </ng-template>
+            </li>
+
+            <li ngbNavItem>
+                <a ngbNavLink class="fs-14px text-dark">Alertas</a>
+                <ng-template ngbNavContent>
+                    tabla alertas
+                </ng-template>
+            </li>
+        </ul>
+    </div>
+    <div class="border border-top-0">
+        <div [ngbNavOutlet]="tabs"></div>
+    </div>
+</div>

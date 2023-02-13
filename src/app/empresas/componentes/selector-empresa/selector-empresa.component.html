@@ -1,0 +1,11 @@
+<div class="selector-empresa p-4 bg-white mb-5">
+    <div class="mb-2">
+        <span class="fw-bold fs-12px">Seleccionar entidad</span>
+    </div>
+    <div class="d-flex flex-gap-10">
+        <select #selectorEmpresa class="form-select" name="empresa" (change)="this.manejarSeleccionEmpresa(selectorEmpresa.value)">
+            <option *ngFor="let empresa of empresas" [value]="empresa.id">NIT {{ empresa.nit | number }} - {{ empresa.nombre }} - Convenio</option>
+        </select>
+        <button type="button" class="boton primario delineado">Consultar</button>
+    </div>
+</div>
