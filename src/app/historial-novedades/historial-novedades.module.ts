@@ -5,7 +5,7 @@ import { PaginaHistorialNovedadesComponent } from './componentes/pagina-historia
 import { ModalDetallesArchivoComponent } from './componentes/modal-detalles-archivo/modal-detalles-archivo.component';
 import { NavegacionModule } from '../navegacion/navegacion.module';
 import { InformacionArchivoComponent } from './componentes/informacion-archivo/informacion-archivo.component';
-import { TabValidacionEstructuraComponent } from './componentes/tab-validacion-estructura/tab-validacion-estructura.component';
+import { TabValidacion } from './componentes/tab-validacion-estructura/tab-validacion-estructura.component';
 import { TabValidacionDatosComponent } from './componentes/tab-validacion-datos/tab-validacion-datos.component';
 import { TablaNovedadesComponent } from './componentes/tabla-novedades/tabla-novedades.component';
 import { EmpresasModule } from '../empresas/empresas.module';
@@ -17,7 +17,7 @@ import { EmpresasModule } from '../empresas/empresas.module';
     PaginaHistorialNovedadesComponent,
     ModalDetallesArchivoComponent,
     InformacionArchivoComponent,
-    TabValidacionEstructuraComponent,
+    TabValidacion,
     TabValidacionDatosComponent,
     TablaNovedadesComponent,
   ],

@@ -1,5 +1,6 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NovedadesArchivo } from '../../modelos/NovedadesArchivo';
 
 @Component({
   selector: 'app-modal-detalles-archivo',
@@ -8,6 +9,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class ModalDetallesArchivoComponent implements OnInit {
   @ViewChild('modal') modal!:ElementRef
+  detallesArchivo?: NovedadesArchivo
 
   constructor(private servicioModal: NgbModal) { }
 
@@ -15,7 +17,8 @@ export class ModalDetallesArchivoComponent implements OnInit {
 
   }
 
-  abrir(){
+  abrir(detallesArchivo: NovedadesArchivo){
+    this.detallesArchivo = detallesArchivo
     this.servicioModal.open(this.modal, {
       size: 'xl'
     })

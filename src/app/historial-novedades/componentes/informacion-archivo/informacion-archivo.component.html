@@ -1,4 +1,4 @@
-<div class="d-flex px-3 py-3 fondo-celeste">
+<div class="d-flex px-3 py-3 fondo-celeste" *ngIf="detallesArchivo">
 
   <div class="col-2">
     <div class="d-flex flex-column">
@@ -10,7 +10,7 @@
   <div class="col-2">
     <div class="d-flex flex-column">
       <span class="fw-bold fs-12px">Fecha y hora de carga:</span>
-      <span class="fs-12px">05 / 11 / 2022 - 3:30 PM</span>  
+      <span class="fs-12px">{{ detallesArchivo.fechaYHora }}</span>  
     </div>
   </div>
 
@@ -18,7 +18,7 @@
     <div class="d-flex flex-column">
       <span>
         <span class="fw-bold fs-12px">Total registros validación de estructura: </span>
-        <span class="fs-12px">519</span>
+        <span class="fs-12px">{{ totalRegistrosValidacionEstructura }}</span>
       </span>
       <span>
         <span class="fw-bold fs-12px">Registros aprobados: </span>
@@ -34,8 +34,8 @@
   <div class="col-3">
     <div class="d-flex flex-column">
       <span>
-        <span class="fw-bold fs-12px">Total registros validación de estructura: </span>
-        <span class="fs-12px">519</span>
+        <span class="fw-bold fs-12px">Total registros validación de datos: </span>
+        <span class="fs-12px">{{ totalRegistrosValidacionDatos }}</span>
       </span>
       <span>
         <span class="fw-bold fs-12px">Registros aprobados: </span>
