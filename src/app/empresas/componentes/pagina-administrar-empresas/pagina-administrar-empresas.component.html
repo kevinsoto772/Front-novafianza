@@ -1,6 +1,6 @@
 <div class="d-flex flex-column flex-gap-30 p-4">
     <div class="d-flex justify-content-end">
-      <button type="button" class="boton primario relleno">
+      <button type="button" class="boton primario relleno" (click)="abrirModalCrearEmpresa()">
         <img src="assets/img/+.svg" class="me-1" /> Crear entidad
       </button>
     </div>
@@ -16,10 +16,10 @@
                 <input type="text" class="form-control" formControlName="busqueda" placeholder="Buscar...">
               </div>
               <div>
-                <button class="totales" disabled>
+                <!-- <button class="totales" disabled>
                   <span class="fw-semibold fs-14px">Total:</span>
                   <span class="fs-12px fw-semibold"style="margin-left: 5px">100</span>
-                </button>
+                </button> -->
               </div>
               <div class="d-flex justify-self-end flex-gap-5 ms-auto mb-3">
                 <span class="fs-12px d-flex align-items-center" id="registrosTotales">Registros por página</span>
@@ -49,25 +49,25 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let empresa of [1,2,3]; let index = index">
-                    <td>empresa.nit</td>
-                    <td>empresa.nombre</td>
-                    <td></td>
-                    <td>empresa.created_at</td>
+                  <tr *ngFor="let empresa of empresas; let index = index">
+                    <td>{{ empresa.nit }}</td>
+                    <td>{{ empresa.nombre }}</td>
+                    <td>Convenio</td>
+                    <td> 15 / 02 / 2023</td>
                     <td></td>
                     <td></td>
                     <td>
-                      <img src="./assets/img/editar.svg" alt="">
+                      <img src="./assets/img/editar.svg" alt="" (click)="abrirModalActualizarEmpresa(empresa)">
                     </td>
                     <td>
                       <label class="switch">
                         <!-- [checked]="empresa.estado" (change)="this.cambiarEstadoEmpresa(index)" -->
-                        <input type="checkbox">
+                        <input type="checkbox" [checked]="empresa.estado" (change)="cambiarEstadoEmpresa(empresa)">
                         <span class="slider round"></span>
                       </label>
                     </td>
                   </tr>
-                  <tr>
+                  <tr *ngIf="empresas.length == 0">
                     <td colspan="6">
                       <label class="d-flex justify-content-center fs-14px">
                         Aun no hay empresas registradas
@@ -79,11 +79,13 @@
             </div>
           </div>
           <div class="card-footer d-flex justify-content-end ">
-            <ngb-pagination class="mt-3" [collectionSize]="100" >
+            <ngb-pagination class="mt-3" [collectionSize]="paginacion.totalRegistros" >
             </ngb-pagination>
           </div>
         </div>
       </div>
     </div>
   </div>
-  
+
+  <app-modal-crear-empresa #modalCrearEmpresa (empresaCreada)="this.obtenerEmpresas(1, 100)"></app-modal-crear-empresa>
+  <app-modal-actualizar-empresa #modalActualizarEmpresa (empresaActualizada)="this.obtenerEmpresas(1, 100)"></app-modal-actualizar-empresa>

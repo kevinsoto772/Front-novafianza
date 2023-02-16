@@ -10,7 +10,7 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { PopupComponent } from './componentes/popup/popup.component';
 import { ModalVerUsuarioComponent } from './componentes/paginas/gestion-de-usuarios-empresas/modal-ver-usuario/modal-ver-usuario.component';
 import { ModalRegistrarUsuarioComponent } from './componentes/paginas/gestion-de-usuarios-empresas/modal-registrar-usuario/modal-registrar-usuario.component';
-import { ModalActualizarUsuarioComponent } from './componentes/paginas/gestion-de-usuarios-empresas/modal-actualizar-usuario/modal-actualizar-empresa.component';
+import { ModalActualizarUsuarioComponent } from './componentes/paginas/gestion-de-usuarios-empresas/modal-actualizar-usuario/modal-actualizar-usuario.component';
 import { HistorialNovedadesComponent } from './componentes/paginas/historial-novedades/historial-novedades.component';
 import { ReportesComponent } from './componentes/paginas/reportes/reportes.component';
 import { ConfiguracionDeCuentaComponent } from './componentes/paginas/configuracion-de-cuenta/configuracion-de-cuenta.component';
@@ -45,7 +45,9 @@ import { EmpresasModule } from '../empresas/empresas.module';
     FormsModule,
     NgbModule,
     SweetAlert2Module.forRoot(),
-    
   ],
+  exports:[
+    PopupComponent
+  ]
 })
 export class AdministradorModule { }

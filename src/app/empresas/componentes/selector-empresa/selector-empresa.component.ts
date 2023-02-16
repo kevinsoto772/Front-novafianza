@@ -16,7 +16,7 @@ export class SelectorEmpresaComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.servicioEmpresas.obtenerEmpresas().subscribe( respuesta => {
+    this.servicioEmpresas.obtenerEmpresas(1, 100).subscribe( respuesta => {
       this.empresas = respuesta.empresas;
     }) 
   }

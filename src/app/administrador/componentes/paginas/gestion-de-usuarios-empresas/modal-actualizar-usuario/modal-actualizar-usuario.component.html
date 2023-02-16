@@ -3,31 +3,168 @@
     <h4 class="modal-title fs-14px  fw-bolder texto-naranja">Actualizar Empresa</h4>
     <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
   </div>
-  <div class="modal-body" *ngIf="empresa">
-    <div class="d-flex flex-gap-5 align-items-center">
-      <span class="fs-14px">Empresa: </span>
-      <span class="fs-14px fw-bold">{{empresa.nombre}}</span>
-  </div><br/>
-      <form [formGroup]="this.formulario" class="d-flex flex-column flex-gap-10">
-          <div class="row">
-              <div class="col-5">
-                  <fieldset>
-                      <label for="">Nombre de la empresa</label>
-                      <input type="text" class="form-control" formControlName="nombre">
-                  </fieldset>
-              </div>
-              <div class="col-5">
-                  <fieldset>
-                      <label for="">Nit de la empresa</label>
-                      <input type="number" class="form-control" formControlName="nit">
-                  </fieldset>
-              </div>
+  <div class="modal-body" *ngIf="usuarioEmpresa">
+    <form [formGroup]="this.formulario" class="d-flex flex-column flex-gap-10">
+        <div class="row">
+            <div class="col-sm-3">
+                <fieldset>
+                  <label class="fw-semibold fs-12px">Tipo de documento</label>
+                      <select class="form-select form-control input" id="tipoDocumento" name="tipoDocumento"
+                      formControlName="tipoDocumento" required>
+                      <option value="" disabled selected>Seleccionar formato...</option>
+                      <option value="CC">CC - Cédula de ciudadanía</option>
+                      <option value="CE">CE - Cédula de extranjería</option>
+                      <option value="Pasaporte">Pasaporte</option>
+                    </select>
+                    <span class="validacion"
+                        *ngIf="this.formulario.controls['tipoDocumento'].invalid &&
+                        this.formulario.controls['tipoDocumento'].dirty">
+                        Tipo de documento requerido.
+                    </span>
+                </fieldset>
+            </div>
+            <div class="col-sm-3">
+                <fieldset>
+                    <label class="fw-semibold fs-12px">Número de documento</label>
+                    <input type="number" class="form-control" formControlName="numeroDocumento">
+                    <span class="validacion"
+                        *ngIf="this.formulario.controls['numeroDocumento'].invalid &&
+                        this.formulario.controls['numeroDocumento'].dirty">
+                        Número de documento requerido.
+                    </span>
+                </fieldset>
+            </div>
+
+            <div class="col-sm-3">
+              <fieldset>
+                  <label class="fw-semibold fs-12px">Nombres</label>
+                  <input type="text" class="form-control" formControlName="nombre">
+                  <span class="validacion"
+                      *ngIf="this.formulario.controls['nombre'].invalid &&
+                      this.formulario.controls['nombre'].dirty">
+                      Nombres requerido.
+                  </span>
+              </fieldset>
           </div>
-      </form>
+
+          <div class="col-sm-3">
+            <fieldset>
+                <label class="fw-semibold fs-12px">Apellidos</label>
+                <input type="text" class="form-control" formControlName="apellido">
+                <span class="validacion"
+                    *ngIf="this.formulario.controls['apellido'].invalid &&
+                    this.formulario.controls['apellido'].dirty">
+                    Apellidos requerido.
+                </span>
+            </fieldset>
+        </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-3">
+              <fieldset>
+                  <label class="fw-semibold fs-12px">Fecha de nacimiento</label>
+                  <input type="date" class="form-control" formControlName="fechaNacimiento">
+                  <span class="validacion"
+                      *ngIf="this.formulario.controls['fechaNacimiento'].invalid &&
+                      this.formulario.controls['fechaNacimiento'].dirty">
+                      Fecha de nacimiento requerido.
+                  </span>
+              </fieldset>
+          </div>
+          <div class="col-sm-3">
+            <div class="row">
+              <div class="col-8">
+                <label >Número de teléfono</label>
+              </div>
+              <div class="col-4 ext">
+                <label *ngIf="this.formulario.controls['tipoTelefono'].value == 'fijo'">Ext.</label>
+              </div>
+            </div>
+            <div class="d-flex">
+              <fieldset id="selector">
+                <select class="form-select form-control input" id="tipoTelefono" name="tipoTelefono"
+                formControlName="tipoTelefono" required>
+                <option value="fijo">Fijo</option>
+                <option value="movil" selected>Móvil</option>
+              </select>
+              </fieldset>
+              <fieldset id="telefono" *ngIf="this.formulario.controls['tipoTelefono'].value == 'movil'">
+                <input type="number" aria-label="Last name" class="form-control" formControlName="telefono">
+                <span class="validacion"
+                            *ngIf="this.formulario.controls['telefono'].invalid &&
+                            this.formulario.controls['telefono'].dirty">
+                            Teléfono requerido.
+                        </span>
+              </fieldset>
+              <fieldset id="telefono" *ngIf="this.formulario.controls['tipoTelefono'].value == 'fijo'">
+                <input type="number" aria-label="Last name" class="form-control" formControlName="telefonoFijo">
+                <span class="validacion"
+                            *ngIf="this.formulario.controls['telefonoFijo'].invalid &&
+                            this.formulario.controls['telefonoFijo'].dirty">
+                            Teléfono requerido.
+                        </span>
+              </fieldset>
+              <fieldset id="extension" *ngIf="this.formulario.controls['tipoTelefono'].value == 'fijo'">
+                <input type="number" class="form-control" formControlName="extension">
+                <span class="validacion"
+                            *ngIf="this.formulario.controls['extension'].invalid &&
+                            this.formulario.controls['extension'].dirty">
+                            Extension requerida.
+                        </span>
+              </fieldset>
+            </div>
+          </div>
+
+          <div class="col-sm-3">
+            <fieldset>
+                <label class="fw-semibold fs-12px">Correo electrónico empresarial</label>
+                <input type="email" class="form-control" formControlName="correo">
+                <span class="validacion"
+                    *ngIf="this.formulario.controls['correo'].invalid &&
+                    this.formulario.controls['correo'].dirty">
+                    Correo electrónico empresarial requerido.
+                </span>
+            </fieldset>
+        </div>
+
+        <div class="col-sm-3">
+          <fieldset>
+              <label class="fw-semibold fs-12px">Cargo</label>
+              <input type="text" class="form-control" formControlName="cargo">
+              <span class="validacion"
+                  *ngIf="this.formulario.controls['cargo'].invalid &&
+                  this.formulario.controls['cargo'].dirty">
+                  Cargo requerido.
+              </span>
+          </fieldset>
+      </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-3">
+            <fieldset>
+                <label class="fw-semibold fs-12px">Perfil</label>
+                <select class="form-select form-control" id="tipoRol" name="tipoRol"
+                formControlName="tipoRol" required>
+                <option value="" disabled selected>Seleccionar formato...</option>
+                <option value="003">Administrador</option>
+                <option value="004">Operativo</option>
+                <option value="005">Consultor</option>
+              </select>
+              <span class="validacion"
+                  *ngIf="this.formulario.controls['tipoRol'].invalid &&
+                  this.formulario.controls['tipoRol'].dirty">
+                  Perfil requerido.
+              </span>
+            </fieldset>
+        </div>
+    </div>
+    </form>
   </div>
   <div class="modal-footer">
-      <button type="button" class="boton-flamingo rojo delineado" (click)="modal.close('Close click')">Cerrar</button>
-      <button type="button" class="boton-flamingo rojo relleno" (click)="this.ActualizarEmpresa()">
+      <button type="button" class="boton primario delineado" (click)="modal.close('Close click')">Cerrar</button>
+      <button type="button" class="boton primario relleno" (click)="actualizarUsuarioEmpresa()">
           Guardar Cambios
       </button>
   </div>

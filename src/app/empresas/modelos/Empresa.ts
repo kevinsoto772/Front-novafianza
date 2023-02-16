@@ -26,4 +26,7 @@ export class Empresa {
     public get estado(): boolean {
 		return this._estado;
 	}
+	public set estado(estado: boolean){
+		this._estado = estado
+	}
 }
