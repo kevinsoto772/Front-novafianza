@@ -2,14 +2,14 @@ export class PeticionRegistrarUsuarioEmpresa {
   public identificacion: number;
   public nombre: string;
   public apellido: string;
-  public fechaNacimiento: Date;
+  public fechaNacimiento: string;
   public cargo: string;
   public correo: string;
   public telefono: string;
   public idEmpresa: string;
   public idRol: string
 
-  public constructor(nombre: string, identificacion: number, apellido: string, fechaNacimiento: Date, cargo: string, correo: string, telefono: string, idEmpresa: string, idRol: string) {
+  public constructor(nombre: string, identificacion: number, apellido: string, fechaNacimiento: string, cargo: string, correo: string, telefono: string, idEmpresa: string, idRol: string) {
     this.nombre = nombre
     this.identificacion = identificacion
     this.apellido = apellido

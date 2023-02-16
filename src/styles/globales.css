@@ -290,8 +290,13 @@ input[type=number] {
 
 .validacion{
   width: 100%;
-  color: var(--rojo-flamingo);
+  color: #AC0404;
   font-size: 12px;
+}
+.validacion-span{
+  color: #AC0404;
+  font-size: 10px;
+  font-weight: normal;
 }
 
 .borde-rojo{

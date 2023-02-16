@@ -43,10 +43,10 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>05/11/2022 - 3:30 PM</td>
-                                    <td>Nombre del archivo</td>
-                                    <td>Nuevas fianzas</td>
+                                <tr *ngFor="let archivoCargado of archivosCargados">
+                                    <td>{{ archivoCargado.fechaYHora }}</td>
+                                    <td> {{ archivoCargado.nombreArchivo }}</td>
+                                    <td>{{ archivoCargado.nombreTipoArchivo }}</td>
                                     <td>
                                         <img class="me-2" src="assets/img/exitoso.svg" alt="exitoso">
                                         <span class="fs-12px text-success fw-bold">Exitoso</span>
@@ -56,7 +56,7 @@
                                         <span class="fs-12px text-success fw-bold">Exitoso</span>
                                     </td>
                                     <td>
-                                        <label class="detalles fs-12px fw-semibold" (click)="abrirModalVerDetallesArchivo()">Ver detalles</label>
+                                        <label class="detalles fs-12px fw-semibold" (click)="abrirModalVerDetallesArchivo(archivoCargado.idArchivoCargado)">Ver detalles</label>
                                     </td>
                                 </tr>
                                 <!-- <tr *ngIf="empresas.length == 0">
