@@ -5,7 +5,7 @@ import { environment } from 'src/environments/environment';
 import { Paginacion } from '../modelos/compartido/Paginador';
 import { PeticionActualizarUsuarioEmpresa } from '../modelos/usuarios/PeticionActualizarUsuarioEmpresa';
 import { PeticionRegistrarUsuarioEmpresa } from '../modelos/usuarios/PeticionRegistrarUsuarioEmpresa';
-import { usuarioEmpresa } from '../modelos/usuarios/usuarioEmpresa';
+import { UsuarioEmpresa } from '../modelos/usuarios/usuarioEmpresa';
 import { Autenticable } from './compartido/Autenticable';
 import { PeticionActualizarContrasena } from '../../autenticacion/modelos/PeticionActualizarContrasena';
 import { usuarioNovafianza } from '../modelos/usuarios/usuarioNovafianza';
@@ -28,19 +28,19 @@ export class ServicioUsuarios extends Autenticable {
     })
   }
 
-  obtenerUsuariosEmpresa(pagina: number, limite: number): Observable<{usuariosEmpresa: usuarioEmpresa[], paginacion:Paginacion}> {
+  obtenerUsuariosEmpresa(pagina: number, limite: number): Observable<{usuariosEmpresa: UsuarioEmpresa[], paginacion:Paginacion}> {
     const endpoint = `/api/v1/usuario_empresa/listar/${pagina}/${limite}`
-    return this.httpClient.get<{usuariosEmpresa: usuarioEmpresa[], paginacion:Paginacion}>(`${this.urlBackend}${endpoint}`, { headers: this.headers });
+    return this.httpClient.get<{usuariosEmpresa: UsuarioEmpresa[], paginacion:Paginacion}>(`${this.urlBackend}${endpoint}`, { headers: this.headers });
   }
 
-  obtenerUsuarioEmpresaPorId(usuariosEmpresa_id: string): Observable<usuarioEmpresa>{
+  obtenerUsuarioEmpresaPorId(usuariosEmpresa_id: string): Observable<UsuarioEmpresa>{
     const endpoint = `/api/v1/usuario_empresa/${usuariosEmpresa_id}`;
-    return this.httpClient.get<usuarioEmpresa>(`${this.urlBackend}${endpoint}`, {headers: this.headers});
+    return this.httpClient.get<UsuarioEmpresa>(`${this.urlBackend}${endpoint}`, {headers: this.headers});
   }
 
-  obtenerUsuarioEmpresaPorUsuario(nombreUsuario: string): Observable<usuarioEmpresa>{
+  obtenerUsuarioEmpresaPorUsuario(nombreUsuario: string): Observable<UsuarioEmpresa>{
     const endpoint = `/api/v1/usuario_empresa/usuario/${nombreUsuario}`;
-    return this.httpClient.get<usuarioEmpresa>(`${this.urlBackend}${endpoint}`, {headers: this.headers});
+    return this.httpClient.get<UsuarioEmpresa>(`${this.urlBackend}${endpoint}`, {headers: this.headers});
   }
 
   obtenerUsuarioNovafianzaPorUsuario(nombreUsuario: string): Observable<usuarioNovafianza>{

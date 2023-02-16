@@ -1,16 +1,16 @@
-export interface usuarioEmpresa {
-  id: string;
+export interface UsuarioEmpresa {
+  id?: string;
   usuario: string;
   identificacion: number;
   nombre: string;
   apellido: string;
-  fechaNacimiento:Date;
+  fechaNacimiento:string;
   cargo: string;
   correo: string;
   telefono: string;
-  estado: boolean;
-  clave: string;
+  estado?: boolean;
+  clave?: string;
   idEmpresa: string;
-  claveTemporal: boolean;
+  claveTemporal?: boolean;
   idRol: string
 }

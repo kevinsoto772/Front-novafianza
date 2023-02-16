@@ -5,22 +5,57 @@ import { Autenticable } from 'src/app/administrador/servicios/compartido/Autenti
 import { Paginacion } from 'src/app/compartido/modelos/Paginacion';
 import { environment } from 'src/environments/environment';
 import { Empresa } from '../modelos/Empresa';
+import { PeticionCrearEmpresa } from '../modelos/PeticionCrearEmpresa';
+import { PeticionActualizarEmpresa } from 'src/app/administrador/modelos/empresas/PeticionActualizarEmpresa';
 
 @Injectable({
   providedIn: 'root'
 })
-export class EmpresasService extends Autenticable{
+export class EmpresasService extends Autenticable {
   private readonly HOST = environment.urlBackend;
 
-  constructor(private clienteHttp: HttpClient) { 
+  constructor(private clienteHttp: HttpClient) {
     super()
   }
 
-  obtenerEmpresas():Observable<{paginacion: Paginacion, empresas: Empresa[]}>{
-    const endpoint = `/api/v1/empresa/listar/1/100`
-    return this.clienteHttp.get<{paginacion: Paginacion, empresas: Empresa[]}>(
+  obtenerEmpresas(pagina: number, limite: number): Observable<{ paginacion: Paginacion, empresas: Empresa[] }> {
+    const endpoint = `/api/v1/empresa/listar/${pagina}/${limite}`
+    return this.clienteHttp.get<{ paginacion: Paginacion, empresas: Empresa[] }>(
       `${this.HOST}${endpoint}`,
-      { headers: { Authorization: `Bearer ${this.obtenerTokenAutorizacion()}`} }
+      { headers: { Authorization: `Bearer ${this.obtenerTokenAutorizacion()}` } }
+    )
+  }
+
+  crearEmpresa(peticion: PeticionCrearEmpresa) {
+    const formData = new FormData()
+    formData.append('nombre', peticion.nombre)
+    formData.append('nit', peticion.nit)
+    formData.append('estado', 'true')
+    formData.append('convenio', peticion.convenio.toString())
+    formData.append('logo', peticion.logo)
+    const endpoint = `/api/v1/empresa/registro`
+    return this.clienteHttp.post<Empresa>(
+      `${this.HOST}${endpoint}`,
+      formData,
+      { headers: { Authorization: `Bearer ${this.obtenerTokenAutorizacion()}` } }
+    )
+  }
+
+  actualizarEmpresa(idEmpresa: string, peticion: PeticionActualizarEmpresa) {
+    const endpoint = `/api/v1/empresa/${idEmpresa}`
+    return this.clienteHttp.patch<Empresa>(
+      `${this.HOST}${endpoint}`,
+      peticion,
+      { headers: { Authorization: `Bearer ${this.obtenerTokenAutorizacion()}` } }
+    )
+  }
+
+  cambiarEstadoEmpresa(idEmpresa: string) {
+    const endpoint = `/api/v1/empresa/${idEmpresa}`
+    return this.clienteHttp.patch<Empresa>(
+      `${this.HOST}${endpoint}`,
+      undefined,
+      { headers: { Authorization: `Bearer ${ this.obtenerTokenAutorizacion() }` } }
     )
   }
 }

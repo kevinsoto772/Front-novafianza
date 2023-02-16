@@ -1,5 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ModalDetallesArchivoComponent } from '../modal-detalles-archivo/modal-detalles-archivo.component';
+import { ArchivoCargado } from '../../modelos/ArchivoCargado';
+import { NovedadesService } from '../../servicios/novedades.service';
 
 @Component({
   selector: 'app-pagina-historial-novedades',
@@ -8,13 +10,20 @@ import { ModalDetallesArchivoComponent } from '../modal-detalles-archivo/modal-d
 })
 export class PaginaHistorialNovedadesComponent implements OnInit {
   @ViewChild('modalVerDetalles') modalDetallesArchivo!:ModalDetallesArchivoComponent
-  constructor() { }
+  archivosCargados:ArchivoCargado[] = []
+  constructor(private servicioNovedades: NovedadesService) { }
 
   ngOnInit(): void {
+    this.servicioNovedades.obtenerArchivosCargados('').subscribe( respuesta => {
+      this.archivosCargados = respuesta.archivosCargados
+    })
+    
   }
 
-  abrirModalVerDetallesArchivo(){
-    this.modalDetallesArchivo.abrir()
+  abrirModalVerDetallesArchivo(idArchivoCargado: string){
+    this.servicioNovedades.obtenerDetalleArchivo(idArchivoCargado).subscribe( detallesArchivo => {
+      this.modalDetallesArchivo.abrir(detallesArchivo)
+    })
   }
 
 }

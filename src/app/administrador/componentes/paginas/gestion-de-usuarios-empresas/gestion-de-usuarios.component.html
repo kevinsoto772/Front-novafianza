@@ -1,6 +1,8 @@
-<div class="d-flex flex-column flex-gap-30">
+<app-selector-empresa (seleccion)="this.idEmpresa = $event.id"></app-selector-empresa>
+
+<div class="d-flex flex-column flex-gap-30 p-4 pt-0" *ngIf="this.idEmpresa">
   <div class="d-flex justify-content-end">
-    <button type="button" class="boton primario relleno" (click)="this.abrirModalRegistrarEmpresa()">
+    <button type="button" class="boton primario relleno" (click)="this.abrirModalRegistrarUsuario()">
       <img src="assets/img/+.svg" class="me-1" /> Crear usuarios
     </button>
   </div>
@@ -50,15 +52,15 @@
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let empresa of empresas; let index = index">
-                  <td>{{ empresa.nit }}</td>
-                  <td>{{ empresa.nombre }}</td>
-                  <td></td>
-                  <td>{{ empresa.created_at }}</td>
-                  <td></td>
-                  <td></td>
+                <tr *ngFor="let usuario of usuarios; let index = index">
+                  <td>{{ usuario.identificacion }}</td>
+                  <td>{{ usuario.nombre }} {{ usuario.apellido }}</td>
+                  <td> {{ usuario.idRol }}</td>
+                  <td>{{ usuario.fechaNacimiento }}</td>
+                  <td>{{ usuario.correo }}</td>
+                  <td>{{ usuario.telefono }}</td>
                   <td>
-                    <img src="./assets/img/editar.svg" alt="">
+                    <img src="./assets/img/editar.svg" alt="" (click)="abrirModalActualizarUsuarioEmpresa(usuario)">
                   </td>
                   <td>
                     <label class="switch">
@@ -68,7 +70,7 @@
                     </label>
                   </td>
                 </tr>
-                <tr *ngIf="empresas.length == 0">
+                <tr *ngIf="usuarios.length == 0">
                   <td colspan="6">
                     <label class="d-flex justify-content-center fs-14px">
                       Aun no hay empresas registradas
@@ -88,9 +90,10 @@
   </div>
 </div>
 
-<app-modal-registrar-usuario #modalRegistrarUsuario (seHaRegistradoUnUsuario)="this.refrescarListaDeEmpresas()"></app-modal-registrar-usuario>
+<app-modal-registrar-usuario #modalRegistrarUsuario (seHaRegistradoUnUsuario)="this.refrescarListaDeUsuarios()">
+</app-modal-registrar-usuario>
 <app-modal-ver-usuario #modalverUsuario></app-modal-ver-usuario>
-<app-modal-actualizar-usuario (seHaActualizadoUnUsuario)="this.refrescarListaDeEmpresas()"
+<app-modal-actualizar-usuario (seHaActualizadoUnUsuario)="this.refrescarListaDeUsuarios()"
   #modalActualizarUsuario
 ></app-modal-actualizar-usuario>
 

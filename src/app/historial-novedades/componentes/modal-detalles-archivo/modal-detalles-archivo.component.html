@@ -1,18 +1,18 @@
 <ng-template #modal let-modal>
-  <div class="modal-header">
+  <div class="modal-header" *ngIf="detallesArchivo">
     <h4 class="modal-title fs-16px">
-      <span class="fw-bold">Detalles: </span> Nombre de archivo
+      <span class="fw-bold">Detalles: </span> {{ detallesArchivo.nombreArchivo }}
     </h4>
     <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
   </div>
-  <div class="modal-body p-0">
-    <app-informacion-archivo></app-informacion-archivo>
+  <div class="modal-body p-0" *ngIf="detallesArchivo">
+    <app-informacion-archivo [detallesArchivo]="detallesArchivo"></app-informacion-archivo>
     <ul ngbNav #tabs="ngbNav" class="fondo-azul-degradado">
 
-      <li ngbNavItem *ngFor="let tab of ['Validacion de estructura', 'Validacion de datos']">
-        <a ngbNavLink class="text-light fs-14px">{{ tab }}</a>
+      <li ngbNavItem *ngFor="let validacion of detallesArchivo!.validaciones">
+        <a ngbNavLink class="text-light fs-14px">{{ validacion.nombre }}</a>
         <ng-template ngbNavContent>
-          <app-tab-validacion-estructura></app-tab-validacion-estructura>
+          <app-tab-validacion [validacion]="validacion"></app-tab-validacion>
         </ng-template>
       </li>
 

@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { EmpresasService } from '../../servicios/empresas.service';
 import { Empresa } from '../../modelos/Empresa';
+import { ModalCrearEmpresaComponent } from '../modal-crear-empresa/modal-crear-empresa.component';
+import { ModalActualizarEmpresaComponent } from '../modal-actualizar-empresa/modal-actualizar-empresa.component';
+import { Paginacion } from 'src/app/compartido/modelos/Paginacion';
 
 @Component({
   selector: 'app-pagina-administrar-empresas',
@@ -8,14 +11,44 @@ import { Empresa } from '../../modelos/Empresa';
   styleUrls: ['./pagina-administrar-empresas.component.css']
 })
 export class PaginaAdministrarEmpresasComponent implements OnInit {
-  public empresas:Empresa[] = []
+  @ViewChild('modalCrearEmpresa') modalCrearEmpresa!: ModalCrearEmpresaComponent
+  @ViewChild('modalActualizarEmpresa') modalActualizar!: ModalActualizarEmpresaComponent
+  public empresas: Empresa[] = []
+  public paginacion: Paginacion
 
-  constructor(private servicioEmpresas: EmpresasService) { }
+  constructor(private servicioEmpresas: EmpresasService) {
+    this.paginacion = {
+      paginaActual: 1,
+      totalPaginas: 1,
+      totalRegistros: 5
+    }
+  }
 
   ngOnInit(): void {
-    this.servicioEmpresas.obtenerEmpresas().subscribe(respuesta => {
-      this.empresas = respuesta.empresas;
+    this.obtenerEmpresas(1, 100)
+  }
+
+  cambiarEstadoEmpresa(empresa: Empresa){
+    empresa.estado = !empresa.estado
+    this.servicioEmpresas.cambiarEstadoEmpresa(empresa.id!).subscribe({
+      complete: ()=> {  },
+      error: ()=> { }
     })
+  }
+
+  obtenerEmpresas(pagina: number, limite: number) {
+    this.servicioEmpresas.obtenerEmpresas(pagina, limite).subscribe(respuesta => {
+      this.empresas = respuesta.empresas
+      this.paginacion = respuesta.paginacion
+    })
+  }
+
+  abrirModalCrearEmpresa() {
+    this.modalCrearEmpresa.abrir()
+  }
+
+  abrirModalActualizarEmpresa(empresa: Empresa) {
+    this.modalActualizar.abrir(empresa)
   }
 
 }

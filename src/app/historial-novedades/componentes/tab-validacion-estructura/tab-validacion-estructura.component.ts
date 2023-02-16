@@ -1,12 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Validacion } from '../../modelos/NovedadesArchivo';
 
 @Component({
-  selector: 'app-tab-validacion-estructura',
+  selector: 'app-tab-validacion',
   templateUrl: './tab-validacion-estructura.component.html',
   styleUrls: ['./tab-validacion-estructura.component.css']
 })
-export class TabValidacionEstructuraComponent implements OnInit {
-
+export class TabValidacion implements OnInit {
+  @Input('validacion') validacion!:Validacion
   constructor() { }
 
   ngOnInit(): void {

@@ -22,13 +22,13 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td>1</td>
-        <td>Descripción</td>
-        <td>Línea</td>
-        <td>Variable</td>
+      <tr *ngFor="let registro of registros; let i = index">
+        <td>{{ (i + 1) }}</td>
+        <td>{{ registro.descripcion }}</td>
+        <td>{{ registro.linea }}</td>
+        <td>{{ registro.variable }}</td>
       </tr>
-      <tr>
+      <tr *ngIf="registros.length == 0">
         <td colspan="4">
           <label class="d-flex justify-content-center fs-14px">
             Sin errores o alertas
