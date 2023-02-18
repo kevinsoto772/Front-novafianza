@@ -5,7 +5,7 @@ import { ServicioCabeceraService } from 'src/app/administrador/servicios/servici
 import { ServicioUsuarios } from 'src/app/administrador/servicios/usuarios.service';
 import { PeticionActualizarContrasena } from 'src/app/autenticacion/modelos/PeticionActualizarContrasena';
 import { PeticionActualizarUsuario } from '../../../modelos/ConfiguracionPerfil/PeticionActualizarUsuario';
-import { PopupComponent } from '../../popup/popup.component';
+import { PopupComponent } from '../../../../alertas/componentes/popup/popup.component';
 
 @Component({
   selector: 'app-configuracion-de-cuenta',

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AdministradorModule } from '../administrador/administrador.module';
-import { PopupComponent } from '../administrador/componentes/popup/popup.component';
+import { PopupComponent } from '../alertas/componentes/popup/popup.component';
 
 
 

@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { PlantillaComponent } from './administrador/componentes/plantilla/plantilla.component';
 import { InicioSesionComponent } from './autenticacion/componentes/inicio-sesion/inicio-sesion.component';
-import { GestionDeUsuariosComponent } from './administrador/componentes/paginas/gestion-de-usuarios-empresas/gestion-de-usuarios.component';
+import { GestionDeUsuariosComponent } from './usuarios/componentes/gestion-de-usuarios-empresas/gestion-de-usuarios.component';
 import { ActualizarContrasenaComponent } from './autenticacion/componentes/actualizar-contrasena/actualizar-contrasena.component';
 import { ReportesComponent } from './administrador/componentes/paginas/reportes/reportes.component';
 import { PaginaCargaArchivosComponent } from './archivos/componentes/carga-archivos/pagina-carga-archivos.component';
