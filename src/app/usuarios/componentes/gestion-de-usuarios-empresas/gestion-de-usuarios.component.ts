@@ -1,8 +1,6 @@
-import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Empresa } from 'src/app/administrador/modelos/empresas/Empresa';
-import { ServicioEmpresa } from 'src/app/administrador/servicios/empresas.service';
-import { PopupComponent } from '../../popup/popup.component';
+import { PopupComponent } from 'src/app/alertas/componentes/popup/popup.component';
 import { ModalRegistrarUsuarioComponent } from './modal-registrar-usuario/modal-registrar-usuario.component';
 import { ModalVerUsuarioComponent } from './modal-ver-usuario/modal-ver-usuario.component';
 import { ModalActualizarUsuarioComponent } from './modal-actualizar-usuario/modal-actualizar-usuario.component';

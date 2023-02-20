@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -9,7 +8,6 @@ import { AutenticacionModule } from './autenticacion/autenticacion.module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { InterceptorAutorizacion } from './administrador/interceptores/InterceptorAutorizacion';
 import { PagoModule } from './pago/pago.module';
-import { InputMonedaDirective } from './directivas/input-moneda.directive';
 
 @NgModule({
   declarations: [
@@ -21,7 +19,7 @@ import { InputMonedaDirective } from './directivas/input-moneda.directive';
     NgbModule,
     AdministradorModule,
     AutenticacionModule,
-    PagoModule
+    PagoModule,
   ],
   exports:[
   ],

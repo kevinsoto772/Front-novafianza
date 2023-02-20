@@ -12,7 +12,6 @@ import { PopupComponent } from '../alertas/componentes/popup/popup.component';
     AdministradorModule
   ],
   exports: [
-    PopupComponent
   ]
 })
 export class AdministradorCompartidoModule { }

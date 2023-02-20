@@ -5,7 +5,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Empresa } from 'src/app/administrador/modelos/empresas/Empresa';
 import { PeticionActualizarEmpresa } from 'src/app/administrador/modelos/empresas/PeticionActualizarEmpresa';
 import { ServicioEmpresa } from 'src/app/administrador/servicios/empresas.service';
-import { PopupComponent } from '../../../popup/popup.component';
+import { PopupComponent } from 'src/app/alertas/componentes/popup/popup.component';
 import { UsuarioEmpresa } from 'src/app/administrador/modelos/usuarios/usuarioEmpresa';
 import { Usuario } from 'src/app/autenticacion/modelos/IniciarSesionRespuesta';
 import { ServicioUsuarios } from 'src/app/administrador/servicios/usuarios.service';

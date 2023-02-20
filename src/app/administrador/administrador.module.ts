@@ -14,6 +14,8 @@ import { ConfiguracionDeCuentaComponent } from './componentes/paginas/configurac
 import { HistorialNovedadesModule } from '../historial-novedades/historial-novedades.module';
 import { ArchivosModule } from '../archivos/archivos.module';
 import { EmpresasModule } from '../empresas/empresas.module';
+import { AlertasModule } from '../alertas/alertas.module';
+import { UsuariosModule } from '../usuarios/usuarios.module';
 
 
 
@@ -31,6 +33,8 @@ import { EmpresasModule } from '../empresas/empresas.module';
     HistorialNovedadesModule,
     ArchivosModule,
     EmpresasModule,
+    AlertasModule,
+    UsuariosModule,
     AdministradorRoutingModule,
     ReactiveFormsModule,
     FormsModule,
