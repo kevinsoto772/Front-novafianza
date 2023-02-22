@@ -7,6 +7,9 @@ import { ModalCrearEmpresaComponent } from './componentes/modal-crear-empresa/mo
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ModalActualizarEmpresaComponent } from './componentes/modal-actualizar-empresa/modal-actualizar-empresa.component';
 import { AdministradorCompartidoModule } from '../administrador-compartido/administrador-compartido.module';
+import { ModalAsignarServiciosComponent } from './componentes/modal-asignar-servicios/modal-asignar-servicios.component';
+import { AlertasModule } from '../alertas/alertas.module';
+import { InputsModule } from '../inputs/inputs.module';
 
 @NgModule({
   declarations: [
@@ -14,12 +17,15 @@ import { AdministradorCompartidoModule } from '../administrador-compartido/admin
     PaginaAdministrarEmpresasComponent,
     ModalCrearEmpresaComponent,
     ModalActualizarEmpresaComponent,
+    ModalAsignarServiciosComponent,
   ],
   imports: [
     CommonModule,
     NgbModule,
     ReactiveFormsModule,
     FormsModule,
+    AlertasModule,
+    InputsModule
 /*     AdministradorCompartidoModule
  */  ],
   exports: [

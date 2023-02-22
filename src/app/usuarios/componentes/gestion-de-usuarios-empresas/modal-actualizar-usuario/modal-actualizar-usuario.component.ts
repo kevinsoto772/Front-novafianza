@@ -10,6 +10,7 @@ import { UsuarioEmpresa } from 'src/app/administrador/modelos/usuarios/usuarioEm
 import { Usuario } from 'src/app/autenticacion/modelos/IniciarSesionRespuesta';
 import { ServicioUsuarios } from 'src/app/administrador/servicios/usuarios.service';
 import { DateTime } from 'luxon';
+import { marcarFormularioComoSucio } from 'src/app/administrador/utilidades/Utilidades';
 
 @Component({
   selector: 'app-modal-actualizar-usuario',
@@ -65,6 +66,7 @@ export class ModalActualizarUsuarioComponent implements OnInit {
   public actualizarUsuarioEmpresa() {
     if(this.formulario.invalid){
       this.popup.abrirPopupFallido('Formulario inválido', 'Rellena correctamente todos los campos')
+      marcarFormularioComoSucio(this.formulario)
       throw Error('Formulario inválido')
     }
     const controls = this.formulario.controls

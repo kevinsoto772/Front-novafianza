@@ -7,29 +7,22 @@
                     Historial de novedades
                 </div>
                 <div class="card-body">
-                    <div class="contenedor">
-                        <div class="barraBusqueda">
-                            <input type="text" class="form-control" placeholder="Buscar...">
+                    <div class="d-flex align-items-center flex-gap-10">
+                        <div class="max-width-200px">
+                            <app-input-busqueda></app-input-busqueda>
                         </div>
-                        <div>
-                            <button class="totales" disabled>
-                                <span class="fw-semibold fs-14px">Total:</span>
-                                <span class="fs-12px fw-semibold" style="margin-left: 5px">11</span>
-                            </button>
-                        </div>
-                        <div class="d-flex justify-self-end flex-gap-5 ms-auto mb-3">
-                            <span class="fs-12px d-flex align-items-center" id="registrosTotales">Registros por
-                                página</span>
-                            <span class="texto-gris fs-12px fw-bold align-items-center">
-                                <select #porPagina class="form-select sm" name="" id="">
+                        <span class="total">Total: 85</span>
+                        <div class="d-flex align-items-center ms-auto flex-gap-5">
+                            <span class="fs-12px">Registros por página</span>
+                            <span class="fs-12px">
+                                <select class="form-select sm">
                                     <option value="5">5</option>
                                     <option value="10">10</option>
-                                    <option value="15">15</option>
-                                    <option value="20">20</option>
+                                    <option value="15">20</option>
                                 </select>
                             </span>
                         </div>
-                    </div>
+                      </div>
                     <div class="container-table d-flex table-responsive">
                         <table class="table table-striped fs-12px">
                             <thead>
@@ -48,24 +41,42 @@
                                     <td> {{ archivoCargado.nombreArchivo }}</td>
                                     <td>{{ archivoCargado.nombreTipoArchivo }}</td>
                                     <td>
-                                        <img class="me-2" src="assets/img/exitoso.svg" alt="exitoso">
-                                        <span class="fs-12px text-success fw-bold">Exitoso</span>
+                                        <ng-container *ngIf="archivoCargado.estadoValidacion === 'Pasó' ">
+                                            <img class="me-2" src="assets/img/exitoso.svg" alt="exitoso">
+                                            <span class="fs-12px text-success fw-bold">Exitoso</span>
+                                        </ng-container>
+                                        
+                                        <ng-container *ngIf="archivoCargado.estadoValidacion === 'Falló' ">
+                                            <img class="me-2" src="assets/img/rechazo.svg" alt="exitoso">
+                                            <span class="fs-12px text-danger fw-bold">Falló</span>
+                                        </ng-container>
+
+                                        <ng-container *ngIf="archivoCargado.estadoValidacion === 'Procesando' ">
+                                            <img class="me-2" src="assets/img/procesando.svg" alt="exitoso">
+                                            <span class="fs-12px text-info fw-bold">Procesando</span>
+                                        </ng-container>
+                                     
                                     </td>
                                     <td>
-                                        <img class="me-2" src="assets/img/exitoso.svg" alt="exitoso">
-                                        <span class="fs-12px text-success fw-bold">Exitoso</span>
+                                        <ng-container *ngIf="archivoCargado.estadoValidacion === 'Pasó' ">
+                                            <img class="me-2" src="assets/img/exitoso.svg" alt="exitoso">
+                                            <span class="fs-12px text-success fw-bold">Exitoso</span>
+                                        </ng-container>
+                                        
+                                        <ng-container *ngIf="archivoCargado.estadoValidacion === 'Falló' ">
+                                            <img class="me-2" src="assets/img/rechazo.svg" alt="exitoso">
+                                            <span class="fs-12px text-danger fw-bold">Falló</span>
+                                        </ng-container>
+
+                                        <ng-container *ngIf="archivoCargado.estadoValidacion === 'Procesando' ">
+                                            <img class="me-2" src="assets/img/procesando.svg" alt="exitoso">
+                                            <span class="fs-12px text-info fw-bold">Procesando</span>
+                                        </ng-container>
                                     </td>
                                     <td>
                                         <label class="detalles fs-12px fw-semibold" (click)="abrirModalVerDetallesArchivo(archivoCargado.idArchivoCargado)">Ver detalles</label>
                                     </td>
                                 </tr>
-                                <!-- <tr *ngIf="empresas.length == 0">
-                    <td colspan="6">
-                      <label class="d-flex justify-content-center fs-14px">
-                        Aun no hay empresas registradas
-                      </label>
-                    </td>
-                  </tr> -->
                             </tbody>
                         </table>
                     </div>

@@ -1,0 +1,55 @@
+<ng-template #modal let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title fs-14px  fw-bolder">Asociar servicios</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+        <div class="row mb-3">
+            <div class="col">
+                <label class="fw-semibold fs-12px">Nombre de la entidad</label>
+                <input class="form-control input" disabled>
+            </div>
+        </div>
+        <div class="row">
+            <app-alerta [tipo]="'informacion'" class="mb-3">
+                Seleccione los servicios que desea activar para esta entidad.
+            </app-alerta>
+        </div>
+        <div class="row mb-2">
+            <div class="col">
+                <label class="fw-semibold fs-12px">Asociar servicios</label>
+                <app-input-busqueda></app-input-busqueda>
+            </div>
+        </div>
+        <div class="row mb-2">
+            <div class="d-flex">
+                <div class="ms-auto">
+                    <label class="d-flex align-items-center">
+                        <input type="checkbox" class="me-2">
+                        <span class="fs-12px fw-semibold">Seleccionar todos</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+
+                <div class="servicios border rounded">
+                    <div class="servicio" *ngFor="let archivo of [ 1, 2, 3 ,4, 5, 6 ,7]">
+                        <label class="d-flex align-items-center">
+                            <input type="checkbox" class="me-2">
+                            <span class="fs-12px fw-semibold">1 nombre servicio</span>
+                        </label>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="boton primario relleno">
+            <img src="assets/img/+.svg" alt="">
+            Crear Empresa
+        </button>
+    </div>
+</ng-template>

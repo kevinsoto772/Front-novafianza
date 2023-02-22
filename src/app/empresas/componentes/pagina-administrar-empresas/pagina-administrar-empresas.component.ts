@@ -4,6 +4,7 @@ import { Empresa } from '../../modelos/Empresa';
 import { ModalCrearEmpresaComponent } from '../modal-crear-empresa/modal-crear-empresa.component';
 import { ModalActualizarEmpresaComponent } from '../modal-actualizar-empresa/modal-actualizar-empresa.component';
 import { Paginacion } from 'src/app/compartido/modelos/Paginacion';
+import { ModalAsignarServiciosComponent } from '../modal-asignar-servicios/modal-asignar-servicios.component';
 
 @Component({
   selector: 'app-pagina-administrar-empresas',
@@ -13,6 +14,7 @@ import { Paginacion } from 'src/app/compartido/modelos/Paginacion';
 export class PaginaAdministrarEmpresasComponent implements OnInit {
   @ViewChild('modalCrearEmpresa') modalCrearEmpresa!: ModalCrearEmpresaComponent
   @ViewChild('modalActualizarEmpresa') modalActualizar!: ModalActualizarEmpresaComponent
+  @ViewChild('modalAsignarServicios') modalAsignarServicios!: ModalAsignarServiciosComponent
   public empresas: Empresa[] = []
   public paginacion: Paginacion
 
@@ -45,6 +47,10 @@ export class PaginaAdministrarEmpresasComponent implements OnInit {
 
   abrirModalCrearEmpresa() {
     this.modalCrearEmpresa.abrir()
+  }
+
+  abrirModalAsignarServicios() {
+    this.modalAsignarServicios.abrir()
   }
 
   abrirModalActualizarEmpresa(empresa: Empresa) {

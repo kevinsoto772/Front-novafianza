@@ -13,6 +13,7 @@ import { TransaccionComponent} from './pago/componentes/transaccion/transaccion.
 import { FormularioProcesoPagoComponent } from './pago/componentes/formulario-proceso-pago/formulario-proceso-pago.component';
 import { PaginaHistorialNovedadesComponent } from './historial-novedades/componentes/pagina-historial-novedades/pagina-historial-novedades.component';
 import { PaginaAdministrarEmpresasComponent } from './empresas/componentes/pagina-administrar-empresas/pagina-administrar-empresas.component';
+import { PaginaGestionArchivosComponent } from './archivos/componentes/pagina-gestion-archivos/pagina-gestion-archivos.component';
 
 
 const routes: Routes = [
@@ -31,6 +32,10 @@ const routes: Routes = [
       {
         path: 'cargar_archivos',
         component: PaginaCargaArchivosComponent
+      },
+      {
+        path: 'servicios',
+        component: PaginaGestionArchivosComponent
       },
       {
         path: 'historial_novedades',
