@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  urlBackend: 'http://127.0.0.1:3333'
+  urlBackend: 'http://127.0.0.1:3333',
+  rutaZonaPagos: '/wordpress/zona-pagos'
 };
 
 /*
