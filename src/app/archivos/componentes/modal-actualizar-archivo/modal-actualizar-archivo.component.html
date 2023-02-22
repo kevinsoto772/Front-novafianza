@@ -1,0 +1,65 @@
+<ng-template #modal let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title fs-14px  fw-bolder texto-naranja">
+            Editar servicio <span class="validacion fw-normal">- Todos los campos son obligatorios</span>
+
+        </h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+        <form [formGroup]="this.formulario" class="d-flex flex-column flex-gap-10">
+            <div class="row">
+                <div class="col">
+                    <fieldset>
+                        <label class="fw-semibold fs-12px">Nombre del servicio</label>
+                        <input formControlName="nombre" class="form-control" type="text">
+                        <app-validacion 
+                        [control]="formulario.controls['nombre']"
+                        [validacion]="'required'"
+                        [texto]="'El nombre es requerido.'">
+                    </app-validacion>
+                    </fieldset>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <fieldset>
+                        <label class="fw-semibold fs-12px">Descripcion</label>
+                        <textarea style="min-height: 80px;" class="form-control" formControlName="descripcion" type="text"></textarea>
+                        <app-validacion 
+                            [control]="formulario.controls['descripcion']"
+                            [validacion]="'required'"
+                            [texto]="'La descripción es requerida.'">
+                        </app-validacion>
+                    </fieldset>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <fieldset>
+                        <label class="fw-semibold fs-12px">Manual de uso</label>
+                        <input formControlName="manual" class="form-control" type="file">
+                        <div class="d-flex mt-2">
+                            <span class="fs-12px ms-auto texto-gris">
+                                <b>Formatos:</b> PDF, <b>Peso Máx</b>: 5MB.
+                            </span>    
+                        </div>
+                        <app-validacion 
+                            [control]="formulario.controls['manual']"
+                            [validacion]="'required'"
+                            [texto]="'El manual es requerido.'">
+                        </app-validacion>
+                    </fieldset>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="boton primario delineado" (click)="modal.close('Close click')">Cerrar</button>
+        <button type="button" class="boton primario relleno">
+            Guardar Cambios
+        </button>
+    </div>
+</ng-template>
+
+<app-popup #popup></app-popup>

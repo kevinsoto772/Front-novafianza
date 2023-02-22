@@ -9,6 +9,7 @@ import { TabValidacion } from './componentes/tab-validacion-estructura/tab-valid
 import { TabValidacionDatosComponent } from './componentes/tab-validacion-datos/tab-validacion-datos.component';
 import { TablaNovedadesComponent } from './componentes/tabla-novedades/tabla-novedades.component';
 import { EmpresasModule } from '../empresas/empresas.module';
+import { InputsModule } from '../inputs/inputs.module';
 
 
 
@@ -26,7 +27,8 @@ import { EmpresasModule } from '../empresas/empresas.module';
     NgbModule,
     /* Modulos propios */
     NavegacionModule,
-    EmpresasModule
+    EmpresasModule,
+    InputsModule
   ]
 })
 export class HistorialNovedadesModule { }

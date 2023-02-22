@@ -2,7 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { PopupComponent } from 'src/app/administrador/componentes/popup/popup.component';
+import { PopupComponent } from 'src/app/alertas/componentes/popup/popup.component';
 import { PeticionRecuperarContrasena } from '../../modelos/PeticionRecuperarContrasena';
 import { AutenticacionService } from '../../servicios/autenticacion.service';
 

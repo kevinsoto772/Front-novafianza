@@ -3,7 +3,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { PopupComponent } from 'src/app/administrador/componentes/popup/popup.component';
+import { PopupComponent } from 'src/app/alertas/componentes/popup/popup.component';
 import Swal from 'sweetalert2';
 import { IniciarSesionRespuesta } from '../../modelos/IniciarSesionRespuesta';
 import { AutenticacionService } from '../../servicios/autenticacion.service';

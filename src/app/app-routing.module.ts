@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { PlantillaComponent } from './administrador/componentes/plantilla/plantilla.component';
 import { InicioSesionComponent } from './autenticacion/componentes/inicio-sesion/inicio-sesion.component';
-import { GestionDeUsuariosComponent } from './administrador/componentes/paginas/gestion-de-usuarios-empresas/gestion-de-usuarios.component';
+import { GestionDeUsuariosComponent } from './usuarios/componentes/gestion-de-usuarios-empresas/gestion-de-usuarios.component';
 import { ActualizarContrasenaComponent } from './autenticacion/componentes/actualizar-contrasena/actualizar-contrasena.component';
 import { ReportesComponent } from './administrador/componentes/paginas/reportes/reportes.component';
 import { PaginaCargaArchivosComponent } from './archivos/componentes/carga-archivos/pagina-carga-archivos.component';
@@ -13,6 +13,7 @@ import { TransaccionComponent} from './pago/componentes/transaccion/transaccion.
 import { FormularioProcesoPagoComponent } from './pago/componentes/formulario-proceso-pago/formulario-proceso-pago.component';
 import { PaginaHistorialNovedadesComponent } from './historial-novedades/componentes/pagina-historial-novedades/pagina-historial-novedades.component';
 import { PaginaAdministrarEmpresasComponent } from './empresas/componentes/pagina-administrar-empresas/pagina-administrar-empresas.component';
+import { PaginaGestionArchivosComponent } from './archivos/componentes/pagina-gestion-archivos/pagina-gestion-archivos.component';
 
 
 const routes: Routes = [
@@ -31,6 +32,10 @@ const routes: Routes = [
       {
         path: 'cargar_archivos',
         component: PaginaCargaArchivosComponent
+      },
+      {
+        path: 'servicios',
+        component: PaginaGestionArchivosComponent
       },
       {
         path: 'historial_novedades',

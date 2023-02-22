@@ -8,35 +8,47 @@
         <div class="card-body">
           <form [formGroup]="this.formulario">
             <div class="row">
+              <!-- Tipo de archivo -->
               <div class="col-sm-3">
                 <fieldset class="mb-2">
                   <label class="titulo-input">Tipo de archivo</label>
                   <select class="form-select form-control input" id="tipoArchivo" name="tipoArchivo"
                   formControlName="tipoArchivo" required>
-                  <option value="" disabled selected>Seleccionar formato...</option>
-                  <option value="Nuevas fianzas">Nuevas fianzas</option>
-                  <option value="Anulaciones">Anulaciones</option>
-                  <option value="Pronto pago">Pronto pago</option>
-                  <option value="Saldos">Saldos</option>
-                  <option value="Reclamaciones">Reclamaciones</option>
-                </select>
+                    <option value="" disabled selected>Seleccionar formato...</option>
+                    <option *ngFor="let tipoArchivo of tiposArchivo" [value]="tipoArchivo.id">{{ tipoArchivo.nombre }}</option>
+                  </select>
+                  <app-validacion 
+                  [control]="formulario.controls['tipoArchivo']"
+                  [validacion]="'required'"
+                  [texto]="'Requerido.'"></app-validacion>
                 </fieldset>
                 <label class="fs-12px descarga" *ngIf="this.formulario.controls['tipoArchivo'].value !== ''">
                   <img src="./assets/img/flecha-abajo.png" class="img-fluid" style="width:12%;"> Descargar Manual de Uso
                 </label>
               </div>
+              <!-- Fecha inicial -->
               <div class="col-sm-3">
                 <fieldset>
                   <label class="titulo-input">Fecha inicial de corte</label>
                   <input type="date" class="form-control" formControlName="fechaInicial">
+                  <app-validacion 
+                  [control]="formulario.controls['fechaInicial']"
+                  [validacion]="'required'"
+                  [texto]="'Requerido.'"></app-validacion>
                 </fieldset>
               </div>
+              <!-- Fecha final -->
               <div class="col-sm-3">
                 <fieldset>
                   <label class="titulo-input">Fecha final de corte</label>
                   <input type="date" class="form-control" formControlName="fechaFinal">
+                  <app-validacion 
+                  [control]="formulario.controls['fechaFinal']"
+                  [validacion]="'required'"
+                  [texto]="'Requerido.'"></app-validacion>
                 </fieldset>
               </div>
+              <!-- Archivo -->
               <div class="col-sm-3">
                 <label class="titulo-input">Cargar archivo</label>
                 <div class="input-group mb-1">
@@ -49,13 +61,24 @@
                   (change)="obtenerArchivo($event)">
                   <label class="input-group-text boton-adjuntar" for="inputGroupFile02" id="">Adjuntar</label>
                 </div>
+                <app-validacion 
+                  [control]="formulario.controls['archivo']"
+                  [validacion]="'required'"
+                  [texto]="'Requerido.'"></app-validacion>
                 <label class="fs-10px"  *ngIf="this.formulario.controls['archivo'].value === null">Formatos permitidos: CVS, TXT. Max. 5MB</label>
               </div>
             </div>
           </form>
+
+          <!-- alerta -->
+          <app-alerta [tipo]="'peligro'" *ngIf="formatoInvalido">
+            <span class="fw-semibold">Formato inválido: </span>
+            <span>No se puede cargar el archivo. Inténtelo nuevamente, los tipos de archivos permitidos son CVS, TXT</span>
+          </app-alerta>
+
         </div>
         <div class="card-footer d-flex justify-content-end">
-          <button type="button" class="boton primario relleno mb-2 mt-2">
+          <button type="button" class="boton primario relleno mb-2 mt-2" (click)="enviarArchivo()">
             Enviar archivo
           </button>
         </div>
@@ -63,3 +86,8 @@
     </div>
   </div>
 </div>
+
+<app-popup-procesando 
+#popupProcesando
+(cargarOtroArchivo)="cargarOtroArchivo()"
+(verHistorialDeNovedades)="verHistorialDeNovedades()"></app-popup-procesando>
