@@ -1,4 +1,5 @@
 export const environment = {
   production: true,
-  urlBackend: 'http://172.16.8.192:4333'
+  urlBackend: 'https://novafianza.com:4333',
+  rutaZonaPagos: '/zona-pagos'
 }; 

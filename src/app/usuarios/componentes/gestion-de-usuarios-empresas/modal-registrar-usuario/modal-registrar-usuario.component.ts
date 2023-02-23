@@ -1,7 +1,7 @@
 import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { PopupComponent } from 'src/app/administrador/componentes/popup/popup.component';
+import { PopupComponent } from 'src/app/alertas/componentes/popup/popup.component';
 import { UsuarioEmpresa } from 'src/app/administrador/modelos/usuarios/usuarioEmpresa';
 import { ServicioUsuarios } from 'src/app/administrador/servicios/usuarios.service';
 

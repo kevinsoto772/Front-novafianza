@@ -1,0 +1,80 @@
+<div class="d-flex flex-column flex-gap-30 p-4">
+    <div class="d-flex justify-content-end">
+        <button type="button" class="boton primario relleno" (click)="abrirModalCrear()">
+            <img src="assets/img/+.svg" class="me-1" /> Crear servicio
+        </button>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card w-100">
+                <div class="card-header py-3">
+                    <span class="fs-14px fw-semibold">Servicios</span>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex align-items-center flex-gap-10">
+                        <div class="max-width-200px">
+                            <app-input-busqueda></app-input-busqueda>
+                        </div>
+                        <span class="total">Total: 85</span>
+                        <div class="d-flex align-items-center ms-auto flex-gap-5">
+                            <span class="fs-12px">Registros por página</span>
+                            <span class="fs-12px">
+                                <select class="form-select sm">
+                                    <option value="5">5</option>
+                                    <option value="10">10</option>
+                                    <option value="15">20</option>
+                                </select>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="container-table d-flex table-responsive">
+                        <table class="table table-striped fs-12px">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Nombre del servicio</th>
+                                    <th scope="col">Archivo</th>
+                                    <th scope="col">Fecha de creación</th>
+                                    <th scope="col">Acciones<br/>
+                                        <label class="acciones me-2" id="accionEditar">Editar</label>
+                                        <label class="acciones">Activo</label>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let archivo of archivos">
+                                    <td>{{ archivo.nombre }}</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td class="d-flex flex-gap-20">
+                                        <img 
+                                        class="cursor-pointer" 
+                                        draggable="false" 
+                                        src="./assets/img/editar.svg" 
+                                        alt="editar"
+                                        (click)="abrirModalActualizar()">
+                                        <label class="switch">
+                                            <!-- [checked]="empresa.estado" (change)="this.cambiarEstadoEmpresa(index)" -->
+                                            <input type="checkbox">
+                                            <span class="slider round"></span>
+                                        </label>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="card-footer d-flex justify-content-end ">
+                    <ngb-pagination class="mt-3" [collectionSize]="paginacion.totalRegistros" [(page)]="paginacion.paginaActual" [pageSize]="10" (pageChange)="this.cambioDePagina($event)">
+                    </ngb-pagination>
+                  </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<app-modal-crear-archivo #modalCrear>
+</app-modal-crear-archivo>
+
+<app-modal-actualizar-archivo #modalActualizar>
+</app-modal-actualizar-archivo>

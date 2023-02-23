@@ -7,17 +7,15 @@ import { BarraNavegacionComponent } from './componentes/barra-navegacion/barra-n
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
-import { PopupComponent } from './componentes/popup/popup.component';
-import { ModalVerUsuarioComponent } from './componentes/paginas/gestion-de-usuarios-empresas/modal-ver-usuario/modal-ver-usuario.component';
-import { ModalRegistrarUsuarioComponent } from './componentes/paginas/gestion-de-usuarios-empresas/modal-registrar-usuario/modal-registrar-usuario.component';
-import { ModalActualizarUsuarioComponent } from './componentes/paginas/gestion-de-usuarios-empresas/modal-actualizar-usuario/modal-actualizar-usuario.component';
+import { PopupComponent } from '../alertas/componentes/popup/popup.component';
 import { HistorialNovedadesComponent } from './componentes/paginas/historial-novedades/historial-novedades.component';
 import { ReportesComponent } from './componentes/paginas/reportes/reportes.component';
 import { ConfiguracionDeCuentaComponent } from './componentes/paginas/configuracion-de-cuenta/configuracion-de-cuenta.component';
-import { GestionDeUsuariosComponent } from './componentes/paginas/gestion-de-usuarios-empresas/gestion-de-usuarios.component';
 import { HistorialNovedadesModule } from '../historial-novedades/historial-novedades.module';
 import { ArchivosModule } from '../archivos/archivos.module';
 import { EmpresasModule } from '../empresas/empresas.module';
+import { AlertasModule } from '../alertas/alertas.module';
+import { UsuariosModule } from '../usuarios/usuarios.module';
 
 
 
@@ -26,11 +24,6 @@ import { EmpresasModule } from '../empresas/empresas.module';
     PlantillaComponent,
     MenuLateralComponent,
     BarraNavegacionComponent,
-    PopupComponent,
-    GestionDeUsuariosComponent,
-    ModalRegistrarUsuarioComponent,
-    ModalVerUsuarioComponent,
-    ModalActualizarUsuarioComponent,
     HistorialNovedadesComponent,
     ReportesComponent,
     ConfiguracionDeCuentaComponent,
@@ -40,14 +33,14 @@ import { EmpresasModule } from '../empresas/empresas.module';
     HistorialNovedadesModule,
     ArchivosModule,
     EmpresasModule,
+    AlertasModule,
+    UsuariosModule,
     AdministradorRoutingModule,
     ReactiveFormsModule,
     FormsModule,
     NgbModule,
     SweetAlert2Module.forRoot(),
   ],
-  exports:[
-    PopupComponent
-  ]
+  exports:[]
 })
 export class AdministradorModule { }

@@ -1,0 +1,24 @@
+<ng-template #modal let-modal>
+    <div class="modal-body pt-5 px-4">
+        <div class="d-flex flex-column align-items-center flex-gap-10 mb-4">
+            <img class="mb-2" draggable="false" src="assets/img/procesando-archivo.svg" alt="procesando archivo">
+            <span class="fs-20px fw-extrabold text-center">Procesando</span>
+        </div>
+        <p class="text-center">
+            <b>Se está procesando el archivo.</b> Le notificaremos vía correo electrónico cuando finalicen los procesos 
+            de validación: <b>1. Validación de estructura</b> y <b>2. Validación de datos.</b> Podrá consultar 
+            el resumen desde el módulo de Novedades.     
+        </p>
+    </div>
+    <div class="modal-footer d-flex justify-content-center py-4 flex-gap-20">
+        <button type="button" class="boton primario delineado" (click)="manejarCargarOtroArchivo()">
+            Cargar otro archivo
+        </button>
+        <button type="button" class="boton primario relleno" (click)="manejarVerHistorialDeNovedades()">
+            Ver historial de carga
+        </button>
+    </div>
+  </ng-template>
+  
+  <app-popup #popup></app-popup>
+  

@@ -11,26 +11,20 @@
             Lista de entidades cliente
           </div>
           <div class="card-body">
-            <div class="contenedor">
-              <div class="barraBusqueda">
-                <input type="text" class="form-control" formControlName="busqueda" placeholder="Buscar...">
+            <div class="d-flex align-items-center flex-gap-10">
+              <div class="max-width-200px">
+                  <app-input-busqueda></app-input-busqueda>
               </div>
-              <div>
-                <!-- <button class="totales" disabled>
-                  <span class="fw-semibold fs-14px">Total:</span>
-                  <span class="fs-12px fw-semibold"style="margin-left: 5px">100</span>
-                </button> -->
-              </div>
-              <div class="d-flex justify-self-end flex-gap-5 ms-auto mb-3">
-                <span class="fs-12px d-flex align-items-center" id="registrosTotales">Registros por página</span>
-                <span class="texto-gris fs-12px fw-bold align-items-center">
-                  <select #porPagina class="form-select sm" name="" id="">
-                    <option value="5">5</option>
-                    <option value="10">10</option>
-                    <option value="15">15</option>
-                    <option value="20">20</option>
-                  </select>
-                </span>
+              <span class="total">Total: 85</span>
+              <div class="d-flex align-items-center ms-auto flex-gap-5">
+                  <span class="fs-12px">Registros por página</span>
+                  <span class="fs-12px">
+                      <select class="form-select sm">
+                          <option value="5">5</option>
+                          <option value="10">10</option>
+                          <option value="15">20</option>
+                      </select>
+                  </span>
               </div>
             </div>
             <div class="container-table d-flex table-responsive">
@@ -42,10 +36,11 @@
                     <th scope="col">Convenio</th>
                     <th scope="col">Fecha creación</th>
                     <th scope="col">Servicios Asociados</th>
-                    <th scope="col" colspan="2">Acciones<br/>
-                      <label class="acciones" id="accionEditar">Editar</label>
-                      <label class="acciones">Activo</label>
-                    </th>
+                    <th scope="col">Acciones<br/>
+                      <label class="acciones me-2">Servicios</label>
+                      <label class="acciones me-2">Editar</label>
+                      <label class="acciones me-2">Activo</label>
+                  </th>
                   </tr>
                 </thead>
                 <tbody>
@@ -55,17 +50,20 @@
                     <td>Convenio</td>
                     <td> 15 / 02 / 2023</td>
                     <td></td>
-                    <td></td>
-                    <td>
-                      <img src="./assets/img/editar.svg" alt="" (click)="abrirModalActualizarEmpresa(empresa)">
-                    </td>
-                    <td>
+                    <td class="d-flex flex-gap-20">
+                      <span class="acciones" (click)="abrirModalAsignarServicios()">Servicios</span>
+                      <img 
+                      class="cursor-pointer" 
+                      draggable="false" 
+                      src="./assets/img/editar.svg" 
+                      alt="editar"
+                      (click)="abrirModalActualizarEmpresa(empresa)">
                       <label class="switch">
-                        <!-- [checked]="empresa.estado" (change)="this.cambiarEstadoEmpresa(index)" -->
-                        <input type="checkbox" [checked]="empresa.estado" (change)="cambiarEstadoEmpresa(empresa)">
-                        <span class="slider round"></span>
+                          <!-- [checked]="empresa.estado" (change)="this.cambiarEstadoEmpresa(index)" -->
+                          <input type="checkbox" [checked]="empresa.estado" (change)="cambiarEstadoEmpresa(empresa)">
+                          <span class="slider round"></span>
                       </label>
-                    </td>
+                  </td>
                   </tr>
                   <tr *ngIf="empresas.length == 0">
                     <td colspan="6">
@@ -89,3 +87,4 @@
 
   <app-modal-crear-empresa #modalCrearEmpresa (empresaCreada)="this.obtenerEmpresas(1, 100)"></app-modal-crear-empresa>
   <app-modal-actualizar-empresa #modalActualizarEmpresa (empresaActualizada)="this.obtenerEmpresas(1, 100)"></app-modal-actualizar-empresa>
+  <app-modal-asignar-servicios #modalAsignarServicios></app-modal-asignar-servicios>

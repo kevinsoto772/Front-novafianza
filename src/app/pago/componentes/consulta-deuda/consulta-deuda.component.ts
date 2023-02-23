@@ -4,6 +4,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { WompiService } from '../../servicios/wompi.service';
 import { ReCaptcha2Component } from 'ngx-captcha';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-modal-consulta-deuda',
@@ -64,7 +65,7 @@ export class ConsultaDeudaComponent implements OnInit {
     parametros.push((this.formulario.controls['numero_documento'].value));
     parametros.push(this.formulario.controls['tipo_documento'].value);
     //this.enrutador.navigate(['/proceso-pago'], { queryParams: { formulario: parametros } })
-    window.open(`/wordpress/zona-pagos?numero_documento=${this.formulario.controls['numero_documento'].value}&tipo_documento=${this.formulario.controls['tipo_documento'].value}`, '_parent');
+    window.open(`${environment.rutaZonaPagos}?numero_documento=${this.formulario.controls['numero_documento'].value}&tipo_documento=${this.formulario.controls['tipo_documento'].value}`, '_parent');
     this.limpiarFormulario();
   }
 
