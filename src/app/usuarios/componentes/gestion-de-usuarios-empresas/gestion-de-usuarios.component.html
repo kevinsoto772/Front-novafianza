@@ -21,17 +21,19 @@
             <div>
               <button class="totales" disabled>
                 <span class="fw-semibold fs-14px">Total:</span>
-                <span class="fs-12px fw-semibold"style="margin-left: 5px">{{this.total}}</span>
+                <span class="fs-12px fw-semibold"style="margin-left: 5px">{{paginador.totalRegistros}}</span>
               </button>
             </div>
             <div class="d-flex justify-self-end flex-gap-5 ms-auto mb-3">
               <span class="fs-12px d-flex align-items-center" id="registrosTotales">Registros por página</span>
               <span class="texto-gris fs-12px fw-bold align-items-center">
-                <select #porPagina class="form-select sm" name="" id="" (change)="this.cambiarlimitePaginado(porPagina.value)">
-                  <option value="5">5</option>
-                  <option value="10">10</option>
-                  <option value="15">15</option>
-                  <option value="20">20</option>
+                <select 
+                #porPagina 
+                class="form-select sm" 
+                name="" id=""
+                [ngModel]="paginador.limiteRegistros"
+                (change)="paginador.cambiarLimitePorPagina(+porPagina.value)">
+                  <option [value]="opcion" *ngFor="let opcion of paginador.opcionesLimiteRegistros">{{opcion}}</option>
                 </select>
               </span>
             </div>
@@ -82,8 +84,13 @@
             </table>
           </div>
         </div>
-        <div class="card-footer d-flex justify-content-end ">
-          <ngb-pagination class="mt-3" [collectionSize]="this.total" [(page)]="pagina" [pageSize]="limite" (pageChange)="this.cambioDePagina($event)">
+        <div class="card-footer d-flex justify-content-end">
+          <ngb-pagination *ngIf="this.paginador.totalRegistros"
+          class="mt-3" 
+          [collectionSize]="this.paginador.totalRegistros" 
+          [page]="this.paginador.paginaActual" 
+          [pageSize]="this.paginador.limiteRegistros" 
+          (pageChange)="this.paginador.cambiarPagina($event)">
           </ngb-pagination>
         </div>
       </div>
@@ -91,10 +98,10 @@
   </div>
 </div>
 
-<app-modal-registrar-usuario #modalRegistrarUsuario (seHaRegistradoUnUsuario)="this.refrescarListaDeUsuarios()">
+<app-modal-registrar-usuario #modalRegistrarUsuario (seHaRegistradoUnUsuario)="this.paginador.inicializarPaginacion()">
 </app-modal-registrar-usuario>
 <app-modal-ver-usuario #modalverUsuario></app-modal-ver-usuario>
-<app-modal-actualizar-usuario (seHaActualizadoUnUsuario)="this.refrescarListaDeUsuarios()"
+<app-modal-actualizar-usuario (seHaActualizadoUnUsuario)="this.paginador.inicializarPaginacion()"
   #modalActualizarUsuario
 ></app-modal-actualizar-usuario>
 

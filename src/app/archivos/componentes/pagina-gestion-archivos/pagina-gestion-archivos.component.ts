@@ -4,6 +4,8 @@ import { ModalCrearArchivoComponent } from '../modal-crear-archivo/modal-crear-a
 import { ModalActualizarArchivoComponent } from '../modal-actualizar-archivo/modal-actualizar-archivo.component';
 import { TipoArchivo } from '../../modelos/TipoArchivo';
 import { CargarArchivosService } from '../../servicios/cargar-archivos.service';
+import { Paginador } from 'src/app/administrador/modelos/compartido/Paginador';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-pagina-gestion-archivos',
@@ -13,26 +15,25 @@ import { CargarArchivosService } from '../../servicios/cargar-archivos.service';
 export class PaginaGestionArchivosComponent implements OnInit {
   @ViewChild('modalCrear') modalCrear!: ModalCrearArchivoComponent
   @ViewChild('modalActualizar') modalActualizar!: ModalActualizarArchivoComponent
-  paginacion: Paginacion
+  paginador: Paginador;
   archivos: TipoArchivo[] = []
 
   constructor(private servicioArchivos: CargarArchivosService) { 
-    this.paginacion = {
-      paginaActual: 1,
-      totalPaginas: 2,
-      totalRegistros: 10
-    }
+    this.paginador = new Paginador(this.obtenerTiposArchivo)
   }
 
   ngOnInit(): void {
-    this.servicioArchivos.obtenerTiposArchivo().subscribe({
-      next: ( respuesta ) => {
-        this.archivos = respuesta.archivos
-      } 
-    })
+    this.paginador.inicializarPaginacion()
   }
 
-  cambioDePagina(pagina: number){
+  obtenerTiposArchivo = (pagina:number, limite: number) =>{
+    return new Observable<Paginacion>( subscriptor => {
+      this.servicioArchivos.obtenerTiposArchivoPaginado(pagina, limite).subscribe({
+        next: ( respuesta ) => {
+          this.archivos = respuesta.archivos
+        } 
+      })
+    })
   }
 
   abrirModalCrear(){

@@ -3,9 +3,9 @@
         <span class="fw-bold fs-12px">Seleccionar entidad</span>
     </div>
     <div class="d-flex flex-gap-10">
-        <select #selectorEmpresa class="form-select" name="empresa" (change)="this.manejarSeleccionEmpresa(selectorEmpresa.value)">
+        <select #selectorEmpresa class="form-select" name="empresa">
             <option *ngFor="let empresa of empresas" [value]="empresa.id">NIT {{ empresa.nit | number }} - {{ empresa.nombre }} - Convenio</option>
         </select>
-        <button type="button" class="boton primario delineado">Consultar</button>
+        <button type="button" class="boton primario delineado" (click)="this.manejarSeleccionEmpresa(selectorEmpresa.value)">Consultar</button>
     </div>
 </div>

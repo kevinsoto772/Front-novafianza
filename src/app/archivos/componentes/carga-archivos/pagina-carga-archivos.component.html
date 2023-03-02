@@ -49,7 +49,7 @@
                 </fieldset>
               </div>
               <!-- Archivo -->
-              <div class="col-sm-3">
+             <!--  <div class="col-sm-3">
                 <label class="titulo-input">Cargar archivo</label>
                 <div class="input-group mb-1">
                   <input 
@@ -66,7 +66,8 @@
                   [validacion]="'required'"
                   [texto]="'Requerido.'"></app-validacion>
                 <label class="fs-10px"  *ngIf="this.formulario.controls['archivo'].value === null">Formatos permitidos: CVS, TXT. Max. 5MB</label>
-              </div>
+              </div> -->
+              <app-input-archivo formControlName="archivo"></app-input-archivo>
             </div>
           </form>
 

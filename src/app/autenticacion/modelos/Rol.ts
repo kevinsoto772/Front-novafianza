@@ -10,6 +10,7 @@ export interface Rol {
 export interface Modulo{
   _id: string;
   _nombre: string;
+  _nombreMostrar: string,
   _ruta: string;
   _icono: string;
   _estado: boolean;
