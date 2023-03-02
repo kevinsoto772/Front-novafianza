@@ -130,8 +130,8 @@
 
       <fieldset class="mb-4">
         <input class="form-check-input" type="checkbox" name="checkbox" formControlName="checkbox" required>
-        <label class="fs-14px fw-semibold mb-2" style="margin-left:10px;">Acepto las <b>políticas de tratamiento de
-            datos.</b></label><br>
+        <label class="fs-14px fw-semibold mb-2" style="margin-left:10px;">Acepto las <a target="_blank" [href]="urlPoliticas"><b>políticas de tratamiento de
+            datos.</b></a></label><br>
         <span class="text-danger fs-12px" *ngIf="
             formulario.controls['checkbox'].errors &&
             formulario.controls['checkbox'].dirty && 

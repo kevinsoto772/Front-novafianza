@@ -4,6 +4,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PeticionRealizarTransaccion } from '../../modelos/PeticionRealizarTransaccion';
 import { WompiService } from '../../servicios/wompi.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-formulario-proceso-pago',
@@ -11,7 +12,8 @@ import { WompiService } from '../../servicios/wompi.service';
   styleUrls: ['./formulario-proceso-pago.component.css']
 })
 export class FormularioProcesoPagoComponent implements OnInit {
-  public llaveCaptcha = '6LemnwgjAAAAAD4NV9ROf1inZOsO5tmM71nNfaQn'
+  public urlPoliticas = environment.urlPoliticasDePrivacidad
+  public llaveCaptcha = environment.llaveCaptcha
   public formulario: FormGroup
   public deuda: boolean = false;
   public consultado: boolean = false;
