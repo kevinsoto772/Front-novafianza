@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Rol } from 'src/app/autenticacion/modelos/Rol';
+import { ServicioLocalStorage } from '../../servicios/local-storage.service';
+import { Usuario } from 'src/app/autenticacion/modelos/IniciarSesionRespuesta';
 
 @Component({
   selector: 'app-menu-lateral',
@@ -6,16 +9,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./menu-lateral.component.css']
 })
 export class MenuLateralComponent implements OnInit {
-  public readonly llaveRolesLocalStorage = 'rol'
-  public roles: any;
+  rol?: Rol | null;
+  usuario?: Usuario | null;
   isCollapsed = false;
   desplegado = true
-  constructor() { }
+  
+  constructor(private servicioLocalStorage: ServicioLocalStorage) { 
+  }
 
   ngOnInit(): void {
-    if (localStorage.getItem(this.llaveRolesLocalStorage) !== null) {
-      this.roles = JSON.parse(localStorage.getItem(this.llaveRolesLocalStorage)!)
-    }
+    this.rol = this.servicioLocalStorage.obtenerRol()
+    this.usuario = this.servicioLocalStorage.obtenerUsuario()
+
   }
 
   public abrir():void{

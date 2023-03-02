@@ -9,6 +9,9 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ServicioUsuarios } from 'src/app/administrador/servicios/usuarios.service';
 import { Usuario } from 'src/app/autenticacion/modelos/IniciarSesionRespuesta';
 import { UsuarioEmpresa } from 'src/app/administrador/modelos/usuarios/usuarioEmpresa';
+import { Paginacion } from 'src/app/compartido/modelos/Paginacion';
+import { Paginador } from 'src/app/administrador/modelos/compartido/Paginador';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-gestion-de-usuarios',
@@ -22,14 +25,14 @@ export class GestionDeUsuariosComponent implements OnInit {
   @ViewChild('modalActualizarUsuario') modalActualizarUsuarioEmpresa!: ModalActualizarUsuarioComponent
   public formulario: FormGroup
   public ReportesCabecera = ['Crear usuarios', '/assets/img/agregar-usuario.svg']
-  public pagina = 1;
-  public total = 0;
-  public limite = 5;
+  public paginador: Paginador;
   public usuarios: UsuarioEmpresa[] = []
   public usuarioAdministrador:Usuario
   public idEmpresa?: string
 
   constructor(private servicioUsuarios: ServicioUsuarios, private servicioCabercera: ServicioCabeceraService) {
+    this.paginador = new Paginador(this.obtenerUsuariosEmpresa)
+    console.log(this.paginador)
     const usuarioString = localStorage.getItem('Usuario')
     if(!usuarioString){
       throw Error('No existe el usuario en el local storage, vuelva a iniciar sesión')
@@ -45,32 +48,24 @@ export class GestionDeUsuariosComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.obtenerUsuariosEmpresa(1, 5, '')
+    this.paginador.inicializarPaginacion(1, 3)
   }
 
   buscarUsuario(cedula: string){
     this.servicioUsuarios.obtenerUsuarioEmpresaPorUsuario(cedula).subscribe( respuesta => {})
   }
 
-  obtenerUsuariosEmpresa(pagina: number, limite: number, idEmpresa: string) {
-    this.servicioUsuarios.obtenerUsuariosEmpresa(pagina, limite).subscribe(respuesta => {
-      this.usuarios = respuesta.usuariosEmpresa;
-    })
-  }
-
-  cambioDePagina(pagina: number): void {
-
-  }
-
-  cambiarlimitePaginado(porPagina: string) {
-    const NumeroEmpresasEnPagina = parseInt(porPagina)
-    this.limite = NumeroEmpresasEnPagina;
-    this.refrescarListaDeUsuarios();
+  obtenerUsuariosEmpresa = (pagina: number, limite: number, idEmpresa: string):Observable<Paginacion> => {
+    const observable = new Observable<Paginacion>((subscriptor => {
+      this.servicioUsuarios.obtenerUsuariosEmpresa(pagina, limite).subscribe(respuesta => {
+        this.usuarios = respuesta.usuariosEmpresa;
+        subscriptor.next(respuesta.paginacion)
+      })
+    }))
+    return observable
   }
 
   abrirModalRegistrarUsuario(): void {
-    console.log(this.usuarioAdministrador)
-    console.log(this.idEmpresa)
     if(!this.idEmpresa){
       throw Error('Para abrir el modal de registro de usuario debe haber una empresa seleccionada')
     }
@@ -83,9 +78,5 @@ export class GestionDeUsuariosComponent implements OnInit {
 
   abrirModalActualizarUsuarioEmpresa(usuario: UsuarioEmpresa): void {
     this.modalActualizarUsuarioEmpresa.abrir(usuario);
-  }
-
-  public refrescarListaDeUsuarios(): void {
-    this.obtenerUsuariosEmpresa(this.pagina, this.limite, '')
   }
 }
