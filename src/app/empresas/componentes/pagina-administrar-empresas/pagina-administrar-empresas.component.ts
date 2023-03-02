@@ -5,6 +5,8 @@ import { ModalCrearEmpresaComponent } from '../modal-crear-empresa/modal-crear-e
 import { ModalActualizarEmpresaComponent } from '../modal-actualizar-empresa/modal-actualizar-empresa.component';
 import { Paginacion } from 'src/app/compartido/modelos/Paginacion';
 import { ModalAsignarServiciosComponent } from '../modal-asignar-servicios/modal-asignar-servicios.component';
+import { Paginador } from 'src/app/administrador/modelos/compartido/Paginador';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-pagina-administrar-empresas',
@@ -16,18 +18,14 @@ export class PaginaAdministrarEmpresasComponent implements OnInit {
   @ViewChild('modalActualizarEmpresa') modalActualizar!: ModalActualizarEmpresaComponent
   @ViewChild('modalAsignarServicios') modalAsignarServicios!: ModalAsignarServiciosComponent
   public empresas: Empresa[] = []
-  public paginacion: Paginacion
+  public paginador: Paginador
 
   constructor(private servicioEmpresas: EmpresasService) {
-    this.paginacion = {
-      paginaActual: 1,
-      totalPaginas: 1,
-      totalRegistros: 5
-    }
+    this.paginador = new Paginador(this.obtenerEmpresas)
   }
 
   ngOnInit(): void {
-    this.obtenerEmpresas(1, 100)
+    this.paginador.inicializarPaginacion()
   }
 
   cambiarEstadoEmpresa(empresa: Empresa){
@@ -38,10 +36,12 @@ export class PaginaAdministrarEmpresasComponent implements OnInit {
     })
   }
 
-  obtenerEmpresas(pagina: number, limite: number) {
-    this.servicioEmpresas.obtenerEmpresas(pagina, limite).subscribe(respuesta => {
-      this.empresas = respuesta.empresas
-      this.paginacion = respuesta.paginacion
+  obtenerEmpresas = (pagina: number, limite: number):Observable<Paginacion> => {
+    return new Observable<Paginacion>( subsciptor => {
+      this.servicioEmpresas.obtenerEmpresas(pagina, limite).subscribe(respuesta => {
+        this.empresas = respuesta.empresas
+        subsciptor.next(respuesta.paginacion)
+      })
     })
   }
 
@@ -49,8 +49,8 @@ export class PaginaAdministrarEmpresasComponent implements OnInit {
     this.modalCrearEmpresa.abrir()
   }
 
-  abrirModalAsignarServicios() {
-    this.modalAsignarServicios.abrir()
+  abrirModalAsignarServicios(empresa: Empresa) {
+    this.modalAsignarServicios.abrir(empresa)
   }
 
   abrirModalActualizarEmpresa(empresa: Empresa) {

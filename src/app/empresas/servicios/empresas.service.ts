@@ -7,6 +7,7 @@ import { environment } from 'src/environments/environment';
 import { Empresa } from '../modelos/Empresa';
 import { PeticionCrearEmpresa } from '../modelos/PeticionCrearEmpresa';
 import { PeticionActualizarEmpresa } from 'src/app/administrador/modelos/empresas/PeticionActualizarEmpresa';
+import { ArchivoEmpresa } from 'src/app/archivos/modelos/ArchivoEmpresa';
 
 @Injectable({
   providedIn: 'root'
@@ -55,6 +56,26 @@ export class EmpresasService extends Autenticable {
     return this.clienteHttp.patch<Empresa>(
       `${this.HOST}${endpoint}`,
       undefined,
+      { headers: { Authorization: `Bearer ${ this.obtenerTokenAutorizacion() }` } }
+    )
+  }
+
+  asignarArchivos(idEmpresa: string, idArchivos: string[]){
+    const endpoint = '/api/v1/archivo_empresa/registro-multiple'
+    return this.clienteHttp.post(
+      `${this.HOST}${endpoint}`,
+      {
+        idEmpresa,
+        idArchivos
+      },
+      { headers: { Authorization: `Bearer ${ this.obtenerTokenAutorizacion() }` } }
+    )
+  }
+
+  listarArchivos(idEmpresa: string){
+    const endpoint = `/api/v1/archivo_empresa/listar_por_empresa/${idEmpresa}`
+    return this.clienteHttp.get<ArchivoEmpresa[]>(
+      `${this.HOST}${endpoint}`,
       { headers: { Authorization: `Bearer ${ this.obtenerTokenAutorizacion() }` } }
     )
   }
