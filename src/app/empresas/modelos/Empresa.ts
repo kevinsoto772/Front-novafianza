@@ -3,10 +3,12 @@ export class Empresa {
     private _nombre: string;
     private _nit: string;
     private _estado: boolean;
+	private _convenio: string;
 
-	constructor(nombre: string, nit: string, estado: boolean, id?: string) {
+	constructor(nombre: string, nit: string, estado: boolean, convenio: string, id?: string) {
 		this._id = id;
 		this._nombre = nombre;
+		this._convenio = convenio;
 		this._nit = nit;
 		this._estado = estado;
 	}
@@ -21,6 +23,10 @@ export class Empresa {
 
     public get nit(): string {
 		return this._nit;
+	}
+
+	public get convenio(): string{
+		return this._convenio
 	}
 
     public get estado(): boolean {

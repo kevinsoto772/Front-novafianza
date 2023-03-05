@@ -44,16 +44,28 @@ export class EmpresasService extends Autenticable {
 
   actualizarEmpresa(idEmpresa: string, peticion: PeticionActualizarEmpresa) {
     const endpoint = `/api/v1/empresa/${idEmpresa}`
+    const formData = new FormData()
+    for(const propiedad in peticion){
+      const valor = peticion[propiedad as keyof PeticionActualizarEmpresa]
+      if(valor){
+        if(typeof valor === 'boolean' || typeof valor === 'number'){
+          formData.append(propiedad, valor.toString())
+          continue;
+        }
+        formData.append(propiedad, valor)
+      }
+    }
+    
     return this.clienteHttp.patch<Empresa>(
       `${this.HOST}${endpoint}`,
-      peticion,
+      formData,
       { headers: { Authorization: `Bearer ${this.obtenerTokenAutorizacion()}` } }
     )
   }
 
   cambiarEstadoEmpresa(idEmpresa: string) {
-    const endpoint = `/api/v1/empresa/${idEmpresa}`
-    return this.clienteHttp.patch<Empresa>(
+    const endpoint = `/api/v1/empresa/estado/${idEmpresa}`
+    return this.clienteHttp.put<Empresa>(
       `${this.HOST}${endpoint}`,
       undefined,
       { headers: { Authorization: `Bearer ${ this.obtenerTokenAutorizacion() }` } }

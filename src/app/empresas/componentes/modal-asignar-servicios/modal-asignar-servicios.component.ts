@@ -6,6 +6,7 @@ import { TipoArchivo } from 'src/app/archivos/modelos/TipoArchivo';
 import { CargarArchivosService } from 'src/app/archivos/servicios/cargar-archivos.service';
 import { EmpresasService } from '../../servicios/empresas.service';
 import { filter } from 'rxjs';
+import { PopupComponent } from 'src/app/alertas/componentes/popup/popup.component';
 
 @Component({
   selector: 'app-modal-asignar-servicios',
@@ -14,6 +15,8 @@ import { filter } from 'rxjs';
 })
 export class ModalAsignarServiciosComponent implements OnInit {
   @ViewChild('modal') modal!: ElementRef
+  @ViewChild('popup') popup!: PopupComponent
+
   empresa?: Empresa
   archivos: TipoArchivo[] = []
   idsArchivosSeleccionados: string[] = []
@@ -69,7 +72,7 @@ export class ModalAsignarServiciosComponent implements OnInit {
   guardarArchivosEmpresa(){
     this.servicioEmpresa.asignarArchivos(this.empresa!.id!, this.idsArchivosSeleccionados).subscribe({
       next: (respuesta => {
-        console.log('archivos guardados.')
+        this.popup.abrirPopupExitoso('Guardado correctamente.')
       })
     });
   }

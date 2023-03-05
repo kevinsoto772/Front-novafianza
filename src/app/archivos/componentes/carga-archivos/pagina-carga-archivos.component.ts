@@ -26,8 +26,7 @@ export class PaginaCargaArchivosComponent implements OnInit {
       tipoArchivo: new FormControl('', [Validators.required]),
       fechaInicial: new FormControl('', [Validators.required]),
       fechaFinal: new FormControl('', Validators.required),
-      archivo: new FormControl(null, Validators.required),
-      recursoArchivo: new FormControl<File | undefined>(undefined, Validators.required)
+      archivo: new FormControl<File | null>(null, Validators.required),
     })
   }
 
@@ -43,15 +42,6 @@ export class PaginaCargaArchivosComponent implements OnInit {
     })
   }
 
-  public obtenerArchivo(evento: Event) {
-    if(!evento.target){
-      throw Error('El target del evento no es un input')
-    }
-    const input = evento.target as HTMLInputElement
-    this.formulario.patchValue({ recursoArchivo: input.files ? input.files.item(0) : undefined })
-    console.log(this.formulario.value)
-  }
-
   public abrirPopupProcesando(){
     this.popupProcesando.abrir()
   }
@@ -59,11 +49,12 @@ export class PaginaCargaArchivosComponent implements OnInit {
   public enviarArchivo():void{
     if(this.formulario.invalid){
       marcarFormularioComoSucio(this.formulario)
+      console.log(this.formulario.controls)
       throw Error('Formulario inválido');
     }
     const controls = this.formulario.controls
     this.servicioArchivo.cargarArchivo(
-      controls['recursoArchivo'].value,
+      controls['archivo'].value,
       {
         fechaInicial: controls['fechaInicial'].value,
         fechaFinal: controls['fechaFinal'].value

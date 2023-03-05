@@ -46,18 +46,17 @@
                             <tbody>
                                 <tr *ngFor="let archivo of archivos">
                                     <td>{{ archivo.nombre }}</td>
-                                    <td></td>
-                                    <td></td>
+                                    <td>manual-prueba.pdf</td>
+                                    <td>4/03/2023</td>
                                     <td class="d-flex flex-gap-20">
                                         <img 
                                         class="cursor-pointer" 
                                         draggable="false" 
                                         src="./assets/img/editar.svg" 
                                         alt="editar"
-                                        (click)="abrirModalActualizar()">
+                                        (click)="abrirModalActualizar(archivo)">
                                         <label class="switch">
-                                            <!-- [checked]="empresa.estado" (change)="this.cambiarEstadoEmpresa(index)" -->
-                                            <input type="checkbox">
+                                            <input type="checkbox" [checked]="archivo.estado" (change)="actualizarEstadoTipoArchivo(archivo.id)">
                                             <span class="slider round"></span>
                                         </label>
                                     </td>
@@ -86,3 +85,5 @@
 
 <app-modal-actualizar-archivo #modalActualizar>
 </app-modal-actualizar-archivo>
+
+<app-popup #popup></app-popup>

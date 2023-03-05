@@ -3,14 +3,12 @@ import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Empresa } from 'src/app/administrador/modelos/empresas/Empresa';
-import { PeticionActualizarEmpresa } from 'src/app/administrador/modelos/empresas/PeticionActualizarEmpresa';
-import { ServicioEmpresa } from 'src/app/administrador/servicios/empresas.service';
 import { PopupComponent } from 'src/app/alertas/componentes/popup/popup.component';
 import { UsuarioEmpresa } from 'src/app/administrador/modelos/usuarios/usuarioEmpresa';
-import { Usuario } from 'src/app/autenticacion/modelos/IniciarSesionRespuesta';
 import { ServicioUsuarios } from 'src/app/administrador/servicios/usuarios.service';
 import { DateTime } from 'luxon';
 import { marcarFormularioComoSucio } from 'src/app/administrador/utilidades/Utilidades';
+import { soloUnoEntre } from 'src/app/usuarios/validadores/AlMenosUno';
 
 @Component({
   selector: 'app-modal-actualizar-usuario',
@@ -34,9 +32,9 @@ export class ModalActualizarUsuarioComponent implements OnInit {
       fechaNacimiento: new FormControl<string>('', [Validators.required]),
       tipoDocumento: new FormControl<string>('', [Validators.required]),
       tipoTelefono: new FormControl<string>('movil', Validators.required),
-      extension: new FormControl<string>('', Validators.required),
-      telefono: new FormControl<string>('', Validators.required),
-      telefonoFijo: new FormControl<string>('', Validators.required),
+      extension: new FormControl<string>(''),
+      telefono: new FormControl<string>('', [soloUnoEntre('telefonoFijo')]),
+      telefonoFijo: new FormControl<string>('', [soloUnoEntre('telefono')]),
       correo: new FormControl<string>('', Validators.required),
       cargo: new FormControl<string>('', [Validators.required]),
       tipoRol: new FormControl<string>('', [Validators.required]),
@@ -67,6 +65,7 @@ export class ModalActualizarUsuarioComponent implements OnInit {
     if(this.formulario.invalid){
       this.popup.abrirPopupFallido('Formulario inválido', 'Rellena correctamente todos los campos')
       marcarFormularioComoSucio(this.formulario)
+      console.log(this.formulario.controls)
       throw Error('Formulario inválido')
     }
     const controls = this.formulario.controls
@@ -78,7 +77,7 @@ export class ModalActualizarUsuarioComponent implements OnInit {
       correo: controls['correo'].value,
       fechaNacimiento: controls['fechaNacimiento'].value,
       identificacion: controls['numeroDocumento'].value,
-      telefono: controls['telefono'].value,
+      telefono: controls['telefono'].value ?? controls['telefonoFijo'],
       idRol: controls['tipoRol'].value
     }).subscribe({
       complete: ()=> { this.popup.abrirPopupExitoso('Se ha actualizado el usuario con éxito') },
@@ -98,10 +97,10 @@ export class ModalActualizarUsuarioComponent implements OnInit {
       DateTime.fromISO(usuarioEmpresa.fechaNacimiento).toFormat('yyyy-MM-dd') 
     )
     controls['tipoDocumento'].setValue('CC')
-    controls['tipoTelefono'].setValue(usuarioEmpresa.telefono)
+    controls['tipoTelefono'].setValue('movil')
     controls['extension'].setValue('')
     controls['telefono'].setValue(usuarioEmpresa.telefono)
-    controls['telefonoFijo'].setValue(usuarioEmpresa.telefono)
+    /* controls['telefonoFijo'].setValue(usuarioEmpresa.telefono) */
     controls['correo'].setValue(usuarioEmpresa.correo)
     controls['cargo'].setValue(usuarioEmpresa.cargo)
     controls['tipoRol'].setValue(usuarioEmpresa.idRol)

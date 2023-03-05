@@ -7,6 +7,7 @@ import { Paginacion } from 'src/app/compartido/modelos/Paginacion';
 import { ModalAsignarServiciosComponent } from '../modal-asignar-servicios/modal-asignar-servicios.component';
 import { Paginador } from 'src/app/administrador/modelos/compartido/Paginador';
 import { Observable } from 'rxjs';
+import { PopupComponent } from 'src/app/alertas/componentes/popup/popup.component';
 
 @Component({
   selector: 'app-pagina-administrar-empresas',
@@ -17,6 +18,7 @@ export class PaginaAdministrarEmpresasComponent implements OnInit {
   @ViewChild('modalCrearEmpresa') modalCrearEmpresa!: ModalCrearEmpresaComponent
   @ViewChild('modalActualizarEmpresa') modalActualizar!: ModalActualizarEmpresaComponent
   @ViewChild('modalAsignarServicios') modalAsignarServicios!: ModalAsignarServiciosComponent
+  @ViewChild('popup') popup!: PopupComponent
   public empresas: Empresa[] = []
   public paginador: Paginador
 
@@ -31,8 +33,9 @@ export class PaginaAdministrarEmpresasComponent implements OnInit {
   cambiarEstadoEmpresa(empresa: Empresa){
     empresa.estado = !empresa.estado
     this.servicioEmpresas.cambiarEstadoEmpresa(empresa.id!).subscribe({
-      complete: ()=> {  },
-      error: ()=> { }
+      complete: ()=> { this.popup.abrirPopupExitoso('Se ha cambiado el estado de la entidad.')  },
+      error: ()=> { this.popup.abrirPopupExitoso('Se ha cambiado el estado de la entidad.') },
+      next: () => { this.popup.abrirPopupExitoso('Se ha cambiado el estado de la entidad.') }
     })
   }
 

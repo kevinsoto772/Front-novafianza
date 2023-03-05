@@ -3,6 +3,9 @@ import { Injectable, Input } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Autenticable } from '../../administrador/servicios/compartido/Autenticable';
 import { TipoArchivo } from '../modelos/TipoArchivo';
+import { Paginacion } from 'src/app/compartido/modelos/Paginacion';
+import { FormatoArchivo } from '../modelos/FormatoArchivo';
+import { PeticionCrearTipoArchivo } from '../modelos/PeticionCrearTipoArchivo';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +15,53 @@ export class CargarArchivosService extends Autenticable {
   constructor(private clienteHttp: HttpClient) {
     super()
     this.HOST = environment.urlBackend
+  }
+
+  obtenerFormatosArchivo(pagina: number, limite: number){
+    const endpoint = `/api/v1/formato_archivo/listar/${pagina}/${limite}`
+    return this.clienteHttp.get<{formatosArchivos: FormatoArchivo[], paginacion: Paginacion}>(
+      `${this.HOST}${endpoint}`,
+      { headers: { Authorization: `Bearer ${this.obtenerTokenAutorizacion()}` } } 
+    )
+  }
+
+  cambiarEstadoTipoArchivo(id: string){
+    const endpoint = `/api/v1/archivo/estado/${id}`
+    return this.clienteHttp.post(
+      `${this.HOST}${endpoint}`,
+      undefined,
+      { headers: { Authorization: `Bearer ${this.obtenerTokenAutorizacion()}` } } 
+    )
+  }
+
+  crearTipoArchivo(peticion: PeticionCrearTipoArchivo){
+    const endpoint = '/api/v1/archivo/registro'
+    const formData = new FormData()
+    formData.append('nombre', peticion.nombre)
+    formData.append('prefijo', 'PP')
+    formData.append('prefijoArchivo', 'T')
+    formData.append('formatoId', peticion.formatoId)
+    formData.append('descripcion', peticion.descripcion)
+    return this.clienteHttp.post(
+      `${this.HOST}${endpoint}`,
+      formData,
+      { headers: { Authorization: `Bearer ${this.obtenerTokenAutorizacion()}` } } 
+    )
+  }
+
+  actualizarTipoArchivo(id:string, peticion: PeticionCrearTipoArchivo){
+    const endpoint = `/api/v1/archivo/${id}`
+    const formData = new FormData()
+    formData.append('nombre', peticion.nombre)
+    formData.append('prefijo', 'PP')
+    formData.append('prefijoArchivo', 'T')
+    formData.append('formatoId', peticion.formatoId)
+    formData.append('descripcion', peticion.descripcion)
+    return this.clienteHttp.patch(
+      `${this.HOST}${endpoint}`,
+      formData,
+      { headers: { Authorization: `Bearer ${this.obtenerTokenAutorizacion()}` } } 
+    )
   }
 
   obtenerTiposArchivo(){

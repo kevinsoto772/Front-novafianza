@@ -11,7 +11,6 @@ import { PeticionActualizarContrasena } from '../../autenticacion/modelos/Petici
 import { usuarioNovafianza } from '../modelos/usuarios/usuarioNovafianza';
 import { PeticionActualizarUsuario } from '../modelos/ConfiguracionPerfil/PeticionActualizarUsuario';
 
-const apiUrl = 'http://127.0.0.1:3333/api/v1'
 @Injectable({
   providedIn: 'root'
 })
@@ -26,6 +25,11 @@ export class ServicioUsuarios extends Autenticable {
       "Content-Type": "application/json",
       "Authorization": `Bearer ${this.obtenerTokenAutorizacion()}`
     })
+  }
+
+  obtenerUsuariosEmpresaPorEmpresa(pagina: number, limite: number, idEmpresa: string): Observable<{usuariosEmpresa: UsuarioEmpresa[], paginacion:Paginacion}> {
+    const endpoint = `/api/v1/usuario_empresa/listar-entidad/${idEmpresa}/${pagina}/${limite}`
+    return this.httpClient.get<{usuariosEmpresa: UsuarioEmpresa[], paginacion:Paginacion}>(`${this.urlBackend}${endpoint}`, { headers: this.headers });
   }
 
   obtenerUsuariosEmpresa(pagina: number, limite: number): Observable<{usuariosEmpresa: UsuarioEmpresa[], paginacion:Paginacion}> {
@@ -66,7 +70,7 @@ export class ServicioUsuarios extends Autenticable {
 
   public cambiarEstadoUsuarioEmpresa(usuariosEmpresa_id:string):Observable<any>{
     const endpoint = `/api/v1/usuario_empresa/estado/${usuariosEmpresa_id}`
-    return this.httpClient.put<any>(`${this.urlBackend}${endpoint}`,{headers: this.headers})
+    return this.httpClient.put<any>(`${this.urlBackend}${endpoint}`, undefined, {headers: this.headers})
   }
 
   public actualizarUsuario(peticionActualizarUsuario:PeticionActualizarUsuario, usuario:string):Observable<any>{

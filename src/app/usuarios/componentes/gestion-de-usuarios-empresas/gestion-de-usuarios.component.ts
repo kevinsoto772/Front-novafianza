@@ -12,6 +12,7 @@ import { UsuarioEmpresa } from 'src/app/administrador/modelos/usuarios/usuarioEm
 import { Paginacion } from 'src/app/compartido/modelos/Paginacion';
 import { Paginador } from 'src/app/administrador/modelos/compartido/Paginador';
 import { Observable } from 'rxjs';
+import { ServicioLocalStorage } from 'src/app/administrador/servicios/local-storage.service';
 
 @Component({
   selector: 'app-gestion-de-usuarios',
@@ -26,20 +27,21 @@ export class GestionDeUsuariosComponent implements OnInit {
   public formulario: FormGroup
   public ReportesCabecera = ['Crear usuarios', '/assets/img/agregar-usuario.svg']
   public paginador: Paginador;
+  public usuario: Usuario | null;
   public usuarios: UsuarioEmpresa[] = []
   public usuarioAdministrador:Usuario
   public idEmpresa?: string
 
-  constructor(private servicioUsuarios: ServicioUsuarios, private servicioCabercera: ServicioCabeceraService) {
+  constructor(private servicioUsuarios: ServicioUsuarios, private servicioCabercera: ServicioCabeceraService, private servicioLocalStorage: ServicioLocalStorage) {
     this.paginador = new Paginador(this.obtenerUsuariosEmpresa)
-    console.log(this.paginador)
+    this.usuario = servicioLocalStorage.obtenerUsuario()
     const usuarioString = localStorage.getItem('Usuario')
     if(!usuarioString){
       throw Error('No existe el usuario en el local storage, vuelva a iniciar sesión')
     }
     this.usuarioAdministrador = JSON.parse( usuarioString ) as Usuario
-    if(this.usuarioAdministrador.idEmpresa){
-      this.idEmpresa = this.usuarioAdministrador.idEmpresa
+    if(this.usuario && this.usuario.idEmpresa){
+      this.idEmpresa = this.usuario.idEmpresa
     }
     this.servicioCabercera.actualizarTitulo(this.ReportesCabecera)
     this.formulario = new FormGroup({
@@ -48,7 +50,14 @@ export class GestionDeUsuariosComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.paginador.inicializarPaginacion(1, 3)
+    if(this.idEmpresa){
+      this.paginador.inicializarPaginacion(1, 3, this.idEmpresa)
+    }
+  }
+
+  manejarCambioDeEmpresa(idEmpresa: string){
+    this.idEmpresa = idEmpresa;
+    this.paginador.inicializarPaginacion(1, 3, this.idEmpresa)
   }
 
   buscarUsuario(cedula: string){
@@ -57,12 +66,19 @@ export class GestionDeUsuariosComponent implements OnInit {
 
   obtenerUsuariosEmpresa = (pagina: number, limite: number, idEmpresa: string):Observable<Paginacion> => {
     const observable = new Observable<Paginacion>((subscriptor => {
-      this.servicioUsuarios.obtenerUsuariosEmpresa(pagina, limite).subscribe(respuesta => {
+      this.servicioUsuarios.obtenerUsuariosEmpresaPorEmpresa(pagina, limite, idEmpresa).subscribe(respuesta => {
         this.usuarios = respuesta.usuariosEmpresa;
         subscriptor.next(respuesta.paginacion)
       })
     }))
     return observable
+  }
+
+  cambiarEstadoUsuario(idUsuario: string){
+    this.servicioUsuarios.cambiarEstadoUsuarioEmpresa(idUsuario).subscribe({
+      next: ()=> this.popup.abrirPopupExitoso('Se actualizó el estado del usuario.'),
+      error: ()=> this.popup.abrirPopupExitoso('Se actualizó el estado del usuario.'),
+    })
   }
 
   abrirModalRegistrarUsuario(): void {

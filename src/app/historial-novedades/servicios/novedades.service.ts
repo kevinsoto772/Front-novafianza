@@ -18,9 +18,9 @@ export class NovedadesService extends Autenticable {
     super()
   }
 
-  obtenerArchivosCargados(pagina: number = 1, limite: number = 5 ) {
+  obtenerArchivosCargados(pagina: number = 1, limite: number = 5, idEmpresa: string) {
     const usuario = this.servicioLocalStorage.obtenerUsuario()
-    const endpoint = `/api/v1/cargas?usuario=0000000&pagina=${pagina}&limite=${limite}`
+    const endpoint = `/api/v1/cargas?entidadId=${idEmpresa}&pagina=${pagina}&limite=${limite}`
     return this.clienteHttp.get<{ archivosCargados: ArchivoCargado[], paginacion: Paginacion }>(
       `${this.HOST}${endpoint}`,
       { headers: { Authorization: `Bearer ${this.obtenerTokenAutorizacion()}` } }

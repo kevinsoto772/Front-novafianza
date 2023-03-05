@@ -1,6 +1,6 @@
 <ng-template #modalActualizarUsuario let-modal>
   <div class="modal-header">
-    <h4 class="modal-title fs-14px  fw-bolder texto-naranja">Actualizar Empresa</h4>
+    <h4 class="modal-title fs-14px  fw-bolder texto-naranja">Actualizar usuario</h4>
     <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
   </div>
   <div class="modal-body" *ngIf="usuarioEmpresa">
@@ -72,24 +72,18 @@
                   </span>
               </fieldset>
           </div>
-          <div class="col-sm-3">
-            <div class="row">
-              <div class="col-8">
-                <label >Número de teléfono</label>
-              </div>
-              <div class="col-4 ext">
-                <label *ngIf="this.formulario.controls['tipoTelefono'].value == 'fijo'">Ext.</label>
-              </div>
-            </div>
-            <div class="d-flex">
+          <div class="col-sm-6">
+            <div class="d-flex flex-gap-10">
               <fieldset id="selector">
+                <label>Tipo</label>
                 <select class="form-select form-control input" id="tipoTelefono" name="tipoTelefono"
                 formControlName="tipoTelefono" required>
                 <option value="fijo">Fijo</option>
-                <option value="movil" selected>Móvil</option>
+                <option value="movil">Móvil</option>
               </select>
               </fieldset>
               <fieldset id="telefono" *ngIf="this.formulario.controls['tipoTelefono'].value == 'movil'">
+                <label >Número de teléfono</label>
                 <input type="number" aria-label="Last name" class="form-control" formControlName="telefono">
                 <span class="validacion"
                             *ngIf="this.formulario.controls['telefono'].invalid &&
@@ -97,7 +91,8 @@
                             Teléfono requerido.
                         </span>
               </fieldset>
-              <fieldset id="telefono" *ngIf="this.formulario.controls['tipoTelefono'].value == 'fijo'">
+              <fieldset class="flex-grow-2" id="telefono" *ngIf="this.formulario.controls['tipoTelefono'].value == 'fijo'">
+                <label >Número de teléfono</label>
                 <input type="number" aria-label="Last name" class="form-control" formControlName="telefonoFijo">
                 <span class="validacion"
                             *ngIf="this.formulario.controls['telefonoFijo'].invalid &&
@@ -105,7 +100,8 @@
                             Teléfono requerido.
                         </span>
               </fieldset>
-              <fieldset id="extension" *ngIf="this.formulario.controls['tipoTelefono'].value == 'fijo'">
+              <fieldset style="width: 60px;" id="extension" *ngIf="this.formulario.controls['tipoTelefono'].value == 'fijo'">
+                <label *ngIf="this.formulario.controls['tipoTelefono'].value == 'fijo'">Ext.</label>
                 <input type="number" class="form-control" formControlName="extension">
                 <span class="validacion"
                             *ngIf="this.formulario.controls['extension'].invalid &&
@@ -142,7 +138,7 @@
       </div>
 
       <div class="row">
-        <div class="col-sm-3">
+        <div class="col-sm-2">
             <fieldset>
                 <label class="fw-semibold fs-12px">Perfil</label>
                 <select class="form-select form-control" id="tipoRol" name="tipoRol"

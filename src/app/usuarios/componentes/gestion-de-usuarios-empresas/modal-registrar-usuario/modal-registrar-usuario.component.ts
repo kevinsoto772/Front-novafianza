@@ -39,6 +39,7 @@ export class ModalRegistrarUsuarioComponent implements OnInit {
   }
 
   public abrir(empresaId: string): void {
+    this.empresaId = empresaId
     this.limpiarFormulario()
     this.servicioModal.open(this.modalRegistroUsuario, {
       size: 'xl'

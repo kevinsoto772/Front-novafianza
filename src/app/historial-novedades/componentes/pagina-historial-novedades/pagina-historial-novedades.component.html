@@ -1,5 +1,5 @@
-<app-selector-empresa></app-selector-empresa>
-<div class="d-flex flex-column flex-gap-30 px-4">
+<app-selector-empresa *ngIf="usuario && !usuario.idEmpresa" (seleccion)="manejarCambioDeEmpresa($event.id!)"></app-selector-empresa>
+<div class="d-flex flex-column flex-gap-30 px-4 pt-4" *ngIf="idEmpresa">
     <div class="row">
         <div class="col-12">
             <div class="card w-100">
@@ -18,7 +18,7 @@
                                 <select
                                 #selectLimiteRegistros
                                 [ngModel]="paginador.limiteRegistros" class="form-select sm"
-                                (change)="paginador.cambiarLimitePorPagina(+selectLimiteRegistros.value)">
+                                (change)="paginador.cambiarLimitePorPagina(+selectLimiteRegistros.value, idEmpresa)">
                                     <option
                                     *ngFor="let opcion of paginador.opcionesLimiteRegistros" 
                                     [value]="opcion">{{opcion}}</option>
@@ -80,6 +80,9 @@
                                         <label class="detalles fs-12px fw-semibold" (click)="abrirModalVerDetallesArchivo(archivoCargado.idArchivoCargado)">Ver detalles</label>
                                     </td>
                                 </tr>
+                                <tr *ngIf="archivosCargados.length === 0">
+                                    <td colspan="6" class="text-center"> No hay cargas registradas para esta entidad.</td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -92,7 +95,7 @@
                     [collectionSize]="paginador.totalRegistros"
                     [page]="paginador.paginaActual"
                     [pageSize]="paginador.limiteRegistros"
-                    (pageChange)="paginador.cambiarPagina($event)">
+                    (pageChange)="paginador.cambiarPagina($event, idEmpresa)">
                     </ngb-pagination>
                 </div>
             </div>

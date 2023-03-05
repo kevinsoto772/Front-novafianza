@@ -2,6 +2,7 @@ import { Component, ElementRef, EventEmitter, OnInit, Output, TemplateRef, ViewC
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { EmpresasService } from '../../servicios/empresas.service';
+import { PopupComponent } from 'src/app/alertas/componentes/popup/popup.component';
 
 @Component({
   selector: 'app-modal-crear-empresa',
@@ -11,6 +12,7 @@ import { EmpresasService } from '../../servicios/empresas.service';
 export class ModalCrearEmpresaComponent implements OnInit {
   @Output('empresaCreada') empresaCreada: EventEmitter<void>
   @ViewChild('modal') modal!: ElementRef
+  @ViewChild('popup') popup!: PopupComponent
   formulario: FormGroup
 
   constructor(private servicioModal: NgbModal, private servicioEmpresa: EmpresasService) {
@@ -18,9 +20,8 @@ export class ModalCrearEmpresaComponent implements OnInit {
     this.formulario = new FormGroup({
       nombre: new FormControl<string>('', [Validators.required]),
       nit: new FormControl<string>('', [Validators.required]),
-      convenio: new FormControl<string>(''),
-      logo: new FormControl<string>('', [Validators.required]),
-      recursoLogo: new FormControl<string>('', [Validators.required])
+      convenio: new FormControl<string>('', [Validators.required]),
+      logo: new FormControl<File | null>(null, [Validators.required]),
     })
   }
 
@@ -35,16 +36,19 @@ export class ModalCrearEmpresaComponent implements OnInit {
     }
     const controls = this.formulario.controls
     this.servicioEmpresa.crearEmpresa({
-      convenio: 1,
+      convenio: controls['convenio'].value,
       estado: true,
-      logo: controls['recursoLogo'].value,
+      logo: controls['logo'].value,
       nit: controls['nit'].value,
       nombre: controls['nombre'].value
     }).subscribe({
       complete: ()=> {
         this.empresaCreada.emit()
+        this.popup.abrirPopupExitoso('Entidad creada con éxito.')
       },
-      error: ()=> {}
+      error: ()=> {
+        this.popup.abrirPopupFallido('Error', 'Algo salió mal en la creación de la entidad.')
+      }
     })
   }
 
@@ -53,15 +57,6 @@ export class ModalCrearEmpresaComponent implements OnInit {
     this.servicioModal.open(this.modal, {
       size: 'xl'
     })
-  }
-
-  public obtenerArchivo(evento: Event) {
-    if(!evento.target){
-      throw Error('El target del evento no es un input')
-    }
-    const input = evento.target as HTMLInputElement
-    this.formulario.patchValue({ recursoLogo: input.files ? input.files.item(0) : undefined })
-    console.log(this.formulario.value)
   }
 
   public limpiarFormulario() {

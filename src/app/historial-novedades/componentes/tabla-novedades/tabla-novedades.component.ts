@@ -8,7 +8,9 @@ import { Registro } from '../../modelos/NovedadesArchivo';
 })
 export class TablaNovedadesComponent implements OnInit {
   @Input('registros') registros: Registro[] = []
-  constructor() { }
+  
+  constructor() { 
+  } 
 
   ngOnInit(): void {
   }

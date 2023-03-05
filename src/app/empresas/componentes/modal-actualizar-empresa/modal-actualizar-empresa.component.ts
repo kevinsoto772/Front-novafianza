@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { EmpresasService } from '../../servicios/empresas.service';
 import { Empresa } from '../../modelos/Empresa';
+import { PopupComponent } from 'src/app/alertas/componentes/popup/popup.component';
 
 @Component({
   selector: 'app-modal-actualizar-empresa',
@@ -12,14 +13,18 @@ import { Empresa } from '../../modelos/Empresa';
 export class ModalActualizarEmpresaComponent implements OnInit {
   @Output('empresaActualizada') empresaActualizada: EventEmitter<void>
   @ViewChild('modal') modal!: ElementRef
+  @ViewChild('popup') popup!: PopupComponent
+
   formulario: FormGroup
   empresa?: Empresa
 
   constructor(private servicioModal: NgbModal, private servicioEmpresa: EmpresasService) {
     this.empresaActualizada = new EventEmitter<void>();
     this.formulario = new FormGroup({
-      nombre: new FormControl<string>('', [Validators.required]),
-      nit: new FormControl<string>('', [Validators.required])
+      nombre: new FormControl<string | undefined>(undefined),
+      nit: new FormControl<string | undefined>(undefined),
+      convenio: new FormControl<string | undefined>(undefined),
+      logo: new FormControl<File | null>(null)
     })
   }
 
@@ -35,12 +40,18 @@ export class ModalActualizarEmpresaComponent implements OnInit {
     const controls = this.formulario.controls
     this.servicioEmpresa.actualizarEmpresa(this.empresa!.id!, {
       nit: controls['nit'].value,
-      nombre: controls['nombre'].value
+      nombre: controls['nombre'].value,
+      convenio: controls['convenio'].value,
+      logo: controls['logo'].value
     }).subscribe({
       complete: ()=> {
+        this.popup.abrirPopupExitoso('Entidad actualizada con éxito.')
         this.empresaActualizada.emit()
+        this.cerrar()
       },
-      error: ()=> {}
+      error: ()=> {
+        this.popup.abrirPopupFallido('Error.', 'Hubo un error al momento de actualizar la entidad.')
+      }
     })
   }
 
@@ -57,6 +68,7 @@ export class ModalActualizarEmpresaComponent implements OnInit {
     const controls = this.formulario.controls
     controls['nombre'].setValue(empresa.nombre)
     controls['nit'].setValue(empresa.nit)
+    controls['convenio'].setValue(empresa.convenio)
   }
 
   public limpiarFormulario() {

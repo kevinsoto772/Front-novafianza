@@ -21,7 +21,7 @@
     transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
     overflow: visible;
 }
-.input-archivo>.boton-adjuntar{
+.input-archivo .boton-adjuntar{
     box-sizing: border-box;
     width: 85px;
     padding: 5px 10px;
@@ -37,5 +37,33 @@
     color: #ffff;
 }
 .archivos{
+    display: flex;
     width: calc(100% - 85px);
+    align-items: center;
+    padding: 5px 15px;
+    overflow: hidden;
+}
+.archivo{
+    box-sizing: border-box;
+    height: 27px;
+    border: 1px solid #C4C4C4;
+    background-color: #EAEAEA;
+    padding: 5px 7px;
+    border-radius: 6px;
+    gap: 10px;
+}
+.nombre-archivo{
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+}
+.eliminar-archivo{
+    display: flex;
+    align-items: center;
+}
+.placeholder{
+    height: 100%;
+    display: flex;
+    align-items: center;
+    font-size: 14px;
 }
