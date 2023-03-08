@@ -73,8 +73,8 @@ export class CargarArchivosService extends Autenticable {
   }
 
   obtenerTiposArchivoPaginado(pagina: number, limite: number){
-    const endpoint = '/api/v1/archivo/listar'
-    return this.clienteHttp.get<{archivos: TipoArchivo[]}>(
+    const endpoint = `/api/v1/archivo/listar/${pagina}/${limite}`
+    return this.clienteHttp.get<{archivos: TipoArchivo[], paginacion: Paginacion}>(
       `${this.HOST}${endpoint}`,
       { headers: { Authorization: `Bearer ${this.obtenerTokenAutorizacion()}` } } 
     )

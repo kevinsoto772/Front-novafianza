@@ -44,24 +44,34 @@
                                     <td> {{ archivoCargado.nombreArchivo }}</td>
                                     <td>{{ archivoCargado.nombreTipoArchivo }}</td>
                                     <td>
-                                        <ng-container *ngIf="archivoCargado.estadoValidacion === 'Pasó' ">
+                                        <ng-container *ngIf="archivoCargado.estadoValidacionEstructura === 'Pasó' ">
                                             <img class="me-2" src="assets/img/exitoso.svg" alt="exitoso">
                                             <span class="fs-12px text-success fw-bold">Exitoso</span>
                                         </ng-container>
                                         
-                                        <ng-container *ngIf="archivoCargado.estadoValidacion === 'Falló' ">
-                                            <img class="me-2" src="assets/img/rechazo.svg" alt="exitoso">
+                                        <ng-container *ngIf="archivoCargado.estadoValidacionEstructura === 'Falló' ">
+                                            <img class="me-2" src="assets/img/rechazo.svg" alt="falló">
                                             <span class="fs-12px text-danger fw-bold">Falló</span>
                                         </ng-container>
 
-                                        <ng-container *ngIf="archivoCargado.estadoValidacion === 'Procesando' ">
+                                        <ng-container *ngIf="archivoCargado.estadoValidacionEstructura === 'Procesando' ">
                                             <img class="me-2" src="assets/img/procesando.svg" alt="exitoso">
                                             <span class="fs-12px text-info fw-bold">Procesando</span>
+                                        </ng-container>
+
+                                        <ng-container *ngIf="archivoCargado.estadoValidacionEstructura === 'Exitoso' ">
+                                            <img class="me-2" src="assets/img/exitoso.svg" alt="exitoso">
+                                            <span class="fs-12px text-success fw-bold">Exitoso</span>
+                                        </ng-container>
+
+                                        <ng-container *ngIf="archivoCargado.estadoValidacionEstructura === 'Exitoso, con alertas' ">
+                                            <img class="me-2" src="assets/img/alerta.svg" alt="Exitoso, con alertas">
+                                            <span class="fs-12px text-info fw-bold">Exitoso con alertas</span>
                                         </ng-container>
                                      
                                     </td>
                                     <td>
-                                        <ng-container *ngIf="archivoCargado.estadoValidacion === 'Pasó' ">
+                                        <ng-container *ngIf="archivoCargado.estadoValidacion === 'Exitoso' ">
                                             <img class="me-2" src="assets/img/exitoso.svg" alt="exitoso">
                                             <span class="fs-12px text-success fw-bold">Exitoso</span>
                                         </ng-container>
@@ -74,6 +84,11 @@
                                         <ng-container *ngIf="archivoCargado.estadoValidacion === 'Procesando' ">
                                             <img class="me-2" src="assets/img/procesando.svg" alt="exitoso">
                                             <span class="fs-12px text-info fw-bold">Procesando</span>
+                                        </ng-container>
+
+                                        <ng-container *ngIf="archivoCargado.estadoValidacion === 'Exitoso, con alertas' ">
+                                            <img class="me-2" src="assets/img/alerta.svg" alt="Exitoso, con alertas">
+                                            <span class="fs-12px text-info fw-bold">Exitoso con alertas</span>
                                         </ng-container>
                                     </td>
                                     <td>
@@ -95,7 +110,8 @@
                     [collectionSize]="paginador.totalRegistros"
                     [page]="paginador.paginaActual"
                     [pageSize]="paginador.limiteRegistros"
-                    (pageChange)="paginador.cambiarPagina($event, idEmpresa)">
+                    (pageChange)="paginador.cambiarPagina($event, idEmpresa)"
+                    [maxSize]="7">
                     </ngb-pagination>
                 </div>
             </div>

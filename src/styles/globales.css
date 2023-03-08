@@ -229,7 +229,7 @@ input[type=number] {
   box-sizing: border-box;
   grid-template-columns: minmax(0,100%);
   width: 761.7px !important;
-  height: 301.73px !important;
+  /* height: 301.73px !important; */
   max-width: 100%;
   padding: 0 0 0 !important;
   border: none;

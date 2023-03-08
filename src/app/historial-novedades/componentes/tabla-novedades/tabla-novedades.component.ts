@@ -1,5 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Registro } from '../../modelos/NovedadesArchivo';
+import { NovedadesService } from '../../servicios/novedades.service';
+import { Paginador } from 'src/app/administrador/modelos/compartido/Paginador';
+import { Observable } from 'rxjs';
+import { Paginacion } from 'src/app/administrador/modelos/compartido/Paginacion';
 
 @Component({
   selector: 'app-tabla-novedades',
@@ -8,11 +12,26 @@ import { Registro } from '../../modelos/NovedadesArchivo';
 })
 export class TablaNovedadesComponent implements OnInit {
   @Input('registros') registros: Registro[] = []
+  registrosPaginados: Registro[] = []
+  paginador: Paginador
   
-  constructor() { 
+  constructor(private servicioNovedades:NovedadesService) {
+    this.paginador = new Paginador(this.obtenerRegistros) 
   } 
 
   ngOnInit(): void {
+    this.paginador.inicializarPaginacion(1, 3)
+  }
+
+  obtenerRegistros = (pagina: number, limite: number): Observable<Paginacion> =>{
+    return new Observable( subscriptor => {
+      this.servicioNovedades.paginarRegistros( pagina, limite, this.registros ).subscribe({
+        next: ( respuesta )=> {
+          this.registrosPaginados = respuesta.registros
+          subscriptor.next(respuesta.paginacion)
+        }
+      })
+    })
   }
 
 }

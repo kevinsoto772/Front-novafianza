@@ -43,6 +43,7 @@ export class PaginaGestionArchivosComponent implements OnInit {
       this.servicioArchivos.obtenerTiposArchivoPaginado(pagina, limite).subscribe({
         next: ( respuesta ) => {
           this.archivos = respuesta.archivos
+          subscriptor.next( respuesta.paginacion )
         } 
       })
     })
