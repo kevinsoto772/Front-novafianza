@@ -25,7 +25,7 @@ export class GestionDeUsuariosComponent implements OnInit {
   @ViewChild('modalverUsuario') ModalVerUsuarioComponent!: ModalVerUsuarioComponent
   @ViewChild('modalActualizarUsuario') modalActualizarUsuarioEmpresa!: ModalActualizarUsuarioComponent
   public formulario: FormGroup
-  public ReportesCabecera = ['Crear usuarios', '/assets/img/agregar-usuario.svg']
+  public ReportesCabecera = ['Crear usuarios', 'assets/img/agregar-usuario.svg']
   public paginador: Paginador;
   public usuario: Usuario | null;
   public usuarios: UsuarioEmpresa[] = []
