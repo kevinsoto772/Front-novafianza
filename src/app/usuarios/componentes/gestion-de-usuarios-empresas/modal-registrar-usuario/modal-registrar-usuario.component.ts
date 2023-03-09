@@ -2,7 +2,6 @@ import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { PopupComponent } from 'src/app/alertas/componentes/popup/popup.component';
-import { UsuarioEmpresa } from 'src/app/administrador/modelos/usuarios/usuarioEmpresa';
 import { ServicioUsuarios } from 'src/app/administrador/servicios/usuarios.service';
 
 @Component({
@@ -20,18 +19,18 @@ export class ModalRegistrarUsuarioComponent implements OnInit {
   constructor(private servicioModal: NgbModal, private servicioUsuarios: ServicioUsuarios) {
     this.seHaRegistradoUnUsuario = new EventEmitter<void>()
     this.formulario = new FormGroup({
-      nombre: new FormControl<string>('', [Validators.required]),
-      apellido: new FormControl<string>('', [Validators.required]),
-      numeroDocumento: new FormControl<string>('', [Validators.required]),
-      fechaNacimiento: new FormControl<string>('', [Validators.required]),
-      tipoDocumento: new FormControl<string>('', [Validators.required]),
-      tipoTelefono: new FormControl<string>('movil', Validators.required),
-      extension: new FormControl<string>('', Validators.required),
-      telefono: new FormControl<string>('', Validators.required),
-      telefonoFijo: new FormControl<string>('', Validators.required),
-      correo: new FormControl<string>('', Validators.required),
-      cargo: new FormControl<string>('', [Validators.required]),
-      tipoRol: new FormControl<string>('', [Validators.required]),
+      nombre          : new FormControl<string | undefined>(undefined, [Validators.required]),
+      apellido        : new FormControl<string | undefined>(undefined, [Validators.required]),
+      numeroDocumento : new FormControl<string | undefined>(undefined, [Validators.required]),
+      fechaNacimiento : new FormControl<string | undefined>(undefined, [Validators.required]),
+      tipoDocumento   : new FormControl<string | undefined>(undefined, [Validators.required]),
+      tipoTelefono    : new FormControl<string | undefined>('movil', Validators.required),
+      extension       : new FormControl<string | undefined>(undefined),
+      telefonoFijo    : new FormControl<string | undefined>(undefined),
+      telefono        : new FormControl<string | undefined>(undefined, Validators.required),
+      correo          : new FormControl<string | undefined>(undefined, Validators.required),
+      cargo           : new FormControl<string | undefined>(undefined, [Validators.required]),
+      tipoRol         : new FormControl<string | undefined>(undefined, [Validators.required]),
     })
   }
 
@@ -59,21 +58,24 @@ export class ModalRegistrarUsuarioComponent implements OnInit {
       throw Error('Formulario inválido')
     }
     const controls = this.formulario.controls
-    const usuarioEmpresa: UsuarioEmpresa = {
-      identificacion: controls['numeroDocumento'].value,
+
+    this.servicioUsuarios.registrarUsuarioEmpresa({
       nombre: controls['nombre'].value,
+      identificacion: controls['numeroDocumento'].value,
       apellido: controls['apellido'].value,
+      fechaNacimiento: controls['fechaNacimiento'].value,
       cargo: controls['cargo'].value,
       correo: controls['correo'].value,
-      fechaNacimiento: controls['fechaNacimiento'].value,
-      telefono: controls['telefono'].value,
+      celular: controls['telefono'].value,
       idEmpresa: this.empresaId!,
       idRol: controls['tipoRol'].value,
-      usuario: controls['numeroDocumento'].value
+      extension: controls['extension'].value,
+      telefono: controls['telefonoFijo'].value
     }
-    this.servicioUsuarios.registrarUsuarioEmpresa(usuarioEmpresa).subscribe({
-      complete: () => { 
-        this.seHaRegistradoUnUsuario.emit() 
+      
+    ).subscribe({
+      complete: () => {
+        this.seHaRegistradoUnUsuario.emit()
         this.popup.abrirPopupExitoso('Usuario creado con éxito')
       },
       error: () => { this.popup.abrirPopupFallido('Error') }
@@ -83,6 +85,12 @@ export class ModalRegistrarUsuarioComponent implements OnInit {
 
   public limpiarFormulario() {
     this.formulario.reset()
+    this.rellenarFormulario()
+  }
+
+  rellenarFormulario() {
+    const controls = this.formulario.controls
+    controls['tipoTelefono'].setValue('movil')
   }
 
   public marcarFormularioComoSucio(): void {

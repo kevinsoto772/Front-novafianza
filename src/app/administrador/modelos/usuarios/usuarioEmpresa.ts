@@ -7,7 +7,9 @@ export interface UsuarioEmpresa {
   fechaNacimiento:string;
   cargo: string;
   correo: string;
-  telefono: string;
+  telefono?: string;
+  celular: string;
+  extension?: string
   estado?: boolean;
   clave?: string;
   idEmpresa: string;

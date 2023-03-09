@@ -25,7 +25,6 @@ export class Paginador {
     ){
         this._funcionObtenerRecursos(pagina, limite, argumentos).subscribe({
             next: (paginacion) => {
-                console.log(paginacion)
                 this.cambiarTotales(paginacion)
             }
         })

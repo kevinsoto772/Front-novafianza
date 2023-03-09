@@ -86,18 +86,14 @@
               </select>
             </fieldset>
             <fieldset id="telefono" *ngIf="this.formulario.controls['tipoTelefono'].value == 'movil'">
-              <input type="number" aria-label="Last name" class="form-control" formControlName="telefono">
+              <input type="number" class="form-control" formControlName="telefono">
               <span class="validacion" *ngIf="this.formulario.controls['telefono'].invalid &&
                               this.formulario.controls['telefono'].dirty">
                 Teléfono requerido.
               </span>
             </fieldset>
             <fieldset id="telefono" *ngIf="this.formulario.controls['tipoTelefono'].value == 'fijo'">
-              <input type="number" aria-label="Last name" class="form-control" formControlName="telefonoFijo">
-              <span class="validacion" *ngIf="this.formulario.controls['telefonoFijo'].invalid &&
-                              this.formulario.controls['telefonoFijo'].dirty">
-                Teléfono requerido.
-              </span>
+              <input type="number" class="form-control" formControlName="telefonoFijo">
             </fieldset>
             <fieldset id="extension" *ngIf="this.formulario.controls['tipoTelefono'].value == 'fijo'">
               <input type="number" class="form-control" formControlName="extension">

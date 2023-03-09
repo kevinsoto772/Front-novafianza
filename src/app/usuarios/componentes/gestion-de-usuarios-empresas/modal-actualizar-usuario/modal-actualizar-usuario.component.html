@@ -86,10 +86,10 @@
                 <label >Número de teléfono</label>
                 <input type="number" aria-label="Last name" class="form-control" formControlName="telefono">
                 <span class="validacion"
-                            *ngIf="this.formulario.controls['telefono'].invalid &&
-                            this.formulario.controls['telefono'].dirty">
-                            Teléfono requerido.
-                        </span>
+                    *ngIf="this.formulario.controls['telefono'].invalid &&
+                    this.formulario.controls['telefono'].dirty">
+                    Teléfono requerido.
+                </span>
               </fieldset>
               <fieldset class="flex-grow-2" id="telefono" *ngIf="this.formulario.controls['tipoTelefono'].value == 'fijo'">
                 <label >Número de teléfono</label>

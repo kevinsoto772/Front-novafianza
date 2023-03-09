@@ -1,8 +1,6 @@
-import { HttpErrorResponse } from '@angular/common/http';
 import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Empresa } from 'src/app/administrador/modelos/empresas/Empresa';
 import { PopupComponent } from 'src/app/alertas/componentes/popup/popup.component';
 import { UsuarioEmpresa } from 'src/app/administrador/modelos/usuarios/usuarioEmpresa';
 import { ServicioUsuarios } from 'src/app/administrador/servicios/usuarios.service';
@@ -33,8 +31,8 @@ export class ModalActualizarUsuarioComponent implements OnInit {
       tipoDocumento: new FormControl<string>('', [Validators.required]),
       tipoTelefono: new FormControl<string>('movil', Validators.required),
       extension: new FormControl<string>(''),
-      telefono: new FormControl<string>('', [soloUnoEntre('telefonoFijo')]),
-      telefonoFijo: new FormControl<string>('', [soloUnoEntre('telefono')]),
+      telefono: new FormControl<string>('', Validators.required),
+      telefonoFijo: new FormControl<string>(''),
       correo: new FormControl<string>('', Validators.required),
       cargo: new FormControl<string>('', [Validators.required]),
       tipoRol: new FormControl<string>('', [Validators.required]),
@@ -77,10 +75,16 @@ export class ModalActualizarUsuarioComponent implements OnInit {
       correo: controls['correo'].value,
       fechaNacimiento: controls['fechaNacimiento'].value,
       identificacion: controls['numeroDocumento'].value,
-      telefono: controls['telefono'].value ?? controls['telefonoFijo'],
+      celular: controls['telefono'].value,
+      telefono: controls['telefonoFijo'].value,
+      extension: controls['extension'].value,
       idRol: controls['tipoRol'].value
     }).subscribe({
-      complete: ()=> { this.popup.abrirPopupExitoso('Se ha actualizado el usuario con éxito') },
+      next: ()=> { 
+        this.popup.abrirPopupExitoso('Se ha actualizado el usuario con éxito') 
+        this.cerrar()
+        this.seHaActualizadoUnUsuario.emit()
+      },
       error: ()=> { this.popup.abrirPopupFallido('Error', 'Ha habido un error al momento de actualizar.') }
     })
   }
@@ -98,9 +102,9 @@ export class ModalActualizarUsuarioComponent implements OnInit {
     )
     controls['tipoDocumento'].setValue('CC')
     controls['tipoTelefono'].setValue('movil')
-    controls['extension'].setValue('')
-    controls['telefono'].setValue(usuarioEmpresa.telefono)
-    /* controls['telefonoFijo'].setValue(usuarioEmpresa.telefono) */
+    controls['extension'].setValue(usuarioEmpresa.extension)
+    controls['telefono'].setValue(usuarioEmpresa.celular)
+    controls['telefonoFijo'].setValue(usuarioEmpresa.telefono)
     controls['correo'].setValue(usuarioEmpresa.correo)
     controls['cargo'].setValue(usuarioEmpresa.cargo)
     controls['tipoRol'].setValue(usuarioEmpresa.idRol)
