@@ -92,7 +92,10 @@
                                         </ng-container>
                                     </td>
                                     <td>
-                                        <label class="detalles fs-12px fw-semibold" (click)="abrirModalVerDetallesArchivo(archivoCargado.idArchivoCargado)">Ver detalles</label>
+                                        <label *ngIf="!cargandoDetalles" class="detalles fs-12px fw-semibold" (click)="abrirModalVerDetallesArchivo(archivoCargado.idArchivoCargado)">
+                                            Ver detalles
+                                        </label>
+                                        <app-loading *ngIf="cargandoDetalles"></app-loading>
                                     </td>
                                 </tr>
                                 <tr *ngIf="archivosCargados.length === 0">

@@ -7,6 +7,8 @@ import { ServicioUsuarios } from 'src/app/administrador/servicios/usuarios.servi
 import { DateTime } from 'luxon';
 import { marcarFormularioComoSucio } from 'src/app/administrador/utilidades/Utilidades';
 import { soloUnoEntre } from 'src/app/usuarios/validadores/AlMenosUno';
+import { Rol } from 'src/app/autenticacion/modelos/Rol';
+import { ServicioLocalStorage } from 'src/app/administrador/servicios/local-storage.service';
 
 @Component({
   selector: 'app-modal-actualizar-usuario',
@@ -19,10 +21,11 @@ export class ModalActualizarUsuarioComponent implements OnInit {
   @Output('seHaActualizadoUnUsuario') seHaActualizadoUnUsuario: EventEmitter<void>
   public usuarioEmpresa?: UsuarioEmpresa;
   public formulario: FormGroup;
+  public rolUsuario: Rol | null
 
-
-  constructor(private servicioModal: NgbModal, private servicioUsuarioEmpresa: ServicioUsuarios) {
+  constructor(private servicioModal: NgbModal, private servicioUsuarioEmpresa: ServicioUsuarios, private servicioLocalStorage: ServicioLocalStorage) {
     this.seHaActualizadoUnUsuario = new EventEmitter<void>()
+    this.rolUsuario = this.servicioLocalStorage.obtenerRol()
     this.formulario = new FormGroup({
       nombre: new FormControl<string>('', [Validators.required]),
       apellido: new FormControl<string>('', [Validators.required]),

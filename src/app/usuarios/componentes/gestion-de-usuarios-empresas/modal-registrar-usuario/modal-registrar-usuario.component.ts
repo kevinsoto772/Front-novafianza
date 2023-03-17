@@ -3,6 +3,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { PopupComponent } from 'src/app/alertas/componentes/popup/popup.component';
 import { ServicioUsuarios } from 'src/app/administrador/servicios/usuarios.service';
+import { ServicioLocalStorage } from 'src/app/administrador/servicios/local-storage.service';
+import { Rol } from 'src/app/autenticacion/modelos/Rol';
 
 @Component({
   selector: 'app-modal-registrar-usuario',
@@ -15,9 +17,11 @@ export class ModalRegistrarUsuarioComponent implements OnInit {
   @Output('seHaRegistradoUnUsuario') seHaRegistradoUnUsuario: EventEmitter<void>
   formulario: FormGroup
   empresaId?: string
+  rolUsuario: Rol | null
 
-  constructor(private servicioModal: NgbModal, private servicioUsuarios: ServicioUsuarios) {
+  constructor(private servicioModal: NgbModal, private servicioUsuarios: ServicioUsuarios, private servicioLocalStorage: ServicioLocalStorage) {
     this.seHaRegistradoUnUsuario = new EventEmitter<void>()
+    this.rolUsuario = this.servicioLocalStorage.obtenerRol()
     this.formulario = new FormGroup({
       nombre          : new FormControl<string | undefined>(undefined, [Validators.required]),
       apellido        : new FormControl<string | undefined>(undefined, [Validators.required]),

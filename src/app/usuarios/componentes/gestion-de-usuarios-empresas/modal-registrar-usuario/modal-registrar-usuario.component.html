@@ -9,7 +9,7 @@
       <div class="row">
         <div class="col-sm-3">
           <fieldset>
-            <label class="fw-semibold fs-12px">Tipo de documento</label>
+            <label class="fw-semibold fs-12px">Tipo de documento <span class="validacion-span">*</span></label>
             <select class="form-select form-control input" id="tipoDocumento" name="tipoDocumento"
               formControlName="tipoDocumento" required>
               <option value="" disabled selected>Seleccionar formato...</option>
@@ -25,7 +25,7 @@
         </div>
         <div class="col-sm-3">
           <fieldset>
-            <label class="fw-semibold fs-12px">Número de documento</label>
+            <label class="fw-semibold fs-12px">Número de documento <span class="validacion-span">*</span></label>
             <input type="number" class="form-control" formControlName="numeroDocumento">
             <span class="validacion" *ngIf="this.formulario.controls['numeroDocumento'].invalid &&
                           this.formulario.controls['numeroDocumento'].dirty">
@@ -36,7 +36,7 @@
 
         <div class="col-sm-3">
           <fieldset>
-            <label class="fw-semibold fs-12px">Nombres</label>
+            <label class="fw-semibold fs-12px">Nombres <span class="validacion-span">*</span></label>
             <input type="text" class="form-control" formControlName="nombre">
             <span class="validacion" *ngIf="this.formulario.controls['nombre'].invalid &&
                         this.formulario.controls['nombre'].dirty">
@@ -47,7 +47,7 @@
 
         <div class="col-sm-3">
           <fieldset>
-            <label class="fw-semibold fs-12px">Apellidos</label>
+            <label class="fw-semibold fs-12px">Apellidos <span class="validacion-span">*</span></label>
             <input type="text" class="form-control" formControlName="apellido">
             <span class="validacion" *ngIf="this.formulario.controls['apellido'].invalid &&
                       this.formulario.controls['apellido'].dirty">
@@ -60,7 +60,7 @@
       <div class="row">
         <div class="col-sm-3">
           <fieldset>
-            <label class="fw-semibold fs-12px">Fecha de nacimiento</label>
+            <label class="fw-semibold fs-12px">Fecha de nacimiento <span class="validacion-span">*</span></label>
             <input type="date" class="form-control" formControlName="fechaNacimiento">
             <span class="validacion" *ngIf="this.formulario.controls['fechaNacimiento'].invalid &&
                         this.formulario.controls['fechaNacimiento'].dirty">
@@ -71,7 +71,7 @@
         <div class="col-sm-3">
           <div class="row">
             <div class="col-8">
-              <label>Número de teléfono</label>
+              <label>Número de teléfono <span class="validacion-span">*</span></label>
             </div>
             <div class="col-4 ext">
               <label *ngIf="this.formulario.controls['tipoTelefono'].value == 'fijo'">Ext.</label>
@@ -107,7 +107,7 @@
 
         <div class="col-sm-3">
           <fieldset>
-            <label class="fw-semibold fs-12px">Correo electrónico empresarial</label>
+            <label class="fw-semibold fs-12px">Correo electrónico empresarial <span class="validacion-span">*</span></label>
             <input type="email" class="form-control" formControlName="correo">
             <span class="validacion" *ngIf="this.formulario.controls['correo'].invalid &&
                       this.formulario.controls['correo'].dirty">
@@ -118,7 +118,7 @@
 
         <div class="col-sm-3">
           <fieldset>
-            <label class="fw-semibold fs-12px">Cargo</label>
+            <label class="fw-semibold fs-12px">Cargo <span class="validacion-span">*</span></label>
             <input type="text" class="form-control" formControlName="cargo">
             <span class="validacion" *ngIf="this.formulario.controls['cargo'].invalid &&
                     this.formulario.controls['cargo'].dirty">
@@ -131,10 +131,10 @@
       <div class="row">
         <div class="col-sm-3">
           <fieldset>
-            <label class="fw-semibold fs-12px">Perfil</label>
+            <label class="fw-semibold fs-12px">Perfil <span class="validacion-span">*</span></label>
             <select class="form-select form-control" id="tipoRol" name="tipoRol" formControlName="tipoRol" required>
               <option value="" disabled selected>Seleccionar formato...</option>
-              <option value="003">Administrador</option>
+              <option value="003" *ngIf="rolUsuario && (rolUsuario._id === '002' || rolUsuario._id === '001')">Administrador</option>
               <option value="004">Operativo</option>
               <option value="005">Consultor</option>
             </select>

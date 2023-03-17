@@ -6,7 +6,9 @@
     <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
   </div>
   <div class="modal-body p-0" *ngIf="detallesArchivo">
-    <app-informacion-archivo [detallesArchivo]="detallesArchivo"></app-informacion-archivo>
+    <app-informacion-archivo 
+    [detallesArchivo]="detallesArchivo"
+    [idArchivoCargado]="idArchivoCargado"></app-informacion-archivo>
     <ul ngbNav #tabs="ngbNav" class="fondo-azul-degradado">
 
       <li ngbNavItem *ngFor="let validacion of detallesArchivo!.validaciones">

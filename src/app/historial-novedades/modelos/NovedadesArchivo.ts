@@ -1,9 +1,9 @@
 export interface NovedadesArchivo {
     nombreArchivo:     string;
     cargadoPor:        string;
-    fechaYHora:        Date;
-    fechaCorteFinal:   Date;
-    fechaCorteInicial: Date;
+    fechaYHora:        string;
+    fechaCorteFinal:   string;
+    fechaCorteInicial: string;
     validaciones:      Validacion[];
 }
 
@@ -23,6 +23,7 @@ export interface Categoria {
 }
 
 export interface Registro {
+    numero: number;
     descripcion: string;
     linea:       string;
     variable:    string;

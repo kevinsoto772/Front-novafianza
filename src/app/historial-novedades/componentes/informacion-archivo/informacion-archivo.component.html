@@ -10,7 +10,7 @@
   <div class="col-2">
     <div class="d-flex flex-column">
       <span class="fw-bold fs-12px">Fecha y hora de carga:</span>
-      <span class="fs-12px">{{ detallesArchivo.fechaYHora }}</span>  
+      <span class="fs-12px">{{ formatearFecha(detallesArchivo.fechaYHora) }}</span>  
     </div>
   </div>
 
@@ -49,7 +49,12 @@
   </div>
 
   <div class="col-2 d-flex flex-column justify-content-center align-items-end">
-    <button class="boton primario delineado">Exportar datos</button>
+    <button class="boton primario delineado" (click)="descargarReporte()" *ngIf="!descargandoArchivo">
+      Exportar datos
+    </button>
+    <button class="boton primario delineado" disabled *ngIf="descargandoArchivo">
+      Descargando <app-loading></app-loading>
+    </button>
   </div>
 
 </div>

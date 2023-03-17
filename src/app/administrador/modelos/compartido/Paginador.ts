@@ -2,8 +2,8 @@ import { Observable } from "rxjs"
 import { Paginacion } from "./Paginacion"
 
 export class Paginador {
-    public readonly opcionesLimiteRegistros = [ 1, 2, 3 ]
-    private readonly limiteRegistrosPorDefecto = 3
+    public readonly opcionesLimiteRegistros = [ 5, 10, 15, 20, 30 ]
+    private readonly limiteRegistrosPorDefecto = 5
     private readonly paginaActualPorDefecto = 1
     private _totalRegistros?: number
     private _paginaActual: number

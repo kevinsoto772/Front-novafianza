@@ -20,7 +20,7 @@ export class TablaNovedadesComponent implements OnInit {
   } 
 
   ngOnInit(): void {
-    this.paginador.inicializarPaginacion(1, 3)
+    this.paginador.inicializarPaginacion(undefined, undefined)
   }
 
   obtenerRegistros = (pagina: number, limite: number): Observable<Paginacion> =>{

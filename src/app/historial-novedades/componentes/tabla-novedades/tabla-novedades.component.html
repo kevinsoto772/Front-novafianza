@@ -6,7 +6,7 @@
         class="form-select sm" 
         (change)="paginador.cambiarLimitePorPagina(+porPagina.value)"
         [ngModel]="paginador.limiteRegistros">
-            <option [value]="opcion" *ngFor="let opcion of paginador.opcionesLimiteRegistros">{{ opcion }}</option>
+            <option [value]="opcion" *ngFor="let opcion of [5, 10, 20, 50, 100]">{{ opcion }}</option>
         </select>
     </span>
   </div>  
@@ -23,7 +23,7 @@
     </thead>
     <tbody>
       <tr *ngFor="let registro of registrosPaginados; let i = index">
-        <td>{{ (i + 1) }}</td>
+        <td>{{ registro.numero }}</td>
         <td>{{ registro.descripcion }}</td>
         <td>{{ registro.linea }}</td>
         <td>{{ registro.variable }}</td>

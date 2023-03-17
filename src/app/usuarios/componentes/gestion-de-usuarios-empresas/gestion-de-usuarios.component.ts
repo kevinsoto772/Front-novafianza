@@ -13,6 +13,7 @@ import { Paginacion } from 'src/app/compartido/modelos/Paginacion';
 import { Paginador } from 'src/app/administrador/modelos/compartido/Paginador';
 import { Observable } from 'rxjs';
 import { ServicioLocalStorage } from 'src/app/administrador/servicios/local-storage.service';
+import { formatearFechaIso } from 'src/app/compartido/Fechas';
 
 @Component({
   selector: 'app-gestion-de-usuarios',
@@ -51,13 +52,13 @@ export class GestionDeUsuariosComponent implements OnInit {
 
   ngOnInit(): void {
     if(this.idEmpresa){
-      this.paginador.inicializarPaginacion(1, 3, this.idEmpresa)
+      this.paginador.inicializarPaginacion(undefined, undefined, this.idEmpresa)
     }
   }
 
   manejarCambioDeEmpresa(idEmpresa: string){
     this.idEmpresa = idEmpresa;
-    this.paginador.inicializarPaginacion(1, 3, this.idEmpresa)
+    this.paginador.inicializarPaginacion(this.paginador.paginaActual, this.paginador.limiteRegistros, this.idEmpresa)
   }
 
   buscarUsuario(cedula: string){
@@ -94,5 +95,9 @@ export class GestionDeUsuariosComponent implements OnInit {
 
   abrirModalActualizarUsuarioEmpresa(usuario: UsuarioEmpresa): void {
     this.modalActualizarUsuarioEmpresa.abrir(usuario);
+  }
+
+  formatearFecha(fecha:string){
+    return formatearFechaIso(fecha, 'yyyy-MM-dd')
   }
 }

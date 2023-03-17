@@ -11,6 +11,7 @@ import { TablaNovedadesComponent } from './componentes/tabla-novedades/tabla-nov
 import { EmpresasModule } from '../empresas/empresas.module';
 import { InputsModule } from '../inputs/inputs.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AlertasModule } from '../alertas/alertas.module';
 
 
 
@@ -26,6 +27,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     NgbModule,
+    AlertasModule,
     FormsModule,
     ReactiveFormsModule,
     /* Modulos propios */

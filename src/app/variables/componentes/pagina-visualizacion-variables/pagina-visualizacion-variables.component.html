@@ -1,11 +1,6 @@
 <app-selector-empresa (seleccion)="manejarCambioDeEmpresa($event.id!)" *ngIf="usuario && !usuario.idEmpresa"></app-selector-empresa>
 
 <div class="d-flex flex-column flex-gap-30 p-4 mt-4" *ngIf="this.idEmpresa">
-  <div class="d-flex justify-content-end">
-    <button type="button" class="boton primario relleno" (click)="this.abrirModalRegistrarUsuario()">
-      <img src="assets/img/+.svg" class="me-1" /> Crear usuarios
-    </button>
-  </div>
   <div class="row">
     <div class="col-12">
       <div class="card w-100">
@@ -14,13 +9,13 @@
         </div>
         <div class="card-body">
           <div class="contenedor">
-            <div class="barraBusqueda" [formGroup]="this.formulario">
+            <div class="barraBusqueda">
               <app-input-busqueda></app-input-busqueda>
             </div>
             <div>
               <button class="totales" disabled>
                 <span class="fw-semibold fs-14px">Total:</span>
-                <span class="fs-12px fw-semibold"style="margin-left: 5px">{{paginador.totalRegistros}}</span>
+                <span class="fs-12px fw-semibold"style="margin-left: 5px">55</span>
               </button>
             </div>
             <div class="d-flex justify-self-end flex-gap-5 ms-auto mb-3">
@@ -30,9 +25,8 @@
                 #porPagina 
                 class="form-select sm" 
                 name="" id=""
-                [ngModel]="paginador.limiteRegistros"
-                (change)="paginador.cambiarLimitePorPagina(+porPagina.value)">
-                  <option [value]="opcion" *ngFor="let opcion of paginador.opcionesLimiteRegistros">{{opcion}}</option>
+                >
+                  <option [value]="opcion" *ngFor="let opcion of [5, 10, 15]">{{opcion}}</option>
                 </select>
               </span>
             </div>
@@ -41,38 +35,23 @@
             <table class="table table-striped fs-12px">
               <thead>
                 <tr>
-                  <th scope="col">Identificación</th>
-                  <th scope="col">Nombres y apellidos</th>
-                  <th scope="col">Perfil</th>
-                  <th scope="col">Fecha de nacimiento</th>
-                  <th scope="col">Correo electrónico</th>
-                  <th scope="col">Telefono</th>
-                  <th scope="col" colspan="2">Acciones<br/>
-                    <label class="acciones" id="accionEditar">Editar</label>
-                    <label class="acciones">Activo</label>
-                  </th>
+                  <th scope="col">Posición</th>
+                  <th scope="col">Nombre campo</th>
+                  <th scope="col">¿Obligatorio?</th>
+                  <th scope="col">Formato fecha</th>
+                  <th scope="col">Tipo dato</th>
+
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let usuario of usuarios; let index = index">
-                  <td>{{ usuario.identificacion }}</td>
-                  <td>{{ usuario.nombre }} {{ usuario.apellido }}</td>
-                  <td> {{ usuario.idRol }}</td>
-                  <td>{{ formatearFecha(usuario.fechaNacimiento) }}</td>
-                  <td>{{ usuario.correo }}</td>
-                  <td>{{ usuario.celular }}</td>
-                  <td>
-                    <img src="assets/img/editar.svg" alt="" (click)="abrirModalActualizarUsuarioEmpresa(usuario)">
-                  </td>
-                  <td>
-                    <label class="switch">
-                      <!-- [checked]="empresa.estado" (change)="this.cambiarEstadoEmpresa(index)" -->
-                      <input type="checkbox" [checked]="usuario.estado" (change)="cambiarEstadoUsuario(usuario.id!)">
-                      <span class="slider round"></span>
-                    </label>
-                  </td>
+                <tr *ngFor="let usuario of [1, 2, 3 ,4, 5]; let index = index">
+                  <td>{{usuario}}</td>
+                  <td>Número del pagaré</td>
+                  <td>Si</td>
+                  <td>No aplica</td>
+                  <td>String</td>
                 </tr>
-                <tr *ngIf="usuarios.length == 0">
+                <tr *ngIf="false">
                   <td colspan="7">
                     <label class="d-flex justify-content-center fs-14px">
                       Aun no hay usuarios registrados en esta entidad.
@@ -84,20 +63,20 @@
           </div>
         </div>
         <div class="card-footer d-flex justify-content-end">
-          <ngb-pagination *ngIf="this.paginador.totalRegistros"
+<!--           <ngb-pagination *ngIf="this.paginador.totalRegistros"
           class="mt-3" 
           [collectionSize]="this.paginador.totalRegistros" 
           [page]="this.paginador.paginaActual" 
           [pageSize]="this.paginador.limiteRegistros" 
           (pageChange)="this.paginador.cambiarPagina($event, this.idEmpresa!)">
-          </ngb-pagination>
+          </ngb-pagination> -->
         </div>
       </div>
     </div>
   </div>
 </div>
 
-<app-modal-registrar-usuario 
+<!-- <app-modal-registrar-usuario 
   #modalRegistrarUsuario 
   (seHaRegistradoUnUsuario)="this.paginador.inicializarPaginacion(1, 3, this.idEmpresa!)"></app-modal-registrar-usuario>
 
@@ -108,6 +87,6 @@
   #modalActualizarUsuario></app-modal-actualizar-usuario>
 
 <swal #popupExitoso></swal>
-<swal #fallido></swal>
+<swal #fallido></swal> -->
 
 <app-popup #popup></app-popup>

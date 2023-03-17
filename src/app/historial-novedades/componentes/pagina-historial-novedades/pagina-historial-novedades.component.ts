@@ -19,6 +19,7 @@ export class PaginaHistorialNovedadesComponent implements OnInit {
   paginador: Paginador
   usuario: Usuario | null
   idEmpresa?: string
+  cargandoDetalles: boolean = false
   constructor(private servicioNovedades: NovedadesService, private servicioLocalStorage: ServicioLocalStorage) { 
     this.paginador = new Paginador(this.obtenerArchivosCargados)
     this.usuario = this.servicioLocalStorage.obtenerUsuario()
@@ -29,13 +30,15 @@ export class PaginaHistorialNovedadesComponent implements OnInit {
 
   ngOnInit(): void {
     if(this.idEmpresa){
-      this.paginador.inicializarPaginacion()
+      this.paginador.inicializarPaginacion(undefined, undefined, this.idEmpresa)
     }
   }
 
   abrirModalVerDetallesArchivo(idArchivoCargado: string){
+    this.cargandoDetalles = true
     this.servicioNovedades.obtenerDetalleArchivo(idArchivoCargado).subscribe( detallesArchivo => {
-      this.modalDetallesArchivo.abrir(detallesArchivo)
+      this.cargandoDetalles = false
+      this.modalDetallesArchivo.abrir(detallesArchivo, idArchivoCargado)
     })
   }
 
@@ -50,7 +53,7 @@ export class PaginaHistorialNovedadesComponent implements OnInit {
 
   manejarCambioDeEmpresa(idEmpresa: string){
     this.idEmpresa = idEmpresa
-    this.paginador.inicializarPaginacion(1, 3, idEmpresa)
+    this.paginador.inicializarPaginacion(this.paginador.paginaActual, this.paginador.limiteRegistros, idEmpresa)
 
   }
 
