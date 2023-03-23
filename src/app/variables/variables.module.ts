@@ -6,12 +6,14 @@ import { EmpresasModule } from '../empresas/empresas.module';
 import { InputsModule } from '../inputs/inputs.module';
 import { AlertasModule } from '../alertas/alertas.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SelectorArchivoEntidadComponent } from './componentes/selector-archivo-entidad/selector-archivo-entidad.component';
 
 
 
 @NgModule({
   declarations: [
-    PaginaVisualizacionVariablesComponent
+    PaginaVisualizacionVariablesComponent,
+    SelectorArchivoEntidadComponent
   ],
   imports: [
     CommonModule,
