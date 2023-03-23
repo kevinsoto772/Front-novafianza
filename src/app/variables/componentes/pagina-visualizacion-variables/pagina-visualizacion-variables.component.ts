@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ServicioLocalStorage } from 'src/app/administrador/servicios/local-storage.service';
 import { ServicioCabeceraService } from 'src/app/administrador/servicios/servicio-cabecera.service';
 import { Usuario } from 'src/app/autenticacion/modelos/IniciarSesionRespuesta';
@@ -7,6 +7,8 @@ import { Campo } from '../../modelos/InformacionVariables';
 import { Paginador } from 'src/app/administrador/modelos/compartido/Paginador';
 import { Paginacion } from 'src/app/compartido/modelos/Paginacion';
 import { Observable } from 'rxjs';
+import { PopupComponent } from 'src/app/alertas/componentes/popup/popup.component';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-pagina-visualizacion-variables',
@@ -14,6 +16,7 @@ import { Observable } from 'rxjs';
   styleUrls: ['./pagina-visualizacion-variables.component.css']
 })
 export class PaginaVisualizacionVariablesComponent implements OnInit {
+  @ViewChild('popup') popup!: PopupComponent
   usuario: Usuario | null
   idEmpresa?: string
   idTipoArchivo?: string
@@ -40,6 +43,17 @@ export class PaginaVisualizacionVariablesComponent implements OnInit {
     this.servicioVariables.consultarVariablesArchivoEntidad(idEmpresa, idTipoArchivo).subscribe({
       next: (informacion) => {
         this.todasLasVariables = informacion.Campos
+        this.paginador.inicializarPaginacion(undefined, undefined, this.todasLasVariables)
+      },
+      error: (error: HttpErrorResponse) => {
+        if(error.status === 404){
+          this.popup.abrirPopupFallido('Estructura no encontrada.', 'No se encontró estructura definida para este archivo y entidad.')
+        }
+        if(error.status === 503){
+          this.popup.abrirPopupFallido('Servicio no disponible.', 'En este momento el servicio no está disponible.')
+        }
+        this.todasLasVariables = []
+        this.variablesPaginadas = []
         this.paginador.inicializarPaginacion(undefined, undefined, this.todasLasVariables)
       }
     })
