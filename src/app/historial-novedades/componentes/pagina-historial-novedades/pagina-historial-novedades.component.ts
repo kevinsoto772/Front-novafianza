@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 import { Paginacion } from 'src/app/compartido/modelos/Paginacion';
 import { ServicioLocalStorage } from 'src/app/administrador/servicios/local-storage.service';
 import { Usuario } from 'src/app/autenticacion/modelos/IniciarSesionRespuesta';
+import { formatearFechaIso } from 'src/app/compartido/Fechas';
 
 @Component({
   selector: 'app-pagina-historial-novedades',
@@ -55,6 +56,10 @@ export class PaginaHistorialNovedadesComponent implements OnInit {
     this.idEmpresa = idEmpresa
     this.paginador.inicializarPaginacion(this.paginador.paginaActual, this.paginador.limiteRegistros, idEmpresa)
 
+  }
+
+  formatearFecha(fecha: string){
+    return formatearFechaIso(fecha, 'yyyy-MM-dd HH:mm:ss')
   }
 
 }
