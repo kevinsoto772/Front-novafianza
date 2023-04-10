@@ -84,6 +84,19 @@ export class EmpresasService extends Autenticable {
     )
   }
 
+  vincularManual(idArchivo: string, idEmpresa: string, manual: File){
+    const endpoint = '/api/v1/archivo_empresa/vincular-manual'
+    const formulario = new FormData()
+    formulario.append('idArchivo', idArchivo)
+    formulario.append('idEmpresa', idEmpresa)
+    formulario.append('manual', manual)
+    return this.clienteHttp.post(
+      `${this.HOST}${endpoint}`,
+      formulario,
+      { headers: { Authorization: `Bearer ${ this.obtenerTokenAutorizacion() }` } }
+    )
+  }
+
   listarArchivos(idEmpresa: string){
     const endpoint = `/api/v1/archivo_empresa/listar_por_empresa/${idEmpresa}`
     return this.clienteHttp.get<ArchivoEmpresa[]>(

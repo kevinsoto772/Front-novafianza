@@ -10,6 +10,9 @@ import { AdministradorCompartidoModule } from '../administrador-compartido/admin
 import { ModalAsignarServiciosComponent } from './componentes/modal-asignar-servicios/modal-asignar-servicios.component';
 import { AlertasModule } from '../alertas/alertas.module';
 import { InputsModule } from '../inputs/inputs.module';
+import { ModalAdjuntarManualComponent } from './componentes/modal-adjuntar-manual/modal-adjuntar-manual.component';
+import { ModalVisualizarManualComponent } from './componentes/modal-visualizar-manual/modal-visualizar-manual.component';
+import { SafePipe } from '../safe.pipe';
 
 @NgModule({
   declarations: [
@@ -18,6 +21,9 @@ import { InputsModule } from '../inputs/inputs.module';
     ModalCrearEmpresaComponent,
     ModalActualizarEmpresaComponent,
     ModalAsignarServiciosComponent,
+    ModalAdjuntarManualComponent,
+    ModalVisualizarManualComponent,
+    SafePipe
   ],
   imports: [
     CommonModule,

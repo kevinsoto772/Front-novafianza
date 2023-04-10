@@ -5,8 +5,10 @@ import { Empresa } from '../../modelos/Empresa';
 import { TipoArchivo } from 'src/app/archivos/modelos/TipoArchivo';
 import { CargarArchivosService } from 'src/app/archivos/servicios/cargar-archivos.service';
 import { EmpresasService } from '../../servicios/empresas.service';
-import { filter } from 'rxjs';
 import { PopupComponent } from 'src/app/alertas/componentes/popup/popup.component';
+import { ModalAdjuntarManualComponent } from '../modal-adjuntar-manual/modal-adjuntar-manual.component';
+import { ArchivoEmpresa } from 'src/app/archivos/modelos/ArchivoEmpresa';
+import { ModalVisualizarManualComponent } from '../modal-visualizar-manual/modal-visualizar-manual.component';
 
 @Component({
   selector: 'app-modal-asignar-servicios',
@@ -16,9 +18,14 @@ import { PopupComponent } from 'src/app/alertas/componentes/popup/popup.componen
 export class ModalAsignarServiciosComponent implements OnInit {
   @ViewChild('modal') modal!: ElementRef
   @ViewChild('popup') popup!: PopupComponent
+  @ViewChild('modalAdjuntar') modalAdjuntar!: ModalAdjuntarManualComponent
+  @ViewChild('modalVisualizar') modalVisualizar!: ModalVisualizarManualComponent
 
+  filtro: string = ''
   empresa?: Empresa
   archivos: TipoArchivo[] = []
+  archivosFiltrados: TipoArchivo[] = []
+  archivosEmpresa: ArchivoEmpresa[] = []
   idsArchivosSeleccionados: string[] = []
   formulario: FormGroup
 
@@ -32,6 +39,15 @@ export class ModalAsignarServiciosComponent implements OnInit {
 
   marcarCheckBoxArchivo(idArchivo: string): boolean{
     return this.idsArchivosSeleccionados.includes(idArchivo) ? true : false
+  }
+
+  manejarNombreArchivoActual(idArchivo: string){
+    for (const archivo of this.archivosEmpresa) {
+      if(idArchivo === archivo.idArchivo){
+        return archivo.manual ?? '-'
+      }
+    }
+    return '-'
   }
 
   manejarCheckBox(checkbox: HTMLInputElement, idArchivo: string){
@@ -57,6 +73,7 @@ export class ModalAsignarServiciosComponent implements OnInit {
     this.servicioArchivo.obtenerTiposArchivo().subscribe({
       next: ( respuesta ) => {
         this.archivos = respuesta.archivos
+        this.archivosFiltrados = respuesta.archivos
       }
     })
   }
@@ -64,7 +81,10 @@ export class ModalAsignarServiciosComponent implements OnInit {
   obtenerArchivosEmpresa(idEmpresa: string){
     this.servicioEmpresa.listarArchivos(idEmpresa).subscribe({
       next: (archivosEmpresa) => {
-        this.idsArchivosSeleccionados = archivosEmpresa.map( archivoEmpresa => archivoEmpresa.idArchivo )
+        this.archivosEmpresa = archivosEmpresa
+        this.idsArchivosSeleccionados = archivosEmpresa
+        .filter( archivosEmpresa => archivosEmpresa.estado === true )
+        .map( archivoEmpresa => archivoEmpresa.idArchivo )
       }
     })
   }
@@ -84,6 +104,26 @@ export class ModalAsignarServiciosComponent implements OnInit {
     this.servicioModal.open(this.modal, {
       size: 'xl'
     })
+  }
+
+  abrirModalAdjuntar(archivo: TipoArchivo){
+    this.modalAdjuntar.abrir(archivo, this.empresa!.id!)
+  }
+
+  abrirModalVisualizar(url: string){
+    if(url === '-' || url === '' || !url){
+      this.popup.abrirPopupFallido('Este servicio no tiene un documento adjunto')
+      return 
+    }
+    this.modalVisualizar.abrir(url)
+  }
+
+  filtrar(filtro: string){
+    if(filtro !== ''){
+      this.archivosFiltrados = this.archivos.filter( archivo => archivo.nombre.toLowerCase().includes(filtro.toLowerCase()) )
+    }else{
+      this.archivosFiltrados = this.archivos
+    }
   }
 
 }
