@@ -119,11 +119,17 @@
         <div class="col-sm-3">
           <fieldset>
             <label class="fw-semibold fs-12px">Cargo <span class="validacion-span">*</span></label>
-            <input type="text" class="form-control" formControlName="cargo">
-            <span class="validacion" *ngIf="this.formulario.controls['cargo'].invalid &&
-                    this.formulario.controls['cargo'].dirty">
-              Cargo requerido.
-            </span>
+            <select class="form-select" formControlName="cargo" #selectCargo (change)="manejarCambioCargo()">
+              <option [value]="cargo.id" *ngFor="let cargo of cargos">{{ cargo.nombre }}</option>
+            </select>
+            <ng-container *ngIf="selectCargo.value === '99cb025b-2bfd-412c-bb81-b979a14f5644'">
+              <label class="fw-semibold fs-12px">Escriba aquí el nombre del cargo<span class="validacion-span">*</span></label>
+              <input type="text" class="form-control" formControlName="otroCargo">
+              <span class="validacion" *ngIf="this.formulario.controls['otroCargo'].invalid &&
+                      this.formulario.controls['otroCargo'].dirty">
+                Cargo requerido.
+              </span>
+            </ng-container>
           </fieldset>
         </div>
       </div>

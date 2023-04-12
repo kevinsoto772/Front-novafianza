@@ -30,17 +30,17 @@ export class PaginaAdministrarEmpresasComponent implements OnInit {
     this.paginador.inicializarPaginacion()
   }
 
-  cambiarEstadoEmpresa(empresa: Empresa){
+  cambiarEstadoEmpresa(empresa: Empresa) {
     empresa.estado = !empresa.estado
     this.servicioEmpresas.cambiarEstadoEmpresa(empresa.id!).subscribe({
-      complete: ()=> { this.popup.abrirPopupExitoso('Se ha cambiado el estado de la entidad.')  },
-      error: ()=> { this.popup.abrirPopupExitoso('Se ha cambiado el estado de la entidad.') },
+      complete: () => { this.popup.abrirPopupExitoso('Se ha cambiado el estado de la entidad.') },
+      error: () => { this.popup.abrirPopupExitoso('Se ha cambiado el estado de la entidad.') },
       next: () => { this.popup.abrirPopupExitoso('Se ha cambiado el estado de la entidad.') }
     })
   }
 
-  obtenerEmpresas = (pagina: number, limite: number):Observable<Paginacion> => {
-    return new Observable<Paginacion>( subsciptor => {
+  obtenerEmpresas = (pagina: number, limite: number): Observable<Paginacion> => {
+    return new Observable<Paginacion>(subsciptor => {
       this.servicioEmpresas.obtenerEmpresas(pagina, limite).subscribe(respuesta => {
         this.empresas = respuesta.empresas
         subsciptor.next(respuesta.paginacion)
@@ -58,6 +58,11 @@ export class PaginaAdministrarEmpresasComponent implements OnInit {
 
   abrirModalActualizarEmpresa(empresa: Empresa) {
     this.modalActualizar.abrir(empresa)
+  }
+
+  alCrearEmpresa(empresa: Empresa) {
+    this.paginador.inicializarPaginacion()
+    this.abrirModalAsignarServicios(empresa)
   }
 
 }

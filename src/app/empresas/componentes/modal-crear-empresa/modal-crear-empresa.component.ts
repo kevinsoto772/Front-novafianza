@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { EmpresasService } from '../../servicios/empresas.service';
 import { PopupComponent } from 'src/app/alertas/componentes/popup/popup.component';
+import { Empresa } from '../../modelos/Empresa';
 
 @Component({
   selector: 'app-modal-crear-empresa',
@@ -10,13 +11,13 @@ import { PopupComponent } from 'src/app/alertas/componentes/popup/popup.componen
   styleUrls: ['./modal-crear-empresa.component.css']
 })
 export class ModalCrearEmpresaComponent implements OnInit {
-  @Output('empresaCreada') empresaCreada: EventEmitter<void>
+  @Output('empresaCreada') empresaCreada: EventEmitter<Empresa>
   @ViewChild('modal') modal!: ElementRef
   @ViewChild('popup') popup!: PopupComponent
   formulario: FormGroup
 
   constructor(private servicioModal: NgbModal, private servicioEmpresa: EmpresasService) {
-    this.empresaCreada = new EventEmitter<void>();
+    this.empresaCreada = new EventEmitter<Empresa>();
     this.formulario = new FormGroup({
       nombre: new FormControl<string>('', [Validators.required]),
       nit: new FormControl<string>('', [Validators.required]),
@@ -42,8 +43,9 @@ export class ModalCrearEmpresaComponent implements OnInit {
       nit: controls['nit'].value,
       nombre: controls['nombre'].value
     }).subscribe({
-      complete: ()=> {
-        this.empresaCreada.emit()
+      next: ( empresa )=> {
+        this.cerrar()
+        this.empresaCreada.emit( empresa )
         this.popup.abrirPopupExitoso('Entidad creada con éxito.')
       },
       error: ()=> {

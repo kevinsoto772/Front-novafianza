@@ -5,6 +5,8 @@ import { PopupComponent } from 'src/app/alertas/componentes/popup/popup.componen
 import { ServicioUsuarios } from 'src/app/administrador/servicios/usuarios.service';
 import { ServicioLocalStorage } from 'src/app/administrador/servicios/local-storage.service';
 import { Rol } from 'src/app/autenticacion/modelos/Rol';
+import { Cargo } from 'src/app/administrador/modelos/usuarios/Cargo';
+import { requeridoSi } from 'src/app/usuarios/validadores/RequeridoSi';
 
 @Component({
   selector: 'app-modal-registrar-usuario',
@@ -18,6 +20,7 @@ export class ModalRegistrarUsuarioComponent implements OnInit {
   formulario: FormGroup
   empresaId?: string
   rolUsuario: Rol | null
+  cargos: Cargo[] = []
 
   constructor(private servicioModal: NgbModal, private servicioUsuarios: ServicioUsuarios, private servicioLocalStorage: ServicioLocalStorage) {
     this.seHaRegistradoUnUsuario = new EventEmitter<void>()
@@ -34,11 +37,17 @@ export class ModalRegistrarUsuarioComponent implements OnInit {
       telefono        : new FormControl<string | undefined>(undefined, Validators.required),
       correo          : new FormControl<string | undefined>(undefined, Validators.required),
       cargo           : new FormControl<string | undefined>(undefined, [Validators.required]),
+      otroCargo       : new FormControl<string | undefined>(undefined, [requeridoSi('cargo', '99cb025b-2bfd-412c-bb81-b979a14f5644')]),
       tipoRol         : new FormControl<string | undefined>(undefined, [Validators.required]),
     })
   }
 
   ngOnInit(): void {
+    this.servicioUsuarios.obtenerCargos().subscribe({
+      next: (cargos) => {
+        this.cargos = cargos
+      }
+    })
   }
 
   public abrir(empresaId: string): void {
@@ -69,6 +78,7 @@ export class ModalRegistrarUsuarioComponent implements OnInit {
       apellido: controls['apellido'].value,
       fechaNacimiento: controls['fechaNacimiento'].value,
       cargo: controls['cargo'].value,
+      otroCargo: controls['otroCargo'].value,
       correo: controls['correo'].value,
       celular: controls['telefono'].value,
       idEmpresa: this.empresaId!,
@@ -106,5 +116,9 @@ export class ModalRegistrarUsuarioComponent implements OnInit {
     });
   }
 
+  manejarCambioCargo(){
+    const controls = this.formulario.controls
+    controls['otroCargo'].setValue('')
+  }
 
 }

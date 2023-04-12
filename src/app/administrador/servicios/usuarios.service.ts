@@ -10,6 +10,7 @@ import { Autenticable } from './compartido/Autenticable';
 import { PeticionActualizarContrasena } from '../../autenticacion/modelos/PeticionActualizarContrasena';
 import { usuarioNovafianza } from '../modelos/usuarios/usuarioNovafianza';
 import { PeticionActualizarUsuario } from '../modelos/ConfiguracionPerfil/PeticionActualizarUsuario';
+import { Cargo } from '../modelos/usuarios/Cargo';
 
 @Injectable({
   providedIn: 'root'
@@ -76,5 +77,14 @@ export class ServicioUsuarios extends Autenticable {
   public actualizarUsuario(peticionActualizarUsuario:PeticionActualizarUsuario, usuario:string):Observable<any>{
     const endpoint = `/api/v1/usuarios/${usuario}`
     return this.httpClient.patch<string>(`${this.urlBackend}${endpoint}`, peticionActualizarUsuario, {headers: this.headers})
+  }
+
+  public obtenerCargos(){
+    const endpoint = `/api/v1/cargos`
+    return this.httpClient.get<Cargo[]>(`${this.urlBackend}${endpoint}`, {
+      headers: {
+        Authorization: `Bearer ${this.obtenerTokenAutorizacion()}`
+      }
+    })
   }
 }

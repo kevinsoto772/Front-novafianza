@@ -93,7 +93,7 @@
     </div>
   </div>
 
-  <app-modal-crear-empresa #modalCrearEmpresa (empresaCreada)="this.paginador.inicializarPaginacion()"></app-modal-crear-empresa>
+  <app-modal-crear-empresa #modalCrearEmpresa (empresaCreada)="alCrearEmpresa($event)"></app-modal-crear-empresa>
   <app-modal-actualizar-empresa #modalActualizarEmpresa (empresaActualizada)="this.paginador.inicializarPaginacion()"></app-modal-actualizar-empresa>
   <app-modal-asignar-servicios #modalAsignarServicios></app-modal-asignar-servicios>
   <app-popup #popup></app-popup>
