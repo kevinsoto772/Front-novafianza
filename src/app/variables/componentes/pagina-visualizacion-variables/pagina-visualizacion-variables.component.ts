@@ -44,7 +44,7 @@ export class PaginaVisualizacionVariablesComponent implements OnInit {
       next: (informacion) => {
         //ordenando por posicion
         this.todasLasVariables = informacion.Campos.sort( (variable1, variable2) => Number(variable1.Posicion) - Number(variable2.Posicion) )
-        this.paginador.inicializarPaginacion(undefined, undefined, this.todasLasVariables)
+        this.paginador.inicializarPaginacion(undefined, this.paginador.limiteRegistros, this.todasLasVariables)
       },
       error: (error: HttpErrorResponse) => {
         if(error.status === 404){

@@ -88,9 +88,10 @@ export class ModalRegistrarUsuarioComponent implements OnInit {
     }
       
     ).subscribe({
-      complete: () => {
+      next: () => {
         this.seHaRegistradoUnUsuario.emit()
         this.popup.abrirPopupExitoso('Usuario creado con éxito')
+        this.cerrar()
       },
       error: () => { this.popup.abrirPopupFallido('Error') }
     })
