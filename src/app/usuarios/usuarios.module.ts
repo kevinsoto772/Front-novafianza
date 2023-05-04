@@ -10,6 +10,7 @@ import { GestionDeUsuariosComponent } from './componentes/gestion-de-usuarios-em
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { EmpresasModule } from '../empresas/empresas.module';
 import { AlertasModule } from '../alertas/alertas.module';
+import { InputsModule } from '../inputs/inputs.module';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { AlertasModule } from '../alertas/alertas.module';
     NgbModule,
     SweetAlert2Module.forRoot(),
     EmpresasModule,
-    AlertasModule
+    AlertasModule,
+    InputsModule
   ]
 })
 export class UsuariosModule { }

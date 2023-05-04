@@ -10,6 +10,7 @@ import { NovedadesArchivo } from '../../modelos/NovedadesArchivo';
 export class ModalDetallesArchivoComponent implements OnInit {
   @ViewChild('modal') modal!:ElementRef
   detallesArchivo?: NovedadesArchivo
+  idArchivoCargado?: string
 
   constructor(private servicioModal: NgbModal) { }
 
@@ -17,8 +18,9 @@ export class ModalDetallesArchivoComponent implements OnInit {
 
   }
 
-  abrir(detallesArchivo: NovedadesArchivo){
+  abrir(detallesArchivo: NovedadesArchivo, idArchivoCargado: string){
     this.detallesArchivo = detallesArchivo
+    this.idArchivoCargado = idArchivoCargado
     this.servicioModal.open(this.modal, {
       size: 'xl'
     })

@@ -1,16 +1,16 @@
-import { HttpErrorResponse } from '@angular/common/http';
 import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Empresa } from 'src/app/administrador/modelos/empresas/Empresa';
-import { PeticionActualizarEmpresa } from 'src/app/administrador/modelos/empresas/PeticionActualizarEmpresa';
-import { ServicioEmpresa } from 'src/app/administrador/servicios/empresas.service';
 import { PopupComponent } from 'src/app/alertas/componentes/popup/popup.component';
 import { UsuarioEmpresa } from 'src/app/administrador/modelos/usuarios/usuarioEmpresa';
-import { Usuario } from 'src/app/autenticacion/modelos/IniciarSesionRespuesta';
 import { ServicioUsuarios } from 'src/app/administrador/servicios/usuarios.service';
 import { DateTime } from 'luxon';
 import { marcarFormularioComoSucio } from 'src/app/administrador/utilidades/Utilidades';
+import { soloUnoEntre } from 'src/app/usuarios/validadores/AlMenosUno';
+import { Rol } from 'src/app/autenticacion/modelos/Rol';
+import { ServicioLocalStorage } from 'src/app/administrador/servicios/local-storage.service';
+import { Cargo } from 'src/app/administrador/modelos/usuarios/Cargo';
+import { requeridoSi } from 'src/app/usuarios/validadores/RequeridoSi';
 
 @Component({
   selector: 'app-modal-actualizar-usuario',
@@ -23,10 +23,12 @@ export class ModalActualizarUsuarioComponent implements OnInit {
   @Output('seHaActualizadoUnUsuario') seHaActualizadoUnUsuario: EventEmitter<void>
   public usuarioEmpresa?: UsuarioEmpresa;
   public formulario: FormGroup;
+  public rolUsuario: Rol | null
+  cargos: Cargo[] = []
 
-
-  constructor(private servicioModal: NgbModal, private servicioUsuarioEmpresa: ServicioUsuarios) {
+  constructor(private servicioModal: NgbModal, private servicioUsuarioEmpresa: ServicioUsuarios, private servicioLocalStorage: ServicioLocalStorage) {
     this.seHaActualizadoUnUsuario = new EventEmitter<void>()
+    this.rolUsuario = this.servicioLocalStorage.obtenerRol()
     this.formulario = new FormGroup({
       nombre: new FormControl<string>('', [Validators.required]),
       apellido: new FormControl<string>('', [Validators.required]),
@@ -34,16 +36,22 @@ export class ModalActualizarUsuarioComponent implements OnInit {
       fechaNacimiento: new FormControl<string>('', [Validators.required]),
       tipoDocumento: new FormControl<string>('', [Validators.required]),
       tipoTelefono: new FormControl<string>('movil', Validators.required),
-      extension: new FormControl<string>('', Validators.required),
+      extension: new FormControl<string>(''),
       telefono: new FormControl<string>('', Validators.required),
-      telefonoFijo: new FormControl<string>('', Validators.required),
+      telefonoFijo: new FormControl<string>(''),
       correo: new FormControl<string>('', Validators.required),
       cargo: new FormControl<string>('', [Validators.required]),
+      otroCargo       : new FormControl<string | undefined>(undefined, [requeridoSi('cargo', '99cb025b-2bfd-412c-bb81-b979a14f5644')]),
       tipoRol: new FormControl<string>('', [Validators.required]),
     })
   }
 
   ngOnInit(): void {
+    this.servicioUsuarioEmpresa.obtenerCargos().subscribe({
+      next: (cargos) => {
+        this.cargos = cargos
+      }
+    })
   }
 
   public abrir(usuario: UsuarioEmpresa): void{
@@ -67,6 +75,7 @@ export class ModalActualizarUsuarioComponent implements OnInit {
     if(this.formulario.invalid){
       this.popup.abrirPopupFallido('Formulario inválido', 'Rellena correctamente todos los campos')
       marcarFormularioComoSucio(this.formulario)
+      console.log(this.formulario.controls)
       throw Error('Formulario inválido')
     }
     const controls = this.formulario.controls
@@ -75,13 +84,20 @@ export class ModalActualizarUsuarioComponent implements OnInit {
       nombre: controls['nombre'].value,
       apellido: controls['apellido'].value,
       cargo: controls['cargo'].value,
+      otroCargo: controls['otroCargo'].value,
       correo: controls['correo'].value,
       fechaNacimiento: controls['fechaNacimiento'].value,
       identificacion: controls['numeroDocumento'].value,
-      telefono: controls['telefono'].value,
+      celular: controls['telefono'].value,
+      telefono: controls['telefonoFijo'].value,
+      extension: controls['extension'].value,
       idRol: controls['tipoRol'].value
     }).subscribe({
-      complete: ()=> { this.popup.abrirPopupExitoso('Se ha actualizado el usuario con éxito') },
+      next: ()=> { 
+        this.popup.abrirPopupExitoso('Se ha actualizado el usuario con éxito') 
+        this.cerrar()
+        this.seHaActualizadoUnUsuario.emit()
+      },
       error: ()=> { this.popup.abrirPopupFallido('Error', 'Ha habido un error al momento de actualizar.') }
     })
   }
@@ -98,13 +114,19 @@ export class ModalActualizarUsuarioComponent implements OnInit {
       DateTime.fromISO(usuarioEmpresa.fechaNacimiento).toFormat('yyyy-MM-dd') 
     )
     controls['tipoDocumento'].setValue('CC')
-    controls['tipoTelefono'].setValue(usuarioEmpresa.telefono)
-    controls['extension'].setValue('')
-    controls['telefono'].setValue(usuarioEmpresa.telefono)
+    controls['tipoTelefono'].setValue('movil')
+    controls['extension'].setValue(usuarioEmpresa.extension)
+    controls['telefono'].setValue(usuarioEmpresa.celular)
     controls['telefonoFijo'].setValue(usuarioEmpresa.telefono)
     controls['correo'].setValue(usuarioEmpresa.correo)
     controls['cargo'].setValue(usuarioEmpresa.cargo)
+    controls['otroCargo'].setValue(usuarioEmpresa.otroCargo)
     controls['tipoRol'].setValue(usuarioEmpresa.idRol)
+  }
+
+  manejarCambioCargo(){
+    const controls = this.formulario.controls
+    controls['otroCargo'].setValue('')
   }
 
 }

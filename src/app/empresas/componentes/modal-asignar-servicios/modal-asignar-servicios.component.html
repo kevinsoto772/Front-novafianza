@@ -3,11 +3,11 @@
         <h4 class="modal-title fs-14px  fw-bolder">Asociar servicios</h4>
         <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
     </div>
-    <div class="modal-body">
+    <div class="modal-body" *ngIf="empresa">
         <div class="row mb-3">
             <div class="col">
                 <label class="fw-semibold fs-12px">Nombre de la entidad</label>
-                <input class="form-control input" disabled>
+                <input class="form-control input" disabled [value]="empresa.nombre">
             </div>
         </div>
         <div class="row">
@@ -18,7 +18,7 @@
         <div class="row mb-2">
             <div class="col">
                 <label class="fw-semibold fs-12px">Asociar servicios</label>
-                <app-input-busqueda></app-input-busqueda>
+                <app-input-busqueda (AlEscribir)="this.filtrar($event)"></app-input-busqueda>
             </div>
         </div>
         <div class="row mb-2">
@@ -33,23 +33,61 @@
         </div>
         <div class="row">
             <div class="col">
-
-                <div class="servicios border rounded">
-                    <div class="servicio" *ngFor="let archivo of [ 1, 2, 3 ,4, 5, 6 ,7]">
-                        <label class="d-flex align-items-center">
-                            <input type="checkbox" class="me-2">
-                            <span class="fs-12px fw-semibold">1 nombre servicio</span>
-                        </label>
-                    </div>
+                <div class="container-table d-flex table-responsive">
+                    <table class="table table-striped fs-12px">
+                        <thead>
+                            <tr>
+                                <th scope="col">ID Servicio</th>
+                                <th scope="col">Nombre del servicio</th>
+                                <th scope="col">Documento adjunto</th>
+                                <th scope="col">Acciones<br />
+                                    <label class="acciones me-2">Ver</label>
+                                    <label class="acciones me-2">Adjuntar</label>
+                                    <label class="acciones me-2">Activar</label>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let archivo of archivosFiltrados; let index = index">
+                                <td>{{ archivo.id }}</td>
+                                <td>{{ archivo.nombre }}</td>
+                                <td>{{ manejarNombreArchivoActual(archivo.id) }} </td>
+                                <td class="d-flex flex-gap-20">
+                                    <!-- ver -->
+                                    <img class="cursor-pointer" draggable="false" src="./assets/img/ver.svg"
+                                    alt="ver" (click)="this.abrirModalVisualizar(manejarNombreArchivoActual(archivo.id))">
+                                    <!-- adjuntar -->
+                                    <img class="cursor-pointer" draggable="false" src="./assets/img/adjuntar.svg"
+                                        alt="adjuntar" (click)="this.abrirModalAdjuntar(archivo)">
+                                    <label class="switch">
+                                        <input type="checkbox"
+                                        #checkboxServicio
+                                        [checked]="marcarCheckBoxArchivo(archivo.id)"
+                                        (change)="manejarCheckBox(checkboxServicio, archivo.id)">
+                                        <span class="slider round"></span>
+                                    </label>
+                                </td>
+                            </tr>
+                            <tr *ngIf="archivos.length == 0">
+                                <td colspan="6">
+                                    <label class="d-flex justify-content-center fs-14px">
+                                        No hay archivos
+                                    </label>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
 
             </div>
         </div>
     </div>
     <div class="modal-footer">
-        <button type="button" class="boton primario relleno">
-            <img src="assets/img/+.svg" alt="">
-            Crear Empresa
+        <button type="button" class="boton primario relleno" (click)="guardarArchivosEmpresa()">
+            Guardar
         </button>
     </div>
 </ng-template>
+<app-popup #popup></app-popup>
+<app-modal-adjuntar-manual #modalAdjuntar></app-modal-adjuntar-manual>
+<app-modal-visualizar-manual #modalVisualizar></app-modal-visualizar-manual>

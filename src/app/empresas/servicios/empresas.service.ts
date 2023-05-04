@@ -7,6 +7,7 @@ import { environment } from 'src/environments/environment';
 import { Empresa } from '../modelos/Empresa';
 import { PeticionCrearEmpresa } from '../modelos/PeticionCrearEmpresa';
 import { PeticionActualizarEmpresa } from 'src/app/administrador/modelos/empresas/PeticionActualizarEmpresa';
+import { ArchivoEmpresa } from 'src/app/archivos/modelos/ArchivoEmpresa';
 
 @Injectable({
   providedIn: 'root'
@@ -43,18 +44,63 @@ export class EmpresasService extends Autenticable {
 
   actualizarEmpresa(idEmpresa: string, peticion: PeticionActualizarEmpresa) {
     const endpoint = `/api/v1/empresa/${idEmpresa}`
+    const formData = new FormData()
+    for(const propiedad in peticion){
+      const valor = peticion[propiedad as keyof PeticionActualizarEmpresa]
+      if(valor){
+        if(typeof valor === 'boolean' || typeof valor === 'number'){
+          formData.append(propiedad, valor.toString())
+          continue;
+        }
+        formData.append(propiedad, valor)
+      }
+    }
+    
     return this.clienteHttp.patch<Empresa>(
       `${this.HOST}${endpoint}`,
-      peticion,
+      formData,
       { headers: { Authorization: `Bearer ${this.obtenerTokenAutorizacion()}` } }
     )
   }
 
   cambiarEstadoEmpresa(idEmpresa: string) {
-    const endpoint = `/api/v1/empresa/${idEmpresa}`
-    return this.clienteHttp.patch<Empresa>(
+    const endpoint = `/api/v1/empresa/estado/${idEmpresa}`
+    return this.clienteHttp.put<Empresa>(
       `${this.HOST}${endpoint}`,
       undefined,
+      { headers: { Authorization: `Bearer ${ this.obtenerTokenAutorizacion() }` } }
+    )
+  }
+
+  asignarArchivos(idEmpresa: string, idArchivos: string[]){
+    const endpoint = '/api/v1/archivo_empresa/registro-multiple'
+    return this.clienteHttp.post(
+      `${this.HOST}${endpoint}`,
+      {
+        idEmpresa,
+        idArchivos
+      },
+      { headers: { Authorization: `Bearer ${ this.obtenerTokenAutorizacion() }` } }
+    )
+  }
+
+  vincularManual(idArchivo: string, idEmpresa: string, manual: File){
+    const endpoint = '/api/v1/archivo_empresa/vincular-manual'
+    const formulario = new FormData()
+    formulario.append('idArchivo', idArchivo)
+    formulario.append('idEmpresa', idEmpresa)
+    formulario.append('manual', manual)
+    return this.clienteHttp.post(
+      `${this.HOST}${endpoint}`,
+      formulario,
+      { headers: { Authorization: `Bearer ${ this.obtenerTokenAutorizacion() }` } }
+    )
+  }
+
+  listarArchivos(idEmpresa: string){
+    const endpoint = `/api/v1/archivo_empresa/listar_por_empresa/${idEmpresa}`
+    return this.clienteHttp.get<ArchivoEmpresa[]>(
+      `${this.HOST}${endpoint}`,
       { headers: { Authorization: `Bearer ${ this.obtenerTokenAutorizacion() }` } }
     )
   }

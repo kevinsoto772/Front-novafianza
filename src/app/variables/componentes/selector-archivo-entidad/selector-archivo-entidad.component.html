@@ -1,0 +1,26 @@
+<div class="selector-empresa p-4 bg-white">
+    <div class="mb-2">
+        <span class="fw-bold fs-12px">Seleccionar entidad y tipo de archivo</span>
+    </div>
+    <form [formGroup]="this.formulario">
+        <div class="d-flex flex-gap-10">
+            <fieldset class="w-100" *ngIf="!this.usuario?.idEmpresa">
+                <select  #selectorEmpresa class="form-select" formControlName="empresa">
+                    <option *ngFor="let empresa of empresas" [value]="empresa.id">NIT {{ empresa.nit | number }} - {{
+                        empresa.nombre }} - {{ empresa.convenio }}</option>
+                </select>
+                <app-validacion [control]="this.formulario.controls['empresa']" [validacion]="'required'"
+                    [texto]="'Debes seleccionar una empresa'"></app-validacion>
+            </fieldset>
+            <fieldset class="w-100">
+                <select #selectorEmpresa class="form-select" formControlName="tipoArchivo">
+                    <option *ngFor="let archivo of archivos" [value]="archivo.id">{{ archivo.nombre }}</option>
+                </select>
+                <app-validacion [control]="this.formulario.controls['tipoArchivo']" [validacion]="'required'"
+                    [texto]="'Debes seleccionar un servicio'"></app-validacion>
+            </fieldset>
+
+            <button type="button" class="boton primario delineado" (click)="this.manejarSeleccion()">Consultar</button>
+        </div>
+    </form>
+</div>

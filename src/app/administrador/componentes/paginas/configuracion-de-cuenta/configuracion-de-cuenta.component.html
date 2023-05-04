@@ -1,181 +1,183 @@
-<ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-1" class="card mb-2">
-  <ngb-panel>
-    <ng-template ngbPanelTitle>
-      <span class="fs-14px fw-semibold">Nombre completo</span>
-    </ng-template>
-    <ng-template ngbPanelContent>
-      <div class="card-body">
-        <form [formGroup]="this.formularioNombre" class="d-flex flex-column flex-gap-10">
-          <div class="row">
-            <div class="col-sm-6">
-              <fieldset>
-                <label for="">Nombre(s)</label>
-                <input type="text" class="form-control" formControlName="nombre">
-                <span class="validacion" *ngIf="this.formularioNombre.controls['nombre'].invalid &&
-                          this.formularioNombre.controls['nombre'].dirty">
-                  Nombre requerido.
-                </span>
-              </fieldset>
-            </div>
-            <div class="col-sm-6">
-              <fieldset>
-                <label for="">Apellidos</label>
-                <input type="text" class="form-control" formControlName="apellido">
-                <span class="validacion" *ngIf="this.formularioNombre.controls['apellido'].invalid &&
-                          this.formularioNombre.controls['apellido'].dirty">
-                  Apellido requerido.
-                </span>
-              </fieldset>
-            </div>
-          </div>
-        </form>
-      </div>
-      <div class="card-footer d-flex justify-content-end">
-        <button type="button" class="boton primario relleno" (click)="this.actualizarUsuario()">
-          Actualizar datos
-        </button>
-      </div>
-    </ng-template>
-  </ngb-panel>
-</ngb-accordion>
-
-<ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-2" class="card mb-2">
-  <ngb-panel>
-    <ng-template ngbPanelTitle>
-      <span class="fs-14px fw-semibold">Información de contacto</span>
-    </ng-template>
-    <ng-template ngbPanelContent>
-      <div class="card-body">
-        <form [formGroup]="this.formularioContacto" class="d-flex flex-column flex-gap-10">
-          <div class="row">
-            <div class="col-sm-6 columna-correo">
-              <fieldset>
-                <label for="">Correo electronico</label>
-                <input type="email" class="form-control" formControlName="Correo">
-                <span class="validacion" *ngIf="this.formularioContacto.controls['Correo'].invalid &&
-                          this.formularioContacto.controls['Correo'].dirty">
-                  Correo requerido.
-                </span>
-              </fieldset>
-            </div>
-            <div class="col-sm-6">
-              <div class="row">
-                <div class="col-8">
-                  <label >Número de teléfono</label>
-                </div>
-                <div class="col-2 ext">
-                  <label *ngIf="this.formularioContacto.controls['tipo_telefono'].value == 'fijo'">Ext.</label>
-                </div>
-              </div>
-              <div class="d-flex">
-                <fieldset id="selector">
-                  <select class="form-select form-control input" id="tipo_telefono" name="tipo_telefono"
-                  formControlName="tipo_telefono" required>
-                  <option value="fijo">Fijo</option>
-                  <option value="movil" selected>Móvil</option>
-                </select>
-                </fieldset>
-                <fieldset id="telefono" *ngIf="this.formularioContacto.controls['tipo_telefono'].value == 'movil'">
-                  <input type="number" aria-label="Last name" class="form-control" formControlName="telefono">
-                  <span class="validacion"
-                              *ngIf="this.formularioContacto.controls['telefono'].invalid &&
-                              this.formularioContacto.controls['telefono'].dirty">
-                              Teléfono requerido.
-                          </span>
-                </fieldset>
-                <fieldset id="telefono" *ngIf="this.formularioContacto.controls['tipo_telefono'].value == 'fijo'">
-                  <input type="number" aria-label="Last name" class="form-control" formControlName="telefono_fijo">
-                  <span class="validacion"
-                              *ngIf="this.formularioContacto.controls['tipo_telefono'].invalid &&
-                              this.formularioContacto.controls['tipo_telefono'].dirty">
-                              Teléfono requerido.
-                          </span>
-                </fieldset>
-                <fieldset id="extension" *ngIf="this.formularioContacto.controls['tipo_telefono'].value == 'fijo'">
-                  <input type="number" class="form-control" formControlName="extension">
-                  <span class="validacion"
-                              *ngIf="this.formularioContacto.controls['extension'].invalid &&
-                              this.formularioContacto.controls['extension'].dirty">
-                              Extension requerida.
-                          </span>
-                </fieldset>
-              </div>
-            </div>
-          </div>
-        </form>
-      </div>
-      <div class="card-footer d-flex justify-content-end">
-        <button type="button" class="boton primario relleno" (click)="this.actualizarUsuario()">
-          Actualizar datos
-        </button>
-      </div>
-    </ng-template>
-  </ngb-panel>
-</ngb-accordion>
-
-<ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-3" class="card mb-2">
-  <ngb-panel>
-    <ng-template ngbPanelTitle>
-      <span class="fs-14px fw-semibold">Seguridad</span>
-    </ng-template>
-    <ng-template ngbPanelContent>
-      <div class="card-body">
-        <form class="d-flex flex-column flex-gap-10" [formGroup]="this.formularioContrasena">
-          <div class="row">
-            <div class="col-sm-4">
-              <label for="">Contraseña actual</label>
-              <input type="password" class="form-control" formControlName="contrasena_actual" required>
-              <span class="validacion"
-                          *ngIf="this.formularioContrasena.controls['contrasena_actual'].invalid &&
-                          this.formularioContrasena.controls['contrasena_actual'].dirty">
-                          Contraseña actual requerida.
-                      </span>
-            </div>
-            <div class="col-sm-4">
-              <label for="">Contraseña nueva</label>
-              <input type="password" class="form-control" formControlName="contrasena_nueva" required>
-              <span class="validacion"
-                        *ngIf="this.formularioContrasena.controls['contrasena_nueva'].invalid &&
-                        this.formularioContrasena.controls['contrasena_nueva'].dirty">
-                        contraseña nueva requerida.
-                    </span>
-            </div>
-            <div class="col-sm-4">
-              <label for="">Confirmar Contraseña</label>
-              <input type="password" class="form-control" formControlName="confirmar_contrasena" required>
-              <span class="validacion"
-                      *ngIf="this.formularioContrasena.controls['confirmar_contrasena'].invalid &&
-                      this.formularioContrasena.controls['confirmar_contrasena'].dirty">
-                      Confirmar contrasena requerido.
+<div class="px-4 mt-4">
+  <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-1" class="card mb-2">
+    <ngb-panel>
+      <ng-template ngbPanelTitle>
+        <span class="fs-14px fw-semibold">Nombre completo</span>
+      </ng-template>
+      <ng-template ngbPanelContent>
+        <div class="card-body">
+          <form [formGroup]="this.formularioNombre" class="d-flex flex-column flex-gap-10">
+            <div class="row">
+              <div class="col-sm-6">
+                <fieldset>
+                  <label for="">Nombre(s)</label>
+                  <input type="text" class="form-control" formControlName="nombre">
+                  <span class="validacion" *ngIf="this.formularioNombre.controls['nombre'].invalid &&
+                            this.formularioNombre.controls['nombre'].dirty">
+                    Nombre requerido.
                   </span>
+                </fieldset>
+              </div>
+              <div class="col-sm-6">
+                <fieldset>
+                  <label for="">Apellidos</label>
+                  <input type="text" class="form-control" formControlName="apellido">
+                  <span class="validacion" *ngIf="this.formularioNombre.controls['apellido'].invalid &&
+                            this.formularioNombre.controls['apellido'].dirty">
+                    Apellido requerido.
+                  </span>
+                </fieldset>
+              </div>
             </div>
-          </div>
-
-          <div class="row">
-            <div class="col">
-              <label class="fs-12px fw-semibold">La contraseña nueva debe contener como mínimo:</label>
+          </form>
+        </div>
+        <div class="card-footer d-flex justify-content-end">
+          <button type="button" class="boton primario relleno" (click)="this.actualizarUsuario()">
+            Actualizar datos
+          </button>
+        </div>
+      </ng-template>
+    </ngb-panel>
+  </ngb-accordion>
+  
+  <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-2" class="card mb-2">
+    <ngb-panel>
+      <ng-template ngbPanelTitle>
+        <span class="fs-14px fw-semibold">Información de contacto</span>
+      </ng-template>
+      <ng-template ngbPanelContent>
+        <div class="card-body">
+          <form [formGroup]="this.formularioContacto" class="d-flex flex-column flex-gap-10">
+            <div class="row">
+              <div class="col-sm-6 columna-correo">
+                <fieldset>
+                  <label for="">Correo electronico</label>
+                  <input type="email" class="form-control" formControlName="Correo">
+                  <span class="validacion" *ngIf="this.formularioContacto.controls['Correo'].invalid &&
+                            this.formularioContacto.controls['Correo'].dirty">
+                    Correo requerido.
+                  </span>
+                </fieldset>
+              </div>
+              <div class="col-sm-6">
+                <div class="row">
+                  <div class="col-8">
+                    <label >Número de teléfono</label>
+                  </div>
+                  <div class="col-2 ext">
+                    <label *ngIf="this.formularioContacto.controls['tipo_telefono'].value == 'fijo'">Ext.</label>
+                  </div>
+                </div>
+                <div class="d-flex">
+                  <fieldset id="selector">
+                    <select class="form-select form-control input" id="tipo_telefono" name="tipo_telefono"
+                    formControlName="tipo_telefono" required>
+                    <option value="fijo">Fijo</option>
+                    <option value="movil" selected>Móvil</option>
+                  </select>
+                  </fieldset>
+                  <fieldset id="telefono" *ngIf="this.formularioContacto.controls['tipo_telefono'].value == 'movil'">
+                    <input type="number" aria-label="Last name" class="form-control" formControlName="telefono">
+                    <span class="validacion"
+                                *ngIf="this.formularioContacto.controls['telefono'].invalid &&
+                                this.formularioContacto.controls['telefono'].dirty">
+                                Teléfono requerido.
+                            </span>
+                  </fieldset>
+                  <fieldset id="telefono" *ngIf="this.formularioContacto.controls['tipo_telefono'].value == 'fijo'">
+                    <input type="number" aria-label="Last name" class="form-control" formControlName="telefono_fijo">
+                    <span class="validacion"
+                                *ngIf="this.formularioContacto.controls['tipo_telefono'].invalid &&
+                                this.formularioContacto.controls['tipo_telefono'].dirty">
+                                Teléfono requerido.
+                            </span>
+                  </fieldset>
+                  <fieldset id="extension" *ngIf="this.formularioContacto.controls['tipo_telefono'].value == 'fijo'">
+                    <input type="number" class="form-control" formControlName="extension">
+                    <span class="validacion"
+                                *ngIf="this.formularioContacto.controls['extension'].invalid &&
+                                this.formularioContacto.controls['extension'].dirty">
+                                Extension requerida.
+                            </span>
+                  </fieldset>
+                </div>
+              </div>
             </div>
-            <div class="col-sm-12 restricciones">
-              <label class="fs-12px requisitos"><img class="img-fluid" src="assets/img/check.svg" alt=""> 8
-                Carácteres</label>
-              <label class="fs-12px requisitos"><img class="img-fluid" src="assets/img/check.svg" alt=""> 1
-                minúscula</label>
-              <label class="fs-12px requisitos"><img class="img-fluid" src="assets/img/check.svg" alt=""> 1
-                Mayúscula</label>
-              <label class="fs-12px requisitos"><img class="img-fluid" src="assets/img/check.svg" alt=""> 1
-                Número</label>
-              <label class="fs-12px requisitos"><img class="img-fluid" src="assets/img/check.svg" alt=""> 1 carácter
-                especial</label>
+          </form>
+        </div>
+        <div class="card-footer d-flex justify-content-end">
+          <button type="button" class="boton primario relleno" (click)="this.actualizarUsuario()">
+            Actualizar datos
+          </button>
+        </div>
+      </ng-template>
+    </ngb-panel>
+  </ngb-accordion>
+  
+  <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-3" class="card mb-2">
+    <ngb-panel>
+      <ng-template ngbPanelTitle>
+        <span class="fs-14px fw-semibold">Seguridad</span>
+      </ng-template>
+      <ng-template ngbPanelContent>
+        <div class="card-body">
+          <form class="d-flex flex-column flex-gap-10" [formGroup]="this.formularioContrasena">
+            <div class="row">
+              <div class="col-sm-4">
+                <label for="">Contraseña actual</label>
+                <input type="password" class="form-control" formControlName="contrasena_actual" required>
+                <span class="validacion"
+                            *ngIf="this.formularioContrasena.controls['contrasena_actual'].invalid &&
+                            this.formularioContrasena.controls['contrasena_actual'].dirty">
+                            Contraseña actual requerida.
+                        </span>
+              </div>
+              <div class="col-sm-4">
+                <label for="">Contraseña nueva</label>
+                <input type="password" class="form-control" formControlName="contrasena_nueva" required>
+                <span class="validacion"
+                          *ngIf="this.formularioContrasena.controls['contrasena_nueva'].invalid &&
+                          this.formularioContrasena.controls['contrasena_nueva'].dirty">
+                          contraseña nueva requerida.
+                      </span>
+              </div>
+              <div class="col-sm-4">
+                <label for="">Confirmar Contraseña</label>
+                <input type="password" class="form-control" formControlName="confirmar_contrasena" required>
+                <span class="validacion"
+                        *ngIf="this.formularioContrasena.controls['confirmar_contrasena'].invalid &&
+                        this.formularioContrasena.controls['confirmar_contrasena'].dirty">
+                        Confirmar contrasena requerido.
+                    </span>
+              </div>
             </div>
-          </div>
-        </form>
-      </div>
-      <div class="card-footer d-flex justify-content-end">
-        <button type="button" class="boton primario relleno" (click)="this.actualizarContrasena()">
-          Actualizar datos
-        </button>
-      </div>
-    </ng-template>
-  </ngb-panel>
-</ngb-accordion>
-<app-popup #popup></app-popup>
+  
+            <div class="row">
+              <div class="col">
+                <label class="fs-12px fw-semibold">La contraseña nueva debe contener como mínimo:</label>
+              </div>
+              <div class="col-sm-12 restricciones">
+                <label class="fs-12px requisitos"><img class="img-fluid" src="assets/img/check.svg" alt=""> 8
+                  Carácteres</label>
+                <label class="fs-12px requisitos"><img class="img-fluid" src="assets/img/check.svg" alt=""> 1
+                  minúscula</label>
+                <label class="fs-12px requisitos"><img class="img-fluid" src="assets/img/check.svg" alt=""> 1
+                  Mayúscula</label>
+                <label class="fs-12px requisitos"><img class="img-fluid" src="assets/img/check.svg" alt=""> 1
+                  Número</label>
+                <label class="fs-12px requisitos"><img class="img-fluid" src="assets/img/check.svg" alt=""> 1 carácter
+                  especial</label>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="card-footer d-flex justify-content-end">
+          <button type="button" class="boton primario relleno" (click)="this.actualizarContrasena()">
+            Actualizar datos
+          </button>
+        </div>
+      </ng-template>
+    </ngb-panel>
+  </ngb-accordion>
+  <app-popup #popup></app-popup>  
+</div>

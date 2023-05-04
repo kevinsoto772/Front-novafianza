@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { Paginacion } from '../modelos/compartido/Paginador';
+import { Paginacion } from '../modelos/compartido/Paginacion';
 import { Empresa } from '../modelos/empresas/Empresa';
 import { PeticionActualizarEmpresa } from '../modelos/empresas/PeticionActualizarEmpresa';
 import { PeticionRegistrarEmpresa } from '../modelos/empresas/PeticionRegistrarEmpresa';

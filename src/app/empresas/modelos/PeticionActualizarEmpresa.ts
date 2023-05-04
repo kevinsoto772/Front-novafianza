@@ -1,5 +1,7 @@
 export interface PeticionActualizarEmpresa {
-    nombre: string,
-    nit: string,
-    estado: boolean
+    nombre?: string,
+    convenio?: string,
+    logo?: File,
+    nit?: string,
+    estado?: boolean
 }

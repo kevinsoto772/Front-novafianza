@@ -10,7 +10,7 @@
   <div class="col-2">
     <div class="d-flex flex-column">
       <span class="fw-bold fs-12px">Fecha y hora de carga:</span>
-      <span class="fs-12px">{{ detallesArchivo.fechaYHora }}</span>  
+      <span class="fs-12px">{{ formatearFecha(detallesArchivo.fechaYHora) }}</span>  
     </div>
   </div>
 
@@ -22,11 +22,11 @@
       </span>
       <span>
         <span class="fw-bold fs-12px">Registros aprobados: </span>
-        <span class="text-success fs-12px">359</span>
+        <span class="text-success fs-12px">0</span>
       </span>
       <span>
         <span class="fw-bold fs-12px">Novedades: </span>
-        <span class="text-danger fs-12px">160</span>
+        <span class="text-danger fs-12px">{{ totalRegistrosValidacionEstructura }}</span>
       </span>
     </div>
   </div>
@@ -39,17 +39,22 @@
       </span>
       <span>
         <span class="fw-bold fs-12px">Registros aprobados: </span>
-        <span class="text-success fs-12px">359</span>
+        <span class="text-success fs-12px">0</span>
       </span>
       <span>
         <span class="fw-bold fs-12px">Novedades: </span>
-        <span class="text-danger fs-12px">160</span>
+        <span class="text-danger fs-12px">{{ totalRegistrosValidacionDatos }}</span>
       </span>
     </div>
   </div>
 
   <div class="col-2 d-flex flex-column justify-content-center align-items-end">
-    <button class="boton primario delineado">Exportar datos</button>
+    <button class="boton primario delineado" (click)="descargarReporte()" *ngIf="!descargandoArchivo">
+      Exportar datos
+    </button>
+    <button class="boton primario delineado" disabled *ngIf="descargandoArchivo">
+      Descargando <app-loading></app-loading>
+    </button>
   </div>
 
 </div>

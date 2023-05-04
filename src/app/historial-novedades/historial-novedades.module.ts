@@ -10,6 +10,8 @@ import { TabValidacionDatosComponent } from './componentes/tab-validacion-datos/
 import { TablaNovedadesComponent } from './componentes/tabla-novedades/tabla-novedades.component';
 import { EmpresasModule } from '../empresas/empresas.module';
 import { InputsModule } from '../inputs/inputs.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AlertasModule } from '../alertas/alertas.module';
 
 
 
@@ -25,6 +27,9 @@ import { InputsModule } from '../inputs/inputs.module';
   imports: [
     CommonModule,
     NgbModule,
+    AlertasModule,
+    FormsModule,
+    ReactiveFormsModule,
     /* Modulos propios */
     NavegacionModule,
     EmpresasModule,

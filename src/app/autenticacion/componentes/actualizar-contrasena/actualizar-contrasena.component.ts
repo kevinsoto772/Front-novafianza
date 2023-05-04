@@ -22,7 +22,7 @@ export class ActualizarContrasenaComponent implements OnInit {
   constructor(private enrutador: Router, private servicioUsuarios: ServicioUsuarios, private servicioAutenticacion:AutenticacionService) {
     this.formulario = new FormGroup({
       antigua_contrasena: new FormControl('', [Validators.required]),
-      nueva_contrasena: new FormControl('', [Validators.required, Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&#_<>^~`()])([A-Za-z\d$@$!%*?&]|[^ ]){8,100}$/)]),
+      nueva_contrasena: new FormControl('', [Validators.required, Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&#_<>^~`()+-])([A-Za-z\d$@$!%*?&]|[^ ]){8,100}$/)]),
       confirmmar_contrasena: new FormControl('', [Validators.required]),
     })
     }

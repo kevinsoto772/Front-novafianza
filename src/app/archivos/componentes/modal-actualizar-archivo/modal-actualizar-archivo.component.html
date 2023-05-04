@@ -20,6 +20,18 @@
                     </app-validacion>
                     </fieldset>
                 </div>
+                <div class="col">
+                    <fieldset>
+                        <label class="fw-semibold fs-12px">Formato del servicio</label>
+                        <select formControlName="formato" class="form-select">
+                            <option *ngFor="let formato of formatosArchivo" [value]="formato.id">{{ formato.formato }}</option>
+                        </select>
+                        <app-validacion [control]="formulario.controls['nombre']" [validacion]="'required'"
+                            [texto]="'El nombre es requerido.'">
+                        </app-validacion>
+
+                    </fieldset>
+                </div>
             </div>
             <div class="row">
                 <div class="col">
@@ -38,7 +50,7 @@
                 <div class="col">
                     <fieldset>
                         <label class="fw-semibold fs-12px">Manual de uso</label>
-                        <input formControlName="manual" class="form-control" type="file">
+                        <app-input-archivo formControlName="manual"></app-input-archivo>
                         <div class="d-flex mt-2">
                             <span class="fs-12px ms-auto texto-gris">
                                 <b>Formatos:</b> PDF, <b>Peso Máx</b>: 5MB.
@@ -56,7 +68,7 @@
     </div>
     <div class="modal-footer">
         <button type="button" class="boton primario delineado" (click)="modal.close('Close click')">Cerrar</button>
-        <button type="button" class="boton primario relleno">
+        <button type="button" class="boton primario relleno" (click)="actualizarTipoArchivo()">
             Guardar Cambios
         </button>
     </div>
