@@ -8,6 +8,7 @@ import { ModalAsignarServiciosComponent } from '../modal-asignar-servicios/modal
 import { Paginador } from 'src/app/administrador/modelos/compartido/Paginador';
 import { Observable } from 'rxjs';
 import { PopupComponent } from 'src/app/alertas/componentes/popup/popup.component';
+import { formatearFechaIso } from 'src/app/compartido/Fechas';
 
 @Component({
   selector: 'app-pagina-administrar-empresas',
@@ -63,6 +64,10 @@ export class PaginaAdministrarEmpresasComponent implements OnInit {
   alCrearEmpresa(empresa: Empresa) {
     this.paginador.inicializarPaginacion()
     this.abrirModalAsignarServicios(empresa)
+  }
+
+  formatearFecha(fechaIso: string){
+    return formatearFechaIso(fechaIso, 'dd / MM / yyyy')
   }
 
 }

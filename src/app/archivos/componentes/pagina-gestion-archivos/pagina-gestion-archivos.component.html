@@ -35,8 +35,8 @@
                             <thead>
                                 <tr>
                                     <th scope="col">Nombre del servicio</th>
-                                    <th scope="col">Archivo</th>
-                                    <th scope="col">Fecha de creación</th>
+<!--                                     <th scope="col">Archivo</th>
+ -->                                    <th scope="col">Fecha de creación</th>
                                     <th scope="col">Acciones<br/>
                                         <label class="acciones me-2" id="accionEditar">Editar</label>
                                         <label class="acciones">Activo</label>
@@ -46,8 +46,8 @@
                             <tbody>
                                 <tr *ngFor="let archivo of archivos">
                                     <td>{{ archivo.nombre }}</td>
-                                    <td>manual-prueba.pdf</td>
-                                    <td>4/03/2023</td>
+<!--                                     <td>manual-prueba.pdf</td>
+ -->                                    <td>{{ formatearFecha( archivo.createdAt ) }}</td>
                                     <td class="d-flex flex-gap-20">
                                         <img 
                                         class="cursor-pointer" 

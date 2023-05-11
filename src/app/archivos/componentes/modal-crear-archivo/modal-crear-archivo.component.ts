@@ -21,7 +21,7 @@ export class ModalCrearArchivoComponent implements OnInit {
       nombre: new FormControl<string>('', [ Validators.required ]),
       formato: new FormControl<string>('', [ Validators.required ]),
       descripcion: new FormControl<string>('', [ Validators.required ]),
-      manual: new FormControl<string>('', [ Validators.required ]),
+      manual: new FormControl<string>('', []),
     })
   }
 
