@@ -8,6 +8,7 @@ import { Paginador } from 'src/app/administrador/modelos/compartido/Paginador';
 import { Observable } from 'rxjs';
 import { FormatoArchivo } from '../../modelos/FormatoArchivo';
 import { PopupComponent } from 'src/app/alertas/componentes/popup/popup.component';
+import { formatearFechaIso } from 'src/app/compartido/Fechas';
 
 @Component({
   selector: 'app-pagina-gestion-archivos',
@@ -62,5 +63,9 @@ export class PaginaGestionArchivosComponent implements OnInit {
 
   abrirModalActualizar(archivo: TipoArchivo){
     this.modalActualizar.abrir(archivo)
+  }
+
+  formatearFecha(fechaIso: string){
+    return formatearFechaIso(fechaIso, 'dd / MM / yyyy')
   }
 }

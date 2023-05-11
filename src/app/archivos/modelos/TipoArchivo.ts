@@ -7,4 +7,5 @@ export interface TipoArchivo {
     prefijo:        string;
     prefijoArchivo: string;
     estado:         boolean;
+    createdAt:      string;
 }
