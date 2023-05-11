@@ -139,10 +139,10 @@
           <fieldset>
             <label class="fw-semibold fs-12px">Perfil <span class="validacion-span">*</span></label>
             <select class="form-select form-control" id="tipoRol" name="tipoRol" formControlName="tipoRol" required>
-              <option value="" disabled selected>Seleccionar formato...</option>
-              <option value="003" *ngIf="rolUsuario && (rolUsuario._id === '002' || rolUsuario._id === '001')">Administrador</option>
+              <option value="" selected>Seleccionar perfil...</option>
               <option value="004">Operativo</option>
               <option value="005">Consultor</option>
+              <option value="003" *ngIf="rolUsuario && (rolUsuario._id === '002' || rolUsuario._id === '001')">Administrador</option>
             </select>
             <span class="validacion" *ngIf="this.formulario.controls['tipoRol'].invalid &&
                     this.formulario.controls['tipoRol'].dirty">
@@ -155,7 +155,6 @@
   </div>
   <div class="modal-footer">
     <button type="button" class="boton primario relleno" (click)="this.registrarUsuarioEmpresa()">
-      <img src="assets/img/+.svg" alt="">
       Crear Usuario
     </button>
   </div>

@@ -50,7 +50,7 @@
                     <td>{{ empresa.nit }}</td>
                     <td>{{ empresa.nombre }}</td>
                     <td>{{ empresa.convenio }}</td>
-                    <td> 4 / 03 / 2023</td>
+                    <td>{{ formatearFecha(empresa.createdAt!) }}</td>
                     <td></td>
                     <td class="d-flex flex-gap-20">
                       <span class="acciones" (click)="abrirModalAsignarServicios(empresa)">Servicios</span>

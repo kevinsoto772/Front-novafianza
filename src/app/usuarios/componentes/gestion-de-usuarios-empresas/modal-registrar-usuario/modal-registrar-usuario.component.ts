@@ -38,7 +38,7 @@ export class ModalRegistrarUsuarioComponent implements OnInit {
       correo          : new FormControl<string | undefined>(undefined, Validators.required),
       cargo           : new FormControl<string | undefined>(undefined, [Validators.required]),
       otroCargo       : new FormControl<string | undefined>(undefined, [requeridoSi('cargo', '99cb025b-2bfd-412c-bb81-b979a14f5644')]),
-      tipoRol         : new FormControl<string | undefined>(undefined, [Validators.required]),
+      tipoRol         : new FormControl<string | undefined>("", [Validators.required]),
     })
   }
 
