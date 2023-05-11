@@ -2,8 +2,8 @@ import { Observable } from "rxjs"
 import { Paginacion } from "./Paginacion"
 
 export class Paginador {
-    public readonly opcionesLimiteRegistros = [ 1, 2, 3 ]
-    private readonly limiteRegistrosPorDefecto = 3
+    public readonly opcionesLimiteRegistros = [ 5, 10, 15, 20, 30 ]
+    private readonly limiteRegistrosPorDefecto = 5
     private readonly paginaActualPorDefecto = 1
     private _totalRegistros?: number
     private _paginaActual: number
@@ -23,9 +23,8 @@ export class Paginador {
         limite: number = this.limiteRegistrosPorDefecto, 
         ...argumentos:any
     ){
-        this._funcionObtenerRecursos(pagina, limite, argumentos).subscribe({
+        this._funcionObtenerRecursos(pagina, limite, ...argumentos).subscribe({
             next: (paginacion) => {
-                console.log(paginacion)
                 this.cambiarTotales(paginacion)
             }
         })
@@ -36,7 +35,7 @@ export class Paginador {
         if(!this._paginaActual){
             throw Error('No se ha establecido una pagina actual');
         }
-        this._funcionObtenerRecursos(this._paginaActual, nuevoLimite, argumentos).subscribe({
+        this._funcionObtenerRecursos(this._paginaActual, nuevoLimite, ...argumentos).subscribe({
             next: (paginacion) => {
                 this.cambiarTotales(paginacion)
             }
@@ -45,7 +44,7 @@ export class Paginador {
 
     cambiarPagina(pagina: number, ...argumentos: any){
         this._paginaActual = pagina
-        this._funcionObtenerRecursos(pagina, this._limiteRegistros, argumentos).subscribe({
+        this._funcionObtenerRecursos(pagina, this._limiteRegistros, ...argumentos).subscribe({
             next: (paginacion) => {
                 this.cambiarTotales(paginacion)
             }

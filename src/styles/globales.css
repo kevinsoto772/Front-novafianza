@@ -229,7 +229,7 @@ input[type=number] {
   box-sizing: border-box;
   grid-template-columns: minmax(0,100%);
   width: 761.7px !important;
-  height: 301.73px !important;
+  /* height: 301.73px !important; */
   max-width: 100%;
   padding: 0 0 0 !important;
   border: none;
@@ -296,4 +296,24 @@ input[type=number] {
 .acciones{
   font-size: 8px;
   color: #9B9B9B;
+}
+
+.cargando{
+  display: block;
+  position: relative;
+  width: 40px;
+  height: 40px;
+  background-color: transparent;
+  border-radius: 50%;
+  border-width: 2px;
+  border-style: solid;
+  border-image: linear-gradient(241deg, var(--azul) 30%, var(--azul-oscuro) 100%);
+}
+.cargando::after{
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  background-color: transparent;
+  border-radius: 50%;
+  border-top: 2px solid ;
 }

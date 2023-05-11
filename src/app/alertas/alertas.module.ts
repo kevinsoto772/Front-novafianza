@@ -4,6 +4,7 @@ import { PopupComponent } from './componentes/popup/popup.component';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { AlertaComponent } from './componentes/alerta/alerta.component';
 import { ValidacionComponent } from './componentes/validacion/validacion.component';
+import { LoadingComponent } from './componentes/loading/loading.component';
 
 
 
@@ -12,6 +13,7 @@ import { ValidacionComponent } from './componentes/validacion/validacion.compone
     PopupComponent,
     AlertaComponent,
     ValidacionComponent,
+    LoadingComponent,
   ],
   imports: [
     CommonModule,
@@ -21,6 +23,7 @@ import { ValidacionComponent } from './componentes/validacion/validacion.compone
     PopupComponent,
     AlertaComponent,
     ValidacionComponent,
+    LoadingComponent
   ]
 })
 export class AlertasModule { }

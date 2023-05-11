@@ -1,0 +1,82 @@
+<app-selector-archivo-entidad (seleccion)="this.manejarSeleccion($event.idEmpresa, $event.idTipoArchivo)"></app-selector-archivo-entidad>
+<div class="d-flex flex-column flex-gap-30 p-4 mt-4" *ngIf="this.idEmpresa">
+  <div class="row">
+    <div class="col-12">
+      <div class="card w-100">
+        <div class="card-header fw-bold fs-14px mt-2">
+          Parametros de carga
+        </div>
+        <div class="card-body">
+          <div class="d-flex align-items-center flex-gap-10">
+            <div class="max-width-200px">
+                <app-input-busqueda></app-input-busqueda>
+            </div>
+            <span class="total">Total: {{ paginador.totalRegistros }}</span>
+            <div class="d-flex align-items-center ms-auto flex-gap-5">
+                <span class="fs-12px">Registros por página</span>
+                <span class="fs-12px">
+                    <select
+                    #selectPorPagina
+                    class="form-select sm"
+                    (change)="paginador.cambiarLimitePorPagina(+selectPorPagina.value, this.todasLasVariables)">
+                        <option *ngFor="let opcion of paginador.opcionesLimiteRegistros" [value]="opcion">{{opcion}}</option>
+                    </select>
+                </span>
+            </div>
+          </div>
+          <div class="container-table d-flex table-responsive">
+            <table class="table table-striped fs-12px">
+              <thead>
+                <tr>
+                  <th scope="col">Posición</th>
+                  <th scope="col">Nombre campo</th>
+                  <th scope="col">¿Obligatorio?</th>
+                  <th scope="col">Formato fecha</th>
+                  <th scope="col">Tipo dato</th>
+
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let variable of variablesPaginadas; let index = index">
+                  <td>{{ variable.Posicion }}</td>
+                  <td>{{ variable.NombreCampo }}</td>
+                  <td>
+                    <span *ngIf="variable.Obligatorio === 'S'">
+                      Sí
+                    </span>
+                    <span *ngIf="variable.Obligatorio !== 'S'">
+                      No
+                    </span>
+                  </td>
+                  <td>
+                    <span *ngIf="variable.FormatoFecha === ''">No aplica</span>
+                    <span *ngIf="variable.FormatoFecha !== ''">{{ variable.FormatoFecha }}</span>
+                  </td>
+                  <td>{{ variable.TipoDato }}</td>
+                </tr>
+                <tr *ngIf="variablesPaginadas.length === 0">
+                  <td colspan="7">
+                    <label class="d-flex justify-content-center fs-14px">
+                      No se encontraron parámetros para este archivo / entidad.
+                    </label>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="card-footer d-flex justify-content-end">
+          <ngb-pagination *ngIf="this.paginador.totalRegistros"
+          class="mt-3" 
+          [collectionSize]="this.paginador.totalRegistros" 
+          [page]="this.paginador.paginaActual" 
+          [pageSize]="this.paginador.limiteRegistros" 
+          (pageChange)="this.paginador.cambiarPagina($event, this.todasLasVariables)">
+          </ngb-pagination>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-popup #popup></app-popup>

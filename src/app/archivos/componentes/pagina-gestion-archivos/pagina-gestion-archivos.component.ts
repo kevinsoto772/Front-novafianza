@@ -6,6 +6,8 @@ import { TipoArchivo } from '../../modelos/TipoArchivo';
 import { CargarArchivosService } from '../../servicios/cargar-archivos.service';
 import { Paginador } from 'src/app/administrador/modelos/compartido/Paginador';
 import { Observable } from 'rxjs';
+import { FormatoArchivo } from '../../modelos/FormatoArchivo';
+import { PopupComponent } from 'src/app/alertas/componentes/popup/popup.component';
 
 @Component({
   selector: 'app-pagina-gestion-archivos',
@@ -15,7 +17,9 @@ import { Observable } from 'rxjs';
 export class PaginaGestionArchivosComponent implements OnInit {
   @ViewChild('modalCrear') modalCrear!: ModalCrearArchivoComponent
   @ViewChild('modalActualizar') modalActualizar!: ModalActualizarArchivoComponent
+  @ViewChild('popup') popup!: PopupComponent
   paginador: Paginador;
+  formatosArchivo: FormatoArchivo[] = []
   archivos: TipoArchivo[] = []
 
   constructor(private servicioArchivos: CargarArchivosService) { 
@@ -26,13 +30,29 @@ export class PaginaGestionArchivosComponent implements OnInit {
     this.paginador.inicializarPaginacion()
   }
 
+  obtenerFormatosArchivo(pagina: number, limite: number){
+    this.servicioArchivos.obtenerFormatosArchivo(pagina, limite).subscribe({
+      next: (respuesta)=>{
+        this.formatosArchivo = respuesta.formatosArchivos
+      }
+    })
+  }
+
   obtenerTiposArchivo = (pagina:number, limite: number) =>{
     return new Observable<Paginacion>( subscriptor => {
       this.servicioArchivos.obtenerTiposArchivoPaginado(pagina, limite).subscribe({
         next: ( respuesta ) => {
           this.archivos = respuesta.archivos
+          subscriptor.next( respuesta.paginacion )
         } 
       })
+    })
+  }
+
+  actualizarEstadoTipoArchivo(id: string){
+    this.servicioArchivos.cambiarEstadoTipoArchivo(id).subscribe({
+      next: ()=> { this.popup.abrirPopupExitoso('Se cambio el estado del servicio con éxito.') },
+      error: ()=> { this.popup.abrirPopupExitoso('Se cambio el estado del servicio con éxito.') }
     })
   }
 
@@ -40,7 +60,7 @@ export class PaginaGestionArchivosComponent implements OnInit {
     this.modalCrear.abrir()
   }
 
-  abrirModalActualizar(){
-    this.modalActualizar.abrir()
+  abrirModalActualizar(archivo: TipoArchivo){
+    this.modalActualizar.abrir(archivo)
   }
 }

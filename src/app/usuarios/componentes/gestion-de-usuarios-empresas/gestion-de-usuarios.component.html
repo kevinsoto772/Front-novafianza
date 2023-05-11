@@ -1,7 +1,6 @@
-<!-- <app-selector-empresa (seleccion)="this.idEmpresa = $event.id"></app-selector-empresa> -->
-<app-selector-empresa (seleccion)="this.idEmpresa = $event.id"></app-selector-empresa>
+<app-selector-empresa (seleccion)="manejarCambioDeEmpresa($event.id!)" *ngIf="usuario && !usuario.idEmpresa"></app-selector-empresa>
 
-<div class="d-flex flex-column flex-gap-30 p-4 pt-0" *ngIf="this.idEmpresa">
+<div class="d-flex flex-column flex-gap-30 p-4 mt-4" *ngIf="this.idEmpresa">
   <div class="d-flex justify-content-end">
     <button type="button" class="boton primario relleno" (click)="this.abrirModalRegistrarUsuario()">
       <img src="assets/img/+.svg" class="me-1" /> Crear usuarios
@@ -16,7 +15,7 @@
         <div class="card-body">
           <div class="contenedor">
             <div class="barraBusqueda" [formGroup]="this.formulario">
-              <input type="text" class="form-control" formControlName="busqueda" placeholder="Buscar...">
+              <app-input-busqueda></app-input-busqueda>
             </div>
             <div>
               <button class="totales" disabled>
@@ -59,24 +58,24 @@
                   <td>{{ usuario.identificacion }}</td>
                   <td>{{ usuario.nombre }} {{ usuario.apellido }}</td>
                   <td> {{ usuario.idRol }}</td>
-                  <td>{{ usuario.fechaNacimiento }}</td>
+                  <td>{{ formatearFecha(usuario.fechaNacimiento) }}</td>
                   <td>{{ usuario.correo }}</td>
-                  <td>{{ usuario.telefono }}</td>
+                  <td>{{ usuario.celular }}</td>
                   <td>
-                    <img src="./assets/img/editar.svg" alt="" (click)="abrirModalActualizarUsuarioEmpresa(usuario)">
+                    <img src="assets/img/editar.svg" alt="" (click)="abrirModalActualizarUsuarioEmpresa(usuario)">
                   </td>
                   <td>
                     <label class="switch">
                       <!-- [checked]="empresa.estado" (change)="this.cambiarEstadoEmpresa(index)" -->
-                      <input type="checkbox">
+                      <input type="checkbox" [checked]="usuario.estado" (change)="cambiarEstadoUsuario(usuario.id!)">
                       <span class="slider round"></span>
                     </label>
                   </td>
                 </tr>
                 <tr *ngIf="usuarios.length == 0">
-                  <td colspan="6">
+                  <td colspan="7">
                     <label class="d-flex justify-content-center fs-14px">
-                      Aun no hay empresas registradas
+                      Aun no hay usuarios registrados en esta entidad.
                     </label>
                   </td>
                 </tr>
@@ -90,7 +89,7 @@
           [collectionSize]="this.paginador.totalRegistros" 
           [page]="this.paginador.paginaActual" 
           [pageSize]="this.paginador.limiteRegistros" 
-          (pageChange)="this.paginador.cambiarPagina($event)">
+          (pageChange)="this.paginador.cambiarPagina($event, this.idEmpresa!)">
           </ngb-pagination>
         </div>
       </div>
@@ -98,12 +97,15 @@
   </div>
 </div>
 
-<app-modal-registrar-usuario #modalRegistrarUsuario (seHaRegistradoUnUsuario)="this.paginador.inicializarPaginacion()">
-</app-modal-registrar-usuario>
+<app-modal-registrar-usuario 
+  #modalRegistrarUsuario 
+  (seHaRegistradoUnUsuario)="this.paginador.inicializarPaginacion(1, 3, this.idEmpresa!)"></app-modal-registrar-usuario>
+
 <app-modal-ver-usuario #modalverUsuario></app-modal-ver-usuario>
-<app-modal-actualizar-usuario (seHaActualizadoUnUsuario)="this.paginador.inicializarPaginacion()"
-  #modalActualizarUsuario
-></app-modal-actualizar-usuario>
+
+<app-modal-actualizar-usuario 
+  (seHaActualizadoUnUsuario)="this.paginador.inicializarPaginacion(1, 3, this.idEmpresa!)"
+  #modalActualizarUsuario></app-modal-actualizar-usuario>
 
 <swal #popupExitoso></swal>
 <swal #fallido></swal>

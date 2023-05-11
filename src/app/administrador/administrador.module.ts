@@ -16,6 +16,8 @@ import { ArchivosModule } from '../archivos/archivos.module';
 import { EmpresasModule } from '../empresas/empresas.module';
 import { AlertasModule } from '../alertas/alertas.module';
 import { UsuariosModule } from '../usuarios/usuarios.module';
+import { VariablesModule } from '../variables/variables.module';
+import { ReportesModule } from '../reportes/reportes.module';
 
 
 
@@ -35,6 +37,8 @@ import { UsuariosModule } from '../usuarios/usuarios.module';
     EmpresasModule,
     AlertasModule,
     UsuariosModule,
+    VariablesModule,
+    ReportesModule,
     AdministradorRoutingModule,
     ReactiveFormsModule,
     FormsModule,

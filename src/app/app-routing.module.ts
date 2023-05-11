@@ -14,6 +14,8 @@ import { FormularioProcesoPagoComponent } from './pago/componentes/formulario-pr
 import { PaginaHistorialNovedadesComponent } from './historial-novedades/componentes/pagina-historial-novedades/pagina-historial-novedades.component';
 import { PaginaAdministrarEmpresasComponent } from './empresas/componentes/pagina-administrar-empresas/pagina-administrar-empresas.component';
 import { PaginaGestionArchivosComponent } from './archivos/componentes/pagina-gestion-archivos/pagina-gestion-archivos.component';
+import { PaginaVisualizacionVariablesComponent } from './variables/componentes/pagina-visualizacion-variables/pagina-visualizacion-variables.component';
+import { PaginaReportesComponent } from './reportes/componentes/pagina-reportes/pagina-reportes.component';
 
 
 const routes: Routes = [
@@ -21,6 +23,10 @@ const routes: Routes = [
     path: 'administrar',
     component: PlantillaComponent,
     children: [
+      {
+        path: 'visualizar_variables',
+        component: PaginaVisualizacionVariablesComponent
+      },
       {
         path: 'crear_usuarios',
         component: GestionDeUsuariosComponent
@@ -43,7 +49,7 @@ const routes: Routes = [
       },
       {
         path: 'reportes',
-        component: ReportesComponent
+        component: PaginaReportesComponent
       },
       {
         path: 'configuracion_de_cuenta',

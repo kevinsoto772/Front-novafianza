@@ -67,7 +67,16 @@
                   [texto]="'Requerido.'"></app-validacion>
                 <label class="fs-10px"  *ngIf="this.formulario.controls['archivo'].value === null">Formatos permitidos: CVS, TXT. Max. 5MB</label>
               </div> -->
-              <app-input-archivo formControlName="archivo"></app-input-archivo>
+              <div class="col-sm-3">
+                <fieldset>
+                  <label class="titulo-input">Cargar archivo</label>
+                  <app-input-archivo formControlName="archivo"></app-input-archivo>
+                  <app-validacion 
+                  [control]="formulario.controls['archivo']"
+                  [validacion]="'required'"
+                  [texto]="'Requerido.'"></app-validacion>
+                </fieldset>
+              </div>
             </div>
           </form>
 

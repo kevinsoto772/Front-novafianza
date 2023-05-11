@@ -7,7 +7,7 @@ import { ServicioCabeceraService } from 'src/app/administrador/servicios/servici
   styleUrls: ['./reportes.component.css']
 })
 export class ReportesComponent implements OnInit {
-  public ReportesCabecera = ['Reportes','/assets/img/icono-reportes-blanco.svg']
+  public ReportesCabecera = ['Reportes','assets/img/icono-reportes-blanco.svg']
 
 
   constructor(private servicioCabercera: ServicioCabeceraService) {

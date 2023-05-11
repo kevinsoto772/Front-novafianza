@@ -35,7 +35,7 @@ export class PopupComponent implements OnInit {
     }
     this.popupExitoso.swalOptions = {
       showConfirmButton: false,
-      customClass: {popup: 'card'}
+      customClass: {popup: 'card'},
     }
     this.popupExitoso.fire()
   }

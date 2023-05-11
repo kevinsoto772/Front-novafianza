@@ -4,4 +4,5 @@ export interface ArchivoCargado {
     nombreArchivo:     string;
     nombreTipoArchivo: string;
     estadoValidacion:  string;
+    estadoValidacionEstructura:  string;
 }

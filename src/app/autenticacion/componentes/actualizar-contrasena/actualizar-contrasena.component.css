@@ -1,6 +1,7 @@
 .fondo {
+  box-sizing: border-box;
   width: 100vw;
-  height: 100vh;
+  height: 110vh;
   background-size: cover;
   background: transparent linear-gradient(241deg, var(--azul) 0%, var(--azul-oscuro) 100%) 0% 0% no-repeat padding-box;
   box-shadow: 0px 3px 6px #00000029;

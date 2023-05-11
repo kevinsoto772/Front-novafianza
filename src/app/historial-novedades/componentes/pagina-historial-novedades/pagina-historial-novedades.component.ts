@@ -5,6 +5,9 @@ import { NovedadesService } from '../../servicios/novedades.service';
 import { Paginador } from 'src/app/administrador/modelos/compartido/Paginador';
 import { Observable } from 'rxjs';
 import { Paginacion } from 'src/app/compartido/modelos/Paginacion';
+import { ServicioLocalStorage } from 'src/app/administrador/servicios/local-storage.service';
+import { Usuario } from 'src/app/autenticacion/modelos/IniciarSesionRespuesta';
+import { formatearFechaIso } from 'src/app/compartido/Fechas';
 
 @Component({
   selector: 'app-pagina-historial-novedades',
@@ -15,27 +18,48 @@ export class PaginaHistorialNovedadesComponent implements OnInit {
   @ViewChild('modalVerDetalles') modalDetallesArchivo!:ModalDetallesArchivoComponent
   archivosCargados:ArchivoCargado[] = []
   paginador: Paginador
-  constructor(private servicioNovedades: NovedadesService) { 
+  usuario: Usuario | null
+  idEmpresa?: string
+  cargandoDetalles: boolean = false
+  constructor(private servicioNovedades: NovedadesService, private servicioLocalStorage: ServicioLocalStorage) { 
     this.paginador = new Paginador(this.obtenerArchivosCargados)
+    this.usuario = this.servicioLocalStorage.obtenerUsuario()
+    if(this.usuario && this.usuario.idEmpresa){
+      this.idEmpresa = this.usuario.idEmpresa
+    }
   }
 
   ngOnInit(): void {
-    this.paginador.inicializarPaginacion()
+    if(this.idEmpresa){
+      this.paginador.inicializarPaginacion(undefined, undefined, this.idEmpresa)
+    }
   }
 
   abrirModalVerDetallesArchivo(idArchivoCargado: string){
+    this.cargandoDetalles = true
     this.servicioNovedades.obtenerDetalleArchivo(idArchivoCargado).subscribe( detallesArchivo => {
-      this.modalDetallesArchivo.abrir(detallesArchivo)
+      this.cargandoDetalles = false
+      this.modalDetallesArchivo.abrir(detallesArchivo, idArchivoCargado)
     })
   }
 
   obtenerArchivosCargados = (pagina: number, limite: number, idEmpresa: string):Observable<Paginacion> => {
     return new Observable<Paginacion>((subsciptor => {
-      this.servicioNovedades.obtenerArchivosCargados(pagina, limite).subscribe( respuesta => {
+      this.servicioNovedades.obtenerArchivosCargados(pagina, limite, idEmpresa).subscribe( respuesta => {
         this.archivosCargados = respuesta.archivosCargados
         subsciptor.next( respuesta.paginacion )
       })
     })) 
+  }
+
+  manejarCambioDeEmpresa(idEmpresa: string){
+    this.idEmpresa = idEmpresa
+    this.paginador.inicializarPaginacion(this.paginador.paginaActual, this.paginador.limiteRegistros, idEmpresa)
+
+  }
+
+  formatearFecha(fecha: string){
+    return formatearFechaIso(fecha, 'yyyy-MM-dd HH:mm:ss')
   }
 
 }
