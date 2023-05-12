@@ -5,7 +5,7 @@
     <form [formGroup]="this.formulario">
         <div class="d-flex flex-gap-10">
             <fieldset class="w-100" *ngIf="!this.usuario?.idEmpresa">
-                <select  #selectorEmpresa class="form-select" formControlName="empresa">
+                <select (change)="obtenerArchivosEmpresa(selectorEmpresa.value)"  #selectorEmpresa class="form-select" formControlName="empresa">
                     <option *ngFor="let empresa of empresas" [value]="empresa.id">NIT {{ empresa.nit | number }} - {{
                         empresa.nombre }} - {{ empresa.convenio }}</option>
                 </select>
@@ -15,6 +15,7 @@
             <fieldset class="w-100">
                 <select #selectorEmpresa class="form-select" formControlName="tipoArchivo">
                     <option *ngFor="let archivo of archivos" [value]="archivo.id">{{ archivo.nombre }}</option>
+                    <option value="" *ngIf="archivos.length === 0">Esta entidad no tiene archivos asociados.</option>
                 </select>
                 <app-validacion [control]="this.formulario.controls['tipoArchivo']" [validacion]="'required'"
                     [texto]="'Debes seleccionar un servicio'"></app-validacion>

@@ -19,18 +19,21 @@
     color: #D9D9D9;
     background-color: #D9D9D9;
 }
+.logo-empresa img{
+    width: 100%;
+}
 
 .click:hover{
-cursor: pointer;
+    cursor: pointer;
 }
 
 .click:active{
-color: var(--azul-oscuro);
+    color: var(--azul-oscuro);
 }
 
 .click:focus{
-  color: var(--azul-oscuro);
-  }
+    color: var(--azul-oscuro);
+}
 
 
 .seccion-menu{

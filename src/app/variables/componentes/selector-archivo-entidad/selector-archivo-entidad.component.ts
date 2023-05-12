@@ -58,4 +58,12 @@ export class SelectorArchivoEntidadComponent implements OnInit {
     })
   }
 
+
+  obtenerArchivosEmpresa(idEmpresa: string){
+    this.servicioArchivos.obtenerTiposArchivoPorEmpresa(idEmpresa).subscribe({
+      next: (respuesta)=>{
+        this.archivos = respuesta.archivos
+      }
+    })
+  }
 }
