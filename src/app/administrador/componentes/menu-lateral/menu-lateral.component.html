@@ -7,9 +7,9 @@
   <div class="logo d-flex justify-content-start mb-4">
     <img class="pointer-events-none cursor-pointer" src="assets/img/logo.svg" alt="">
   </div>
-  <hr *ngIf="usuario && usuario.idEmpresa">
-  <div class="logo d-flex justify-content-start" *ngIf="usuario && usuario.idEmpresa">
-    <img class="pointer-events-none cursor-pointer" src="assets/img/ejemplo-logo-empresa/company-pequeño.png" alt="">
+  <hr *ngIf="usuario && usuario.idEmpresa && usuario.logoEmpresa">
+  <div class="logo-empresa d-flex justify-content-start" *ngIf="usuario && usuario.idEmpresa">
+    <img class="pointer-events-none cursor-pointer" [src]="usuario.logoEmpresa" draggable="false">
   </div>
   <div *ngIf="this.rol && this.rol._modulos">
     <div class="d-flex flex-column" *ngFor="let module of this.rol._modulos">

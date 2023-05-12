@@ -7,6 +7,7 @@ import { marcarFormularioComoSucio } from 'src/app/administrador/utilidades/Util
 import { TipoArchivo } from '../../modelos/TipoArchivo';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { ServicioLocalStorage } from 'src/app/administrador/servicios/local-storage.service';
 
 @Component({
   selector: 'app-pagina-carga-archivos',
@@ -19,8 +20,17 @@ export class PaginaCargaArchivosComponent implements OnInit {
   public formulario: FormGroup
   public formatoInvalido: boolean = false
   public tiposArchivo: TipoArchivo[] = []
+  public idEmpresa?: string
 
-  constructor(private servicioCabercera: ServicioCabeceraService, private servicioArchivo: CargarArchivosService, private router: Router) {
+  constructor(
+    private servicioCabercera: ServicioCabeceraService, 
+    private servicioArchivo: CargarArchivosService,
+    private servicioLocalStorage: ServicioLocalStorage,
+    private router: Router) {
+    const usuario = this.servicioLocalStorage.obtenerUsuario()
+    if(usuario!.idEmpresa){
+      this.idEmpresa = usuario!.idEmpresa
+    }
     this.servicioCabercera.actualizarTitulo(this.archivosCabecera)
     this.formulario = new FormGroup({
       tipoArchivo: new FormControl('', [Validators.required]),
@@ -35,7 +45,7 @@ export class PaginaCargaArchivosComponent implements OnInit {
   }
 
   public obtenerTiposArchivo(){
-    this.servicioArchivo.obtenerTiposArchivo().subscribe({
+    this.servicioArchivo.obtenerTiposArchivoPorEmpresa(this.idEmpresa!).subscribe({
       next: (respuesta) => {
         this.tiposArchivo = respuesta.archivos
       }

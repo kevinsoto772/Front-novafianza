@@ -15,4 +15,5 @@ export interface Usuario {
   telefono: string
   correo: string
   idEmpresa?: string
+  logoEmpresa?: string
 }
