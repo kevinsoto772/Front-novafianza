@@ -32,6 +32,7 @@
                                 <tr>
                                     <th scope="col">Fecha y hora</th>
                                     <th scope="col">Nombre del archivo</th>
+                                    <th scope="col">Tipo de carga</th>
                                     <th scope="col">Tipo de archivo</th>
                                     <th scope="col">Validación de estructura</th>
                                     <th scope="col">Validación de datos</th>
@@ -42,6 +43,7 @@
                                 <tr *ngFor="let archivoCargado of archivosCargados">
                                     <td>{{ formatearFecha(archivoCargado.fechaYHora) }}</td>
                                     <td> {{ archivoCargado.nombreArchivo }}</td>
+                                    <td> {{ archivoCargado.tipoCarga }}</td>
                                     <td>{{ archivoCargado.nombreTipoArchivo }}</td>
                                     <td>
                                         <ng-container *ngIf="archivoCargado.estadoValidacionEstructura === 'Pasó' ">
@@ -99,7 +101,7 @@
                                     </td>
                                 </tr>
                                 <tr *ngIf="archivosCargados.length === 0">
-                                    <td colspan="6" class="text-center"> No hay cargas registradas para esta entidad.</td>
+                                    <td colspan="7" class="text-center"> No hay cargas registradas para esta entidad.</td>
                                 </tr>
                             </tbody>
                         </table>

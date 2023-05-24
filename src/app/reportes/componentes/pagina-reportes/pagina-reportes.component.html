@@ -1,61 +1,14 @@
-<div class="mt-4 mx-3">
-    <div class="d-flex flex-column flex-gap-30">
-        <div class="row">
-            <div class="col-12">
-                <div class="card w-100">
-                    <div class="card-header fw-semibold fs-14px mt-2">
-                        Filtrar datos
-                    </div>
-                    <div class="card-body">
-                        <form>
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <fieldset>
-                                        <label class="titulo-input">Tipo de archivo</label>
-                                        <select class="form-select form-control input" id="tipoArchivo"
-                                            name="tipoArchivo" required>
-                                            <option value="" disabled selected>Seleccionar formato...</option>
-                                            <option value="Nuevas fianzas">Nuevas fianzas</option>
-                                            <option value="Anulaciones">Anulaciones</option>
-                                            <option value="Pronto pago">Pronto pago</option>
-                                            <option value="Saldos">Saldos</option>
-                                            <option value="Reclamaciones">Reclamaciones</option>
-                                        </select>
-                                    </fieldset>
-                                </div>
-                                <div class="col-sm-3">
-                                    <fieldset>
-                                        <label class="titulo-input">Fecha inicial</label>
-                                        <input type="date" class="form-control">
-                                    </fieldset>
-                                </div>
-                                <div class="col-sm-3">
-                                    <fieldset>
-                                        <label class="titulo-input">Fecha final</label>
-                                        <input type="date" class="form-control">
-                                    </fieldset>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="card-footer d-flex justify-content-end">
-                        <button type="button" class="boton primario relleno mb-2 mt-2">
-                            Consultar
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-12">
-                <div class="card w-100">
-                    <div class="card-body">
-                        <app-grafico-barras></app-grafico-barras>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </div>
+<div class="w-100 bg-white px-2 border-bottom">
+    <ul class="tipos-reportes">
+        <li class="tipo-reporte" [routerLink]="['/administrar', 'reportes', 'colocacion']" [routerLinkActive]="'activo'">
+            Colocación
+        </li>
+        <li class="tipo-reporte" [routerLink]="['/administrar', 'reportes', 'saldos-cartera']" [routerLinkActive]="'activo'">
+            Saldos cartera
+        </li>
+        <li class="tipo-reporte" [routerLink]="['/administrar', 'reportes', 'operaciones']" [routerLinkActive]="'activo'">
+            Operaciones
+        </li>
+    </ul>
 </div>
+<router-outlet></router-outlet>
