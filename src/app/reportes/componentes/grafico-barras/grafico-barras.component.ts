@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { Chart } from 'chart.js';
+import Chart from 'chart.js/auto'
 
 @Component({
   selector: 'app-grafico-barras',
@@ -13,7 +13,9 @@ export class GraficoBarrasComponent implements OnInit, AfterViewInit {
   data: number[] = []
   public coloresGrafico: string[] = ['#4E73DF', '#36B9CC', '#1CC88A']
 
-  constructor() { }
+  constructor() { 
+   /*  Chart.register(CategoryScale) */
+  }
 
   ngOnInit(): void {
   }
@@ -30,6 +32,7 @@ export class GraficoBarrasComponent implements OnInit, AfterViewInit {
       data: {
         labels: labels,
         datasets: [{
+          label: 'año',          
           data: data,
           backgroundColor: this.obtenerColoresDeBarras(this.labels, this.coloresGrafico)
         }]
@@ -37,7 +40,7 @@ export class GraficoBarrasComponent implements OnInit, AfterViewInit {
       options: {
         plugins: {
           legend: {
-            display: false
+
           }
         },
         scales: {

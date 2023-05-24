@@ -88,13 +88,23 @@ export class CargarArchivosService extends Autenticable {
     )
   }
 
-  cargarArchivo(archivo: File, corte: { fechaInicial: string, fechaFinal: string }, tipoArchivo: string) {
+  cargarArchivo(
+    archivo: File, 
+    corte: { fechaInicial: string, fechaFinal: string }, 
+    tipoArchivo: string, 
+    anio: string, 
+    mes: string,
+    esPrueba: boolean = false
+  ) {
     const endpoint = '/api/v1/cargas'
     const formData = new FormData()
     formData.append('archivo', archivo)
     formData.append('fechaInicial', corte.fechaInicial)
     formData.append('fechaFinal', corte.fechaFinal)
     formData.append('tipoArchivo', tipoArchivo)
+    formData.append('anio', anio)
+    formData.append('mes', mes)
+    formData.append('automatico',  esPrueba ? "N" : "S" ) //S para envio normal, N para envio de validación
     return this.clienteHttp.post(
       `${this.HOST}${endpoint}`, 
       formData,

@@ -1,0 +1,22 @@
+.tipos-reportes{
+    margin: 0;
+}
+.tipo-reporte{
+    position: relative;
+    height: 50px;
+    line-height: 50px;
+    margin: 0px 10px;
+    display: inline-flex;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+}
+.tipo-reporte.activo::before{
+    width: 100%;
+    position: absolute;
+    content: "";
+    bottom: 0;
+    border-top: 4px solid var(--azul);
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}

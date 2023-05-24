@@ -101,9 +101,21 @@ input[type=number] {
   background-color: var(--azul);
   color: white;
 }
+.boton.primario.relleno.alterno{
+  background-color: white;
+  color: var(--azul);
+}
 .boton.primario.relleno:hover{
   background-color: var(--azul-oscuro);
   color: white;
+}
+.boton.sin-borde{
+  box-shadow: none;
+  border: none;
+  background-color: transparent;
+}
+.boton.primario.sin-borde{
+  color: var(--azul);
 }
 
 .boton.primario.delineado{

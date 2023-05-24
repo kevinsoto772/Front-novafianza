@@ -16,7 +16,7 @@ import { ServicioLocalStorage } from 'src/app/administrador/servicios/local-stor
 })
 export class PaginaCargaArchivosComponent implements OnInit {
   @ViewChild('popupProcesando') popupProcesando!: PopupProcesandoComponent
-  public archivosCabecera = ['Carga de archivos', '/assets/img/icono-archivos-blanco.svg']
+  public archivosCabecera = ['Carga de archivos', 'assets/img/icono-archivos-blanco.svg']
   public formulario: FormGroup
   public formatoInvalido: boolean = false
   public tiposArchivo: TipoArchivo[] = []
@@ -35,8 +35,10 @@ export class PaginaCargaArchivosComponent implements OnInit {
     this.formulario = new FormGroup({
       tipoArchivo: new FormControl('', [Validators.required]),
       fechaInicial: new FormControl('', [Validators.required]),
-      fechaFinal: new FormControl('', Validators.required),
-      archivo: new FormControl<File | null>(null, Validators.required),
+      fechaFinal: new FormControl('', [Validators.required]),
+      archivo: new FormControl<File | null>(null, [Validators.required]),
+      anio: new FormControl<number | undefined>(undefined, [Validators.required, Validators.pattern(/^\d{4}$/)]),
+      mes: new FormControl<number | undefined>(undefined, [Validators.required])
     })
   }
 
@@ -56,7 +58,7 @@ export class PaginaCargaArchivosComponent implements OnInit {
     this.popupProcesando.abrir()
   }
 
-  public enviarArchivo():void{
+  public enviarArchivo(esPrueba: boolean):void{
     if(this.formulario.invalid){
       marcarFormularioComoSucio(this.formulario)
       console.log(this.formulario.controls)
@@ -69,7 +71,9 @@ export class PaginaCargaArchivosComponent implements OnInit {
         fechaInicial: controls['fechaInicial'].value,
         fechaFinal: controls['fechaFinal'].value
       },
-      controls['tipoArchivo'].value
+      controls['tipoArchivo'].value,
+      controls['anio'].value,
+      controls['mes'].value
     ).subscribe({
       next: () => {
         this.abrirPopupProcesando()

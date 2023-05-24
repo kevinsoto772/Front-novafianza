@@ -16,6 +16,9 @@ import { PaginaAdministrarEmpresasComponent } from './empresas/componentes/pagin
 import { PaginaGestionArchivosComponent } from './archivos/componentes/pagina-gestion-archivos/pagina-gestion-archivos.component';
 import { PaginaVisualizacionVariablesComponent } from './variables/componentes/pagina-visualizacion-variables/pagina-visualizacion-variables.component';
 import { PaginaReportesComponent } from './reportes/componentes/pagina-reportes/pagina-reportes.component';
+import { PaginaReporteColocacionComponent } from './reportes/componentes/tipos-reportes/pagina-reporte-colocacion/pagina-reporte-colocacion.component';
+import { PaginaReporteSaldosCarteraComponent } from './reportes/componentes/tipos-reportes/pagina-reporte-saldos-cartera/pagina-reporte-saldos-cartera.component';
+import { PaginaReporteOperacionesComponent } from './reportes/componentes/tipos-reportes/pagina-reporte-operaciones/pagina-reporte-operaciones.component';
 
 
 const routes: Routes = [
@@ -49,7 +52,21 @@ const routes: Routes = [
       },
       {
         path: 'reportes',
-        component: PaginaReportesComponent
+        component: PaginaReportesComponent,
+        children: [
+          {
+            path: 'colocacion',
+            component: PaginaReporteColocacionComponent
+          },
+          {
+            path: 'saldos-cartera',
+            component: PaginaReporteSaldosCarteraComponent
+          },
+          {
+            path: 'operaciones',
+            component: PaginaReporteOperacionesComponent
+          }
+        ]
       },
       {
         path: 'configuracion_de_cuenta',
