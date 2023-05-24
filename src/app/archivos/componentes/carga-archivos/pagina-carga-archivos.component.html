@@ -9,7 +9,7 @@
           <form [formGroup]="this.formulario">
             <div class="row">
               <!-- Tipo de archivo -->
-              <div class="col-sm-3">
+              <div class="col-sm-2">
                 <fieldset class="mb-2">
                   <label class="titulo-input">Tipo de archivo</label>
                   <select class="form-select form-control input" id="tipoArchivo" name="tipoArchivo"
@@ -27,7 +27,7 @@
                 </label>
               </div>
               <!-- Fecha inicial -->
-              <div class="col-sm-3">
+              <div class="col-sm-2">
                 <fieldset>
                   <label class="titulo-input">Fecha inicial de corte</label>
                   <input type="date" class="form-control" formControlName="fechaInicial">
@@ -38,7 +38,7 @@
                 </fieldset>
               </div>
               <!-- Fecha final -->
-              <div class="col-sm-3">
+              <div class="col-sm-2">
                 <fieldset>
                   <label class="titulo-input">Fecha final de corte</label>
                   <input type="date" class="form-control" formControlName="fechaFinal">
@@ -48,26 +48,47 @@
                   [texto]="'Requerido.'"></app-validacion>
                 </fieldset>
               </div>
-              <!-- Archivo -->
-             <!--  <div class="col-sm-3">
-                <label class="titulo-input">Cargar archivo</label>
-                <div class="input-group mb-1">
-                  <input 
-                  type="file" 
-                  class="form-control" 
-                  id="inputGroupFile02" 
-                  formControlName="archivo"
-                  accept=".cvs,.txt"
-                  (change)="obtenerArchivo($event)">
-                  <label class="input-group-text boton-adjuntar" for="inputGroupFile02" id="">Adjuntar</label>
-                </div>
-                <app-validacion 
-                  [control]="formulario.controls['archivo']"
+              <!-- Año -->
+              <div class="col-sm-2">
+                <fieldset>
+                  <label class="titulo-input">Año</label>
+                  <input type="number" class="form-control" formControlName="anio">
+                  <app-validacion 
+                  [control]="formulario.controls['anio']"
                   [validacion]="'required'"
                   [texto]="'Requerido.'"></app-validacion>
-                <label class="fs-10px"  *ngIf="this.formulario.controls['archivo'].value === null">Formatos permitidos: CVS, TXT. Max. 5MB</label>
-              </div> -->
-              <div class="col-sm-3">
+                  <app-validacion 
+                  [control]="formulario.controls['anio']"
+                  [validacion]="'pattern'"
+                  [texto]="'El formato debe ser un año válido (aaaa).'"></app-validacion>
+                </fieldset>
+              </div>
+              <!-- Mes -->
+              <div class="col-sm-2">
+                <fieldset>
+                  <label class="titulo-input">Mes</label>
+                  <select formControlName="mes" class="form-select">
+                    <option value="1">Enero</option>
+                    <option value="2">Febrero</option>
+                    <option value="3">Marzo</option>
+                    <option value="4">Abril</option>
+                    <option value="5">Mayo</option>
+                    <option value="6">Junio</option>
+                    <option value="7">Julio</option>
+                    <option value="8">Agosto</option>
+                    <option value="9">Septiembre</option>
+                    <option value="10">Octubre</option>
+                    <option value="11">Noviembre</option>
+                    <option value="12">Diciembre</option>
+                  </select>
+                  <app-validacion 
+                  [control]="formulario.controls['mes']"
+                  [validacion]="'required'"
+                  [texto]="'Requerido.'"></app-validacion>
+                </fieldset>
+              </div>
+             <!-- Archivo -->
+              <div class="col-sm-2">
                 <fieldset>
                   <label class="titulo-input">Cargar archivo</label>
                   <app-input-archivo formControlName="archivo"></app-input-archivo>
@@ -88,7 +109,10 @@
 
         </div>
         <div class="card-footer d-flex justify-content-end">
-          <button type="button" class="boton primario relleno mb-2 mt-2" (click)="enviarArchivo()">
+          <button type="button" class="boton primario delineado mb-2 mt-2 me-2" (click)="enviarArchivo(true)">
+            Validar archivo
+          </button>
+          <button type="button" class="boton primario relleno mb-2 mt-2" (click)="enviarArchivo(false)">
             Enviar archivo
           </button>
         </div>
