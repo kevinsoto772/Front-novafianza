@@ -9,6 +9,7 @@ import { Paginador } from 'src/app/administrador/modelos/compartido/Paginador';
 import { Observable } from 'rxjs';
 import { PopupComponent } from 'src/app/alertas/componentes/popup/popup.component';
 import { formatearFechaIso } from 'src/app/compartido/Fechas';
+import { ServicioCabeceraService } from 'src/app/administrador/servicios/servicio-cabecera.service';
 
 @Component({
   selector: 'app-pagina-administrar-empresas',
@@ -23,7 +24,8 @@ export class PaginaAdministrarEmpresasComponent implements OnInit {
   public empresas: Empresa[] = []
   public paginador: Paginador
 
-  constructor(private servicioEmpresas: EmpresasService) {
+  constructor(private servicioEmpresas: EmpresasService, private servicioCabecera: ServicioCabeceraService) {
+    this.servicioCabecera.actualizarTitulo(['Administrar entidades', 'assets/img/cabecera/administrar-empresas-blanco.svg']) 
     this.paginador = new Paginador(this.obtenerEmpresas)
   }
 
