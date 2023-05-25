@@ -29,6 +29,7 @@ export class PaginaVisualizacionVariablesComponent implements OnInit {
     private servicioCabecera: ServicioCabeceraService,
     private servicioVariables: VariablesService
   ) {
+    this.servicioCabecera.actualizarTitulo(['Parametrización entidad', 'assets/img/cabecera/administrar-servicios-blanco.svg']) 
     this.paginador = new Paginador(this.paginarVariables)
     this.usuario = this.servicioLocalStorage.obtenerUsuario()
     if (this.usuario && this.usuario.idEmpresa) {

@@ -9,6 +9,7 @@ import { Observable } from 'rxjs';
 import { FormatoArchivo } from '../../modelos/FormatoArchivo';
 import { PopupComponent } from 'src/app/alertas/componentes/popup/popup.component';
 import { formatearFechaIso } from 'src/app/compartido/Fechas';
+import { ServicioCabeceraService } from 'src/app/administrador/servicios/servicio-cabecera.service';
 
 @Component({
   selector: 'app-pagina-gestion-archivos',
@@ -23,7 +24,8 @@ export class PaginaGestionArchivosComponent implements OnInit {
   formatosArchivo: FormatoArchivo[] = []
   archivos: TipoArchivo[] = []
 
-  constructor(private servicioArchivos: CargarArchivosService) { 
+  constructor(private servicioArchivos: CargarArchivosService, private servicioCabecera: ServicioCabeceraService) { 
+    this.servicioCabecera.actualizarTitulo(['Administrar servicios', 'assets/img/cabecera/administrar-servicios-blanco.svg']) 
     this.paginador = new Paginador(this.obtenerTiposArchivo)
   }
 
