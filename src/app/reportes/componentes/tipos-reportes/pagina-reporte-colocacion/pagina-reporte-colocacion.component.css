@@ -1,0 +1,42 @@
+.mw-s{
+    min-width: 79px;
+}
+.mw-m{
+    min-width: 116px;
+}
+.mw-l{
+    min-width: 143px;
+}
+.flex-gap-14px{
+    gap: 14px;
+}
+.resumenes-colocacion{
+    overflow-x: auto;
+}
+.resumen-colocacion{
+    display:  flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0 10px;
+    height: 76px;
+    border: 1px solid #B7B7B7;
+    border-radius: 5px;
+    background-color: #fff;
+}
+.resumen-colocacion .nombre{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 11px;
+    color: #4B4B4B;
+    height: 33px;
+}
+.resumen-colocacion .valor{
+    font-size: 16px;
+    font-weight: bold;
+}
+.periodo-consulta{
+    background-color: #DBDBDB;
+}

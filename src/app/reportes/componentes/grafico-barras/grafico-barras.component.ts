@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import Chart from 'chart.js/auto'
+import Chart, { ChartTypeRegistry } from 'chart.js/auto'
 
 @Component({
   selector: 'app-grafico-barras',
@@ -8,7 +8,7 @@ import Chart from 'chart.js/auto'
 })
 export class GraficoBarrasComponent implements OnInit, AfterViewInit {
   @ViewChild('canvas') canvas!: ElementRef
-  public grafico?: Chart
+  public grafico?: Chart<'line'>
   labels: string[] = []
   data: number[] = []
   public coloresGrafico: string[] = ['#4E73DF', '#36B9CC', '#1CC88A']
@@ -21,20 +21,21 @@ export class GraficoBarrasComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.data = [100, 200, 300]
-    this.labels = ['Archivo1', 'Archivo2', 'Archivo3']
+    this.data = [100, 200, 300, 400 ]
+    this.labels = ['Archivo1', 'Archivo2', 'Archivo3', 'Archivo4', 'Archivo5']
     this.renderizarGrafico(this.labels, this.data)
   }
 
   public renderizarGrafico(labels: string[], data: number[]) {
-    this.grafico = new Chart(this.canvas.nativeElement, {
-      type: 'bar',
+    this.grafico = new Chart<'line'>(this.canvas.nativeElement, {
+      type: 'line',
       data: {
         labels: labels,
         datasets: [{
           label: 'año',          
           data: data,
-          backgroundColor: this.obtenerColoresDeBarras(this.labels, this.coloresGrafico)
+          backgroundColor: this.coloresGrafico[0],
+          borderColor: this.coloresGrafico[0]
         }]
       },
       options: {
@@ -45,9 +46,9 @@ export class GraficoBarrasComponent implements OnInit, AfterViewInit {
         },
         scales: {
           xAxis: {
-            grid: {
+/*             grid: {
               display: false
-            }
+            } */
           }
         }
       },
