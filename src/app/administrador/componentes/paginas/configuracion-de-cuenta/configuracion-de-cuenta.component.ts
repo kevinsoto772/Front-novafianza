@@ -14,7 +14,7 @@ import { PopupComponent } from '../../../../alertas/componentes/popup/popup.comp
 })
 export class ConfiguracionDeCuentaComponent implements OnInit {
   @ViewChild('popup') popup!: PopupComponent
-  public ReportesCabecera = ['Configuración de cuenta', '/assets/img/icono-configuracion-usuario.svg']
+  public ReportesCabecera = ['Configuración de cuenta', 'assets/img/icono-configuracion-usuario.svg']
   public formularioNombre: FormGroup;
   public formularioContacto: FormGroup;
   public formularioContrasena: FormGroup;

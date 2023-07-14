@@ -8,6 +8,7 @@ import { Paginacion } from 'src/app/compartido/modelos/Paginacion';
 import { ServicioLocalStorage } from 'src/app/administrador/servicios/local-storage.service';
 import { Usuario } from 'src/app/autenticacion/modelos/IniciarSesionRespuesta';
 import { formatearFechaIso } from 'src/app/compartido/Fechas';
+import { ServicioCabeceraService } from 'src/app/administrador/servicios/servicio-cabecera.service';
 
 @Component({
   selector: 'app-pagina-historial-novedades',
@@ -21,7 +22,8 @@ export class PaginaHistorialNovedadesComponent implements OnInit {
   usuario: Usuario | null
   idEmpresa?: string
   cargandoDetalles: boolean = false
-  constructor(private servicioNovedades: NovedadesService, private servicioLocalStorage: ServicioLocalStorage) { 
+  constructor(private servicioNovedades: NovedadesService, private servicioLocalStorage: ServicioLocalStorage, private servicioCabecera: ServicioCabeceraService) {
+    this.servicioCabecera.actualizarTitulo(['Historial de novedades', 'assets/img/cabecera/novedades-blanco.svg']) 
     this.paginador = new Paginador(this.obtenerArchivosCargados)
     this.usuario = this.servicioLocalStorage.obtenerUsuario()
     if(this.usuario && this.usuario.idEmpresa){

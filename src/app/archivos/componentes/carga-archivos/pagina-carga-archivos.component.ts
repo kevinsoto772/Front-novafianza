@@ -73,7 +73,8 @@ export class PaginaCargaArchivosComponent implements OnInit {
       },
       controls['tipoArchivo'].value,
       controls['anio'].value,
-      controls['mes'].value
+      controls['mes'].value,
+      esPrueba
     ).subscribe({
       next: () => {
         this.abrirPopupProcesando()
