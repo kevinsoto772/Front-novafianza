@@ -9,6 +9,7 @@ import { PaginaReporteColocacionComponent } from './componentes/tipos-reportes/p
 import { PaginaReporteSaldosCarteraComponent } from './componentes/tipos-reportes/pagina-reporte-saldos-cartera/pagina-reporte-saldos-cartera.component';
 import { PaginaReporteOperacionesComponent } from './componentes/tipos-reportes/pagina-reporte-operaciones/pagina-reporte-operaciones.component';
 import { FiltrosColocacionComponent } from './componentes/filtros/filtros-colocacion/filtros-colocacion.component';
+import { BarraPorcentualComponent } from './componentes/barra-porcentual/barra-porcentual.component';
 
 
 
@@ -19,7 +20,8 @@ import { FiltrosColocacionComponent } from './componentes/filtros/filtros-coloca
     PaginaReporteColocacionComponent,
     PaginaReporteSaldosCarteraComponent,
     PaginaReporteOperacionesComponent,
-    FiltrosColocacionComponent
+    FiltrosColocacionComponent,
+    BarraPorcentualComponent
   ],
   imports: [
     RouterModule,

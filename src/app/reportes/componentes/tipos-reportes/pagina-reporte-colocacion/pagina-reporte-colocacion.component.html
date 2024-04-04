@@ -1,9 +1,99 @@
 <app-filtros-colocacion></app-filtros-colocacion>
-<div class="d-flex p-3 align-items-center">
+<div class="periodo-consulta d-flex p-3 align-items-center">
     <span class="texto-gris fs-14px">
         <b>Periodo de consulta: </b> Enero de 2022 al Enero de 2023 
     </span>
     <span class="ms-auto">
         <button class="boton primario relleno alterno">Exportar datos</button>
     </span>
+</div>
+<div class="resumenes-colocacion d-flex p-3 justify-content-start align-items-center flex-gap-14px">
+    <div class="fs-14px fw-semibold">Resumen general</div>
+    <!-- Valor colocacion -->
+    <div class="resumen-colocacion mw-l">
+        <span class="nombre">Valor colocación</span>
+        <span class="valor">
+            <span class="texto-primario">$ </span>
+            <span>400.000.000</span>
+        </span>
+    </div>
+    <!-- Número de creditos -->
+    <div class="resumen-colocacion mw-s">
+        <span class="nombre">Número de créditos</span>
+        <span class="valor">
+            <span>101</span>
+        </span>
+    </div>
+    <!-- Número de clientes -->
+    <div class="resumen-colocacion mw-s">
+        <span class="nombre">Número de clientes</span>
+        <span class="valor">
+            <span>101</span>
+        </span>
+    </div>
+    <!-- Ticket promedio -->
+    <div class="resumen-colocacion mw-l">
+        <span class="nombre">Ticket promedio</span>
+        <span class="valor">
+            <span class="texto-primario">$ </span>
+            <span>322.222.000</span>
+        </span>
+    </div>
+    <!-- Plazo promedio ponderado -->
+    <div class="resumen-colocacion mw-m">
+        <span class="nombre">Plazo promedio ponderado</span>
+        <span class="valor">
+            <span>361</span>
+        </span>
+    </div>
+    <!-- Creditos por clientes -->
+    <div class="resumen-colocacion mw-s">
+        <span class="nombre">Créditos por clientes</span>
+        <span class="valor">
+            <span>2,1</span>
+        </span>
+    </div>
+    <!-- Cobertura sobre colocación -->
+    <div class="resumen-colocacion mw-m">
+        <span class="nombre">Cobertura sobre colocación</span>
+        <span class="valor">
+            <span>80.1 </span>
+            <span class="texto-primario">%</span>
+        </span>
+    </div>
+    <!-- Crédito máximo -->
+    <div class="resumen-colocacion mw-l">
+        <span class="nombre">Crédito máximo</span>
+        <span class="valor">
+            <span class="texto-primario">$ </span>
+            <span>100.000.000</span>
+        </span>
+    </div>
+</div>
+<div class="card mx-3 mb-3">
+    <div class="card-header">
+        <span class="fs-14px fw-semibold">Porcentaje de variación</span>
+    </div>
+    <div class="card-body">
+        <div class="d-flex align-items-center">
+            <span class="fs-14px texto-gris me-3">Año anterior</span>
+            <app-barra-porcentual [ngStyle]="{'width': '388px'}" [porcentaje]="32"></app-barra-porcentual>
+        </div>
+    </div>
+</div>
+
+<div class="row px-3">
+    <div class="col">
+        <div class="card">
+            <div class="card-header">
+                <span class="fs-14px fw-semibold">Colocación</span>
+            </div>
+            <div class="card-body">
+                <app-grafico-barras></app-grafico-barras>  
+            </div>
+        </div>
+    </div>
+    <div class="col">
+
+    </div>
 </div>
